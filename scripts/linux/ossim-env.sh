@@ -98,11 +98,11 @@ export BUILD_GEOPDF_PLUGIN=ON
 fi
 
 if [ -z $BUILD_OPENCV_PLUGIN ] ; then
-   export BUILD_OPENCV_PLUGIN=ON
+   export BUILD_OPENCV_PLUGIN=OFF
 fi
 
 if [ -z $BUILD_OPENJPEG_PLUGIN ] ; then
-   export BUILD_OPENJPEG_PLUGIN=ON
+   export BUILD_OPENJPEG_PLUGIN=OFF
 fi
 
 if [ -z $BUILD_PNG_PLUGIN ] ; then
