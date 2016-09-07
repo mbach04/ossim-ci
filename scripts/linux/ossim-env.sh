@@ -23,7 +23,7 @@ fi
 # this should work with OpenJDK installation.
 #
 if [ -z $JAVA_HOME ] ; then
-  if [ -d "/usr/lib/jvm/java"] ; then
+  if [ -d "/usr/lib/jvm/java" ] ; then
     export JAVA_HOME="/usr/lib/jvm/java"
   fi
 fi
@@ -182,10 +182,10 @@ if [ -z $OSSIM_BUILD_ADDITIONAL_DIRECTORIES ] ; then
    fi
 fi
 
-echo "TESTING FOR KAKADU !!!!!!!!!!!!!!"
+echo "TESTING FOR KAKADU !!!!!!!!!!!!!! "
 if [ \( "${BUILD_KAKADU_PLUGIN}"="ON" \) -o \( -d "$OSSIM_DEV_HOME/ossim-private/ossim-kakadu-jpip-server" \) ] ; then
 
-   if [ -d "${OSSIM_DEV_HOME}/kakadu-${KAKADU_VERSION}"] ; then
+   if [ -d "${OSSIM_DEV_HOME}/kakadu-${KAKADU_VERSION}" ] ; then
       if [ -z $KAKADU_ROOT_SRC ] ; then
          export KAKADU_ROOT_SRC="${OSSIM_DEV_HOME}/kakadu-${KAKADU_VERSION}"
       fi
