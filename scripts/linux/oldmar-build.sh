@@ -14,6 +14,11 @@ if [ ! -f $OSSIM_INSTALL_PREFIX/share/java/joms-$OSSIM_VERSION.jar ]; then
 fi
 # make sure the joms jar is in the local maven repo
 mvn install:install-file -Dfile=$OSSIM_DEV_HOME/install/share/java/joms-$OSSIM_VERSION.jar -DgroupId=org.ossim -DartifactId=joms -Dversion=$OSSIM_VERSION -Dpackaging=jar
+
+if [ -d $OSSIM_DEV_HOME/ossim-install ] ; then
+   rm -rf $OSSIM_DEV_HOME/ossim-install
+fi
+
 mv $OSSIM_INSTALL_PREFIX ossim-install
 
 if [ $? -ne 0 ]; then
