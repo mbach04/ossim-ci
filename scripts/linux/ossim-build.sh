@@ -3,7 +3,6 @@
 pushd `dirname $0` >/dev/null
 export SCRIPT_DIR=`pwd -P`
 pushd $SCRIPT_DIR/../../.. >/dev/null
-#export OSSIM_DEV_HOME=$PWD
 popd > /dev/null
 popd >/dev/null
 
