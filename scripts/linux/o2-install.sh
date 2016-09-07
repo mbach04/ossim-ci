@@ -7,7 +7,7 @@ popd >/dev/null
 
 source $SCRIPT_DIR/ossim-env.sh
 
-$ROOT_DIR/omar/build_scripts/linux/install.sh
+$OSSIM_DEV_HOME/omar/build_scripts/linux/install.sh
 
 if [ $? -ne 0 ]; then
   echo; echo "ERROR: Failed installation for omar binaries."
