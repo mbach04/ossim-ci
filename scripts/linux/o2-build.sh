@@ -5,6 +5,7 @@ export SCRIPT_DIR=`pwd -P`
 pushd $SCRIPT_DIR/../../.. >/dev/null
 popd > /dev/null
 popd >/dev/null
+export OMAR_DEV_HOME=$OSSIM_DEV_HOME/omar
 
 source $SCRIPT_DIR/ossim-env.sh
 
