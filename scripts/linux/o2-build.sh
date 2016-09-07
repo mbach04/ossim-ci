@@ -9,7 +9,7 @@ popd >/dev/null
 source $SCRIPT_DIR/ossim-env.sh
 
 if [ ! -f $OSSIM_INSTALL_PREFIX/share/java/joms-$OSSIM_VERSION.jar ]; then
-   echo "ERROR: joms-$OSSIM_VERSION.jar is not found in the install artifact and OMAR can't be built."
+   echo "ERROR: $OSSIM_INSTALL_PREFIX/share/java/joms-$OSSIM_VERSION.jar is not found in the install artifact and OMAR can't be built."
    exit 1
 fi
 # make sure the joms jar is in the local maven repo
