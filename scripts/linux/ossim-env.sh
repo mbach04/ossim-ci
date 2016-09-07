@@ -182,7 +182,8 @@ if [ -z $OSSIM_BUILD_ADDITIONAL_DIRECTORIES ] ; then
    fi
 fi
 
-if [ \( "${BUILD_KAKADU_PLUGIN}"="ON" \) -o \( -d $OSSIM_DEV_HOME/ossim-private/ossim-kakadu-jpip-server \) ] ; then
+echo "TESTING FOR KAKADU !!!!!!!!!!!!!!"
+if [ \( "${BUILD_KAKADU_PLUGIN}"="ON" \) -o \( -d "$OSSIM_DEV_HOME/ossim-private/ossim-kakadu-jpip-server" \) ] ; then
 
    if [ -d "${OSSIM_DEV_HOME}/kakadu-${KAKADU_VERSION}"] ; then
       if [ -z $KAKADU_ROOT_SRC ] ; then
