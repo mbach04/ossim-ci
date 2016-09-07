@@ -10,6 +10,6 @@ source $SCRIPT_DIR/ossim-env.sh
 $OSSIM_DEV_HOME/omar/build_scripts/linux/install.sh
 
 if [ $? -ne 0 ]; then
-  echo; echo "ERROR: Failed installation for omar binaries."
+  echo; echo "ERROR: Failed installation for oldmar binaries."
   exit 1
 fi
