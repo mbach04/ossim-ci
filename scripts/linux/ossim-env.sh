@@ -17,6 +17,10 @@ else
    export OSSIM_DEV_HOME=$WORKSPACE
 fi
 
+if [ -z $OSSIM_INSTALL_PREFIX ]; then
+  export OSSIM_INSTALL_PREFIX=$OSSIM_DEV_HOME/install
+fi
+
 # Setup JAVA Home
 #
 # If not explicitly set then try to set.  Add more for other OS's
