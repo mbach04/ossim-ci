@@ -8,7 +8,7 @@ node {
           git branch: 'dev', url: 'https://github.com/ossimlabs/ossim-video.git'
        }
        dir("ossim-planet"){
-          git branch: 'dev', url: 'https://github.com/ossimlabs/ossim-plane.git'
+          git branch: 'dev', url: 'https://github.com/ossimlabs/ossim-planet.git'
        }
        dir("ossim-gui"){
           git branch: 'dev', url: 'https://github.com/ossimlabs/ossim-gui.git'
