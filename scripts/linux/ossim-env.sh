@@ -164,7 +164,7 @@ if [ -d $OSSIM_DEV_HOME/ossim-plugins ] ; then
    fi
 
    if [ -z $BUILD_OPENJPEG_PLUGIN ] ; then
-      export BUILD_OPENJPEG_PLUGIN=OFF
+      export BUILD_OPENJPEG_PLUGIN=ON
    fi
 
    if [ -z $BUILD_PNG_PLUGIN ] ; then
