@@ -100,7 +100,7 @@ fi
 
 # now create the yum repo artifact tgz file
 #
-getOsInfo os major_version os_arch
+getOsInfo os major_version minor_version os_arch
 
 # create the RPM dir
 rpmdir=${OSSIM_DEV_HOME}/rpmbuild/RPMS/${os}/${major_version}/${GIT_BRANCH}/${os_arch}
