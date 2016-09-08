@@ -26,18 +26,11 @@ node {
    stage("Build"){
     sh "${env.WORKSPACE}/ossim-ci/scripts/linux/rpmbuild-binary.sh"
    }
-   stage("Test"){
-     echo "NEED TO ADD TESTS FOR THE INSTALLATION!!!!"
-   }
    
    stage("Archive"){
-//     dir("${env.WORKSPACE}"){
-//         sh "tar cvfz install.tgz install"
-//     }
-//     dir("${env.WORKSPACE}/artifacts"){
-//         sh "mv ${env.WORKSPACE}/install.tgz ."
-//         sh "cp ${env.WORKSPACE}/ossim-oms/lib/joms-*.jar ."
-//     }
-//     archiveArtifacts 'artifacts/*'
+     dir("${env.WORKSPACE}/artifacts"){
+         sh "mv ${env.WORKSPACE}/rpms.tgz ."
+     }
+     archiveArtifacts 'artifacts/*'
   }
 }
