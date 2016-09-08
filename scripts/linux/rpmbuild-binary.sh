@@ -56,7 +56,6 @@ echo rpmbuild -ba --define "_topdir ${OSSIM_DEV_HOME}/rpmbuild" --define "RPM_OS
 rpmbuild -ba --define "_topdir ${OSSIM_DEV_HOME}/rpmbuild" --define "RPM_OSSIM_VERSION ${OSSIM_VERSION}" --define "BUILD_RELEASE ${OSSIM_BUILD_RELEASE}" ${OSSIM_DEV_HOME}/rpmbuild/SPECS/ossim-all.spec
 if [ $? -ne 0 ]; then
   echo; echo "ERROR: Build failed for OSSIM rpm binary build."
-  popd >/dev/null
   exit 1
 fi
 
