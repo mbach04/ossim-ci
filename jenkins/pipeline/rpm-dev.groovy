@@ -24,7 +24,7 @@ node {
         target: "${env.WORKSPACE}/oldmar-install"])
    }
    stage("Build"){
-    sh ""
+    sh "${env.WORKSPACE}/ossim-ci/scripts/linux/rpmbuild-binary.sh"
    }
    stage("Test"){
      echo "NEED TO ADD TESTS FOR THE INSTALLATION!!!!"
