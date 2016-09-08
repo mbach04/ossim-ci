@@ -21,6 +21,9 @@ node {
          ${env.WORKSPACE}/ossim-ci/scripts/linux/oldmar-build.sh
        """
    }
+   stage("Test"){
+     echo "NEED TO ADD TESTS FOR THE INSTALLATION!!!!"
+   }
    stage("Install"){
          sh "${env.WORKSPACE}/ossim-ci/scripts/linux/oldmar-install.sh"
    }
