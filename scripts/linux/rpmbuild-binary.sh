@@ -26,9 +26,17 @@ source $SCRIPT_DIR/functions.sh
 
 #if [ ! -d $OSSIM_DEV_HOME/rpmbuild ] ; then
 mkdir -p $OSSIM_DEV_HOME/rpmbuild/{BUILD,RPMS,SOURCES,SPECS,SRPMS}
+if [ $? -ne 0 ]; then
+  echo; echo "ERROR: Unable to create rpmbuild directories."
+  exit 1
+fi
 #fi
 
-cp $OSSIM_DEV_HOME/ossim-ci/gecs/*.spec $OSSIM_DEV_HOME/rpmbuild/SPECS
+cp $OSSIM_DEV_HOME/ossim-ci/rpm_specs/*.spec $OSSIM_DEV_HOME/rpmbuild/SPECS/
+if [ $? -ne 0 ]; then
+  echo; echo "ERROR: Unable to copy spec files from $OSSIM_DEV_HOME/ossim-ci/rpm_specs/*.spec to location $OSSIM_DEV_HOME/rpmbuild/SPECS."
+  exit 1
+fi
 
 if [ -d $OSSIM_DEV_HOME/rpmbuild/BUILD ] ; then
   # Setup the ossim binaries for packaging
