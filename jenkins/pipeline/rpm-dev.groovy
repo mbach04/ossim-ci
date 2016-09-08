@@ -14,6 +14,18 @@ node {
               flatten: true,
               target: "${env.WORKSPACE}/ossim-dev-install"])
            sh "tar xvfz ossim-dev-install/install.tgz"
+           step ([$class: 'CopyArtifact',
+              projectName: 'o2-dev',
+              filter: "artifacts/install.tgz",
+              flatten: true,
+              target: "${env.WORKSPACE}/o2-dev-install"])
+           sh "tar xvfz o2-dev-install/install.tgz"
+           step ([$class: 'CopyArtifact',
+              projectName: 'oldmar-dev',
+              filter: "artifacts/install.tgz",
+              flatten: true,
+              target: "${env.WORKSPACE}/oldmar-dev-install"])
+           sh "tar xvfz oldmar-dev-install/install.tgz"
        }
    }
    stage("Build"){
