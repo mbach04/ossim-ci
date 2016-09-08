@@ -8,7 +8,6 @@ node {
           git branch: 'dev-OCS626', url: 'https://github.com/ossimlabs/ossim-ci.git'
        }
     }
-    echo "GIT_BRANCH ============= ${GIT_BRANCH}"
    stage("Download Artifacts"){
        dir("${env.WORKSPACE}/install/share/java"){
            step ([$class: 'CopyArtifact',
