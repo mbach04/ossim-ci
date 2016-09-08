@@ -24,10 +24,15 @@ node {
        }
    }
    echo "${env.WORKSPACE}"
+   stage("Download Artifacts"){
+       dir("${env.WORKSPACE}"){
+           step ([$class: 'CopyArtifact',
+              projectName: 'ossim-kakadu-dev',
+              filter: "artifacts/kakadu.tgz",
+              flatten: true])
+       }
+   }
    stage("Build"){
-       step ([$class: 'CopyArtifact',
-          projectName: 'ossim-kakadu-dev',
-          filter: "kakadu.tgz".toString()]);
        sh """
         tar xvfz kakadu.tgz
         """

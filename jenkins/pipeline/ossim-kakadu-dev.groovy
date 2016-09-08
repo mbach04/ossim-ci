@@ -23,7 +23,6 @@ node {
        cp -R ${env.KAKADU_VERSION} ${env.WORKSPACE}/kakadu-${env.KAKADU_VERSION}
        popd
        pushd ${env.WORKSPACE}
-       tar cvfz kakadu.tgz kakadu-${env.KAKADU_VERSION}
        popd
        """
    }
@@ -36,7 +35,11 @@ node {
    
    stage("Archive"){
      dir("${env.WORKSPACE}"){
-         archiveArtifacts "kakadu.tgz"
+         sh "tar cvfz kakadu.tgz kakadu-${env.KAKADU_VERSION}"
      }
-   }
+     dir("${env.WORKSPACE}/artifacts"){
+         sh "mv ${env.WORKSPACE}/kakadu.tgz ."
+     }
+     archiveArtifacts 'artifacts/*'
+  }
 }
