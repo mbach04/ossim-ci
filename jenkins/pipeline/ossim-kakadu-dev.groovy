@@ -22,8 +22,6 @@ node {
        pushd ${env.WORKSPACE}/ossim-private/kakadu
        cp -R ${env.KAKADU_VERSION} ${env.WORKSPACE}/kakadu-${env.KAKADU_VERSION}
        popd
-       pushd ${env.WORKSPACE}
-       popd
        """
    }
 //   stage("Install"){
