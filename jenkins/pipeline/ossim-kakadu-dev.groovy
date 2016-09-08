@@ -40,4 +40,7 @@ node {
      }
      archiveArtifacts 'artifacts/*'
   }
+  stage("Clean Workspace"){
+    step([$class: 'WsCleanup'])
+  }
 }
