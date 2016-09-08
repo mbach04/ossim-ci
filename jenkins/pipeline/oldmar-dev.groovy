@@ -9,7 +9,7 @@ node {
        }
     }
    stage("Download Artifacts"){
-       dir("${env.WORKSPACE}/install/share/java"){
+       dir("${env.WORKSPACE}"){
            step ([$class: 'CopyArtifact',
               projectName: 'ossim-dev',
               filter: "artifacts/*.jar",
