@@ -154,6 +154,10 @@ if [ -d $OSSIM_DEV_HOME/ossim-plugins ] ; then
    if [ -z $BUILD_POTRACE_PLUGIN ] ; then
       export BUILD_POTRACE_PLUGIN=ON
    fi
+   
+   if [ -z $BUILD_FFTW3_PLUGIN ] ; then
+      export BUILD_FFTW3_PLUGIN=ON
+   fi
 
    if [ -z $BUILD_GEOPDF_PLUGIN ] ; then
    export BUILD_GEOPDF_PLUGIN=ON
