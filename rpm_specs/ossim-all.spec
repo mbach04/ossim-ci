@@ -250,9 +250,19 @@ Summary:        OpenJPEG ossim plugin
 Group:          System Environment/Libraries
 Requires:       %{name}-libs%{?_isa} = %{version}-%{release}
 
+%package    fftw3-plugin
+Summary:        FFTW plugin
+Group:          System Environment/Libraries
+Requires:       %{name}-libs%{?_isa} = %{version}-%{release}
+
+
 %description    openjpeg-plugin
 This sub-package contains the OpenJPEG ossim plugin for
 reading/writing J2K compressed images via the OpenJPEG library.
+
+%description    fftw3-plugin
+This sub-package contains the FFTW3 plugin.
+
 
 %package    png-plugin
 Summary:        PNG ossim plugin
@@ -577,6 +587,9 @@ rm -rf /usr/share/ossim/${APP_NAME}
 
 %files openjpeg-plugin
 %{_libdir}/ossim/plugins/libossim_openjpeg_plugin.so
+
+%files fftw3-plugin
+%{_libdir}/ossim/plugins/libossim_fftw3_plugin.so
 
 %files png-plugin
 %{_libdir}/ossim/plugins/libossim_png_plugin.so
