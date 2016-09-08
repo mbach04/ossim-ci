@@ -11,19 +11,20 @@ node {
         projectName: 'ossim-dev',
         filter: "artifacts/install.tgz",
         flatten: true,
-        target: "${env.WORKSPACE}/ossim-dev-install"])
+        target: "${env.WORKSPACE}/ossim-install"])
      step ([$class: 'CopyArtifact',
         projectName: 'o2-dev',
         filter: "artifacts/install.tgz",
         flatten: true,
-        target: "${env.WORKSPACE}/o2-dev-install"])
+        target: "${env.WORKSPACE}/o2-install"])
      step ([$class: 'CopyArtifact',
         projectName: 'oldmar-dev',
         filter: "artifacts/install.tgz",
         flatten: true,
-        target: "${env.WORKSPACE}/oldmar-dev-install"])
+        target: "${env.WORKSPACE}/oldmar-install"])
    }
    stage("Build"){
+    sh ""
    }
    stage("Test"){
      echo "NEED TO ADD TESTS FOR THE INSTALLATION!!!!"

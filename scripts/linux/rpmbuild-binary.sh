@@ -63,10 +63,10 @@ if [ -d $OSSIM_DEV_HOME/rpmbuild/BUILD ] ; then
 else
   echo "ERROR: Directory $OSSIM_DEV_HOME/rpmbuild/BUILD does not exist"
 fi
+
 echo rpmbuild -ba --define "_topdir ${OSSIM_DEV_HOME}/rpmbuild" --define "RPM_OSSIM_VERSION ${OSSIM_VERSION}" --define "BUILD_RELEASE ${OSSIM_BUILD_RELEASE}" ${OSSIM_DEV_HOME}/rpmbuild/SPECS/oldmar-all.spec
 
 rpmbuild -ba --define "_topdir ${OSSIM_DEV_HOME}/rpmbuild" --define "RPM_OSSIM_VERSION ${OSSIM_VERSION}" --define "BUILD_RELEASE ${OSSIM_BUILD_RELEASE}" ${OSSIM_DEV_HOME}/rpmbuild/SPECS/oldmar-all.spec
-
 
 if [ $? -ne 0 ]; then
   echo; echo "ERROR: Build failed for OLDMAR rpm binary build."
@@ -74,11 +74,16 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
-# Setup and package the new O2 distribution
-pushd $OSSIM_DEV_HOME/rpmbuild/BUILD/
-rm -rf *
-tar  xvfz $OSSIM_DEV_HOME/o2-install/install.tgz 
-popd
+if [ -d $OSSIM_DEV_HOME/rpmbuild/BUILD ] ; then
+  # Setup and package the new O2 distribution
+  pushd $OSSIM_DEV_HOME/rpmbuild/BUILD/
+  rm -rf *
+  tar  xvfz $OSSIM_DEV_HOME/o2-install/install.tgz 
+  popd
+else
+  echo "ERROR: Directory $OSSIM_DEV_HOME/rpmbuild/BUILD does not exist"
+fi
+
 echo rpmbuild -ba --define "_topdir ${OSSIM_DEV_HOME}/rpmbuild" --define "O2_VERSION ${O2_VERSION}" --define "O2_BUILD_RELEASE ${O2_BUILD_RELEASE}" ${OSSIM_DEV_HOME}/rpmbuild/SPECS/o2-all.spec
 rpmbuild -ba --define "_topdir ${OSSIM_DEV_HOME}/rpmbuild" --define "O2_VERSION ${O2_VERSION}" --define "O2_BUILD_RELEASE ${O2_BUILD_RELEASE}" ${OSSIM_DEV_HOME}/rpmbuild/SPECS/o2-all.spec
 if [ $? -ne 0 ]; then
