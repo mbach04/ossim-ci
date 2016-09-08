@@ -105,6 +105,14 @@ else
    export BUILD_OSSIM_GUI=OFF
 fi
 
+if [ -d $OSSIM_DEV_HOME/ossim-planet ] ; then
+   if [ -z $BUILD_OSSIM_PLANET ] ; then
+      export BUILD_OSSIM_PLANET=ON
+   fi
+else
+   export BUILD_OSSIM_PLANET=OFF
+fi
+
 if [ -d $OSSIM_DEV_HOME/ossim-wms ] ; then
    if [ -z $BUILD_OSSIM_WMS ] ; then
       export BUILD_OSSIM_WMS=ON
