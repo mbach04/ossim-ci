@@ -1,5 +1,6 @@
 node {
    env.WORKSPACE=pwd()
+   stage("Checkout"){
        dir("ossim-ci"){
           git branch: 'dev-OCS626', url: 'https://github.com/ossimlabs/ossim-ci.git'
        }
