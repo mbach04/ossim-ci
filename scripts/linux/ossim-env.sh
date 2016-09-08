@@ -139,9 +139,9 @@ if [ -d $OSSIM_DEV_HOME/ossim-plugins ] ; then
       export BUILD_KAKADU_PLUGIN=ON
    fi
 
-   #if [ -z $BUILD_KML_PLUGIN ] ; then
-   #   export BUILD_KML_PLUGIN=ON
-   #fi
+   if [ -z $BUILD_KML_PLUGIN ] ; then
+      export BUILD_KML_PLUGIN=ON
+   fi
 
    if [ -z $BUILD_GDAL_PLUGIN ] ; then
       export BUILD_GDAL_PLUGIN=ON
