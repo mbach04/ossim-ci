@@ -12,7 +12,7 @@ function getOsInfo {
         local osArch=`uname -i`
         if [ -f /etc/redhat-release ] ; then
                 DISTRO=`cat /etc/redhat-release | cut -d' ' -f1`
-                if [[ $test =~ .*Red Hat.* ]] ; then
+                if [[ $DISTRO =~ .*Red.* ]] ; then
                    DISTRO="RedHat"
                 fi
                 majorVersion=`cat /etc/redhat-release | grep  -o "[0-9]*\.[0-9]*\.*[0-9]*" | cut -d'.' -f1`
