@@ -23,7 +23,7 @@ node {
           git branch: 'dev', url: 'https://github.com/ossimlabs/ossim-wms.git'
        }
        dir("ossim-ci"){
-          git branch: 'dev-OCS626', url: 'https://github.com/ossimlabs/ossim-ci.git'
+          git branch: 'dev', url: 'https://github.com/ossimlabs/ossim-ci.git'
        }
        dir("ossim-private"){
           git branch: 'dev', url: 'git@github.com:radiantbluetechnologies/ossim-private.git'
