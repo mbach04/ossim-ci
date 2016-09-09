@@ -2,7 +2,7 @@ node {
    env.WORKSPACE=pwd()
    stage("Checkout"){
        dir("ossim-ci"){
-          git branch: 'dev-OCS626', url: 'https://github.com/ossimlabs/ossim-ci.git'
+          git branch: 'dev', url: 'https://github.com/ossimlabs/ossim-ci.git'
        }
    }
    echo "${env.WORKSPACE}"

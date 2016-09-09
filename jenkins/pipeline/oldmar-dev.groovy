@@ -5,7 +5,7 @@ node {
           git branch: 'dev', url: 'https://github.com/radiantbluetechnologies/omar.git'
         }
        dir("ossim-ci"){
-          git branch: 'dev-OCS626', url: 'https://github.com/ossimlabs/ossim-ci.git'
+          git branch: 'dev', url: 'https://github.com/ossimlabs/ossim-ci.git'
        }
     }
    stage("Download Artifacts"){
