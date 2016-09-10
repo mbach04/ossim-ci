@@ -50,7 +50,7 @@ function copyDependencies {
     fi
 
     mkdir -p $TARGET_FOLDER/{bin, lib64, lib}
-    
+
     # copy the binary to the target folder
     # create directories if required
     echo "---> copy binary itself"
