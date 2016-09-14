@@ -43,6 +43,9 @@ node {
     }
    stage("Archive"){
      dir("${env.WORKSPACE}"){
+         dir("ossim-dev-src"){
+          sh "rm -rf `find . -name .git`"
+         }
          sh "tar cvfz ossim-dev-src.tgz ossim-dev-src"
      }
      dir("${env.WORKSPACE}/artifacts"){
