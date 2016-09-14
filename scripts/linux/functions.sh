@@ -53,8 +53,8 @@ function copyDependencies {
 
     # copy the binary to the target folder
     # create directories if required
-    echo "---> copy binary itself"
-    cp --parents -v "$PATH_TO_BINARY" "$TARGET_FOLDER"
+#    echo "---> copy binary itself"
+#    cp --parents -v "$PATH_TO_BINARY" "$TARGET_FOLDER"
 
     # copy the required shared libs to the target folder
     # create directories if required
