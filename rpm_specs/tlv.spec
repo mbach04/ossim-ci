@@ -27,8 +27,8 @@ pushd %{_builddir}/install
     fi
   done
   # Loop through each app and sym link to the versioned app
-  if [ -d %{buildroot}%{_datadir}/${APP} ]; then
-      pushd %{buildroot}%{_datadir}/${APP}
+  if [ -d %{buildroot}%{_datadir}/omar/${APP} ]; then
+      pushd %{buildroot}%{_datadir}/omar/${APP}
         if [ -L ${APP}.jar ]; then
          unlink ${APP}.jar
         fi
@@ -104,10 +104,10 @@ fi
 export APP_NAME=time_lapse
 rm -rf /var/log/${APP_NAME}
 rm -rf /var/run/${APP_NAME}
-rm -rf /usr/share/${APP_NAME}
+rm -rf /usr/share/omar/${APP_NAME}
 
 %files
-%{_datadir}/time_lapse
+%{_datadir}/omar/time_lapse
 %if %{is_systemd}
 /usr/lib/systemd/system/time_lapse.service
 %else
