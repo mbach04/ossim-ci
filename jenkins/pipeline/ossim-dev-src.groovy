@@ -38,6 +38,12 @@ node {
         dir("ossim-ci"){
           git branch: 'dev', url: 'https://github.com/ossimlabs/ossim-ci.git'
         }
+        dir("ossimlabs-tlv"){
+          git branch: 'dev', url: 'https://github.com/ossimlabs/tlv.git'
+        }
+        dir("tlv"){
+          git branch: 'master', url: 'https://github.com/time-lapse-viwer/tlv.git'
+        }
       }
     }
    stage("Archive"){
