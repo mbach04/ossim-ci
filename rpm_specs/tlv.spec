@@ -1,4 +1,4 @@
-Name:          tlv
+Name:          time_lapse
 Version:        %{TLV_VERSION}
 Release:        %{TLV_BUILD_RELEASE}%{?dist}
 Summary:        New TLV Web Application Services
