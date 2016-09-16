@@ -57,6 +57,12 @@ if [ -z $O2_VERSION ] ; then
    export O2_VERSION=1.0.0
 fi
 
+# for packaging and general version number 
+#
+if [ -z $TLV_VERSION ] ; then
+   export TLV_VERSION=1.0.0
+fi
+
 # For RPM packaging
 #
 if [ -z $OSSIM_BUILD_RELEASE ] ; then
@@ -67,6 +73,10 @@ fi
 #
 if [ -z $O2_BUILD_RELEASE ] ; then
    export O2_BUILD_RELEASE=1
+fi
+
+if [ -z $TLV_BUILD_RELEASE ] ; then
+   export TLV_BUILD_RELEASE=1
 fi
 
 if [ -z $JAVA_HOME ]; then

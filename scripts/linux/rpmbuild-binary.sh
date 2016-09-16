@@ -98,6 +98,22 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
+if [ -f $OSSIM_DEV_HOME/tlv-install.tgz ] ; then
+  if [ -d $OSSIM_DEV_HOME/rpmbuild/BUILD ] ; then
+    # Setup and package the new O2 distribution
+    pushd $OSSIM_DEV_HOME/rpmbuild/BUILD/
+    rm -rf *
+    tar xvfz $OSSIM_DEV_HOME/tlv-install.tgz 
+    popd
+  else
+    echo "ERROR: Directory $OSSIM_DEV_HOME/rpmbuild/BUILD does not exist"
+    exit 1
+  fi
+  echo rpmbuild -ba --define "_topdir ${OSSIM_DEV_HOME}/rpmbuild" --define "TLV_VERSION ${TLV_VERSION}" --define "TLV_BUILD_RELEASE ${TLV_BUILD_RELEASE}" ${OSSIM_DEV_HOME}/rpmbuild/SPECS/tlv.spec
+  rpmbuild -ba --define "_topdir ${OSSIM_DEV_HOME}/rpmbuild" --define "TLV_VERSION ${TLV_VERSION}" --define "TLV_BUILD_RELEASE ${TLV_BUILD_RELEASE}" ${OSSIM_DEV_HOME}/rpmbuild/SPECS/tlv.spec
+
+fi
+
 # now create the yum repo artifact tgz file
 #
 getOsInfo os major_version minor_version os_arch
@@ -114,13 +130,13 @@ pushd ${OSSIM_DEV_HOME}/rpmbuild/RPMS >/dev/null
   if [ -d "${OSSIM_DEPS_RPMS}" ] ; then
     cp $OSSIM_DEPS_RPMS/*.rpm $rpmdir/
   fi
-    pushd $rpmdir >/dev/null
-      createrepo --simple-md-filenames .
-      if [ $? -ne 0 ]; then
-        echo; echo "ERROR: createrepo failed.  Unable to execute createrepo --simple-md-filenames."
-        exit 1
-      fi
-    popd
+  pushd $rpmdir >/dev/null
+    createrepo --simple-md-filenames .
+    if [ $? -ne 0 ]; then
+      echo; echo "ERROR: createrepo failed.  Unable to execute createrepo --simple-md-filenames."
+      exit 1
+    fi
+  popd
   tar cvfz rpms.tgz $os
   mv rpms.tgz ${OSSIM_DEV_HOME}/
 popd > /dev/null
