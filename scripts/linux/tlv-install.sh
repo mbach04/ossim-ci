@@ -2,7 +2,6 @@
 pushd `dirname $0` >/dev/null
 export SCRIPT_DIR=`pwd -P`
 popd > /dev/null
-popd >/dev/null
 
 source $SCRIPT_DIR/ossim-env.sh
 
