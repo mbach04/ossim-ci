@@ -9,5 +9,5 @@ popd >/dev/null
 source $SCRIPT_DIR/ossim-env.sh
 
 pushd $OSSIM_DEV_HOME/tlv/time_lapse
-./gradew assemble
+./gradlew assemble
 
