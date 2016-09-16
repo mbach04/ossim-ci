@@ -28,6 +28,9 @@ node {
        dir("ossim-private"){
           git branch: 'dev', url: 'git@ossim-private.github.com:radiantbluetechnologies/ossim-private.git'
        }
+//       dir("cucumber-oc2s"){
+//          git branch: 'dev', url: 'git@cucumber-oc2s.github.com:radiantbluetechnologies/cucumber-oc2s.git'
+//       }
    }
    echo "${env.WORKSPACE}"
    stage("Download Artifacts"){
