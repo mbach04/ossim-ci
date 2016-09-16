@@ -28,17 +28,16 @@ pushd %{_builddir}/install
   done
   # Loop through each app and sym link to the versioned app
   if [ -d %{buildroot}%{_datadir}/omar/${APP} ]; then
-      pushd %{buildroot}%{_datadir}/omar/${APP}
-        if [ -L ${APP}.jar ]; then
-         unlink ${APP}.jar
-        fi
-        if [ ! -f ${APP}.war ]; then
-          ln -s ${APP}-*.war ${app}.war
-        fi
-        chmod 755 *.sh
-      popd
-    fi  
-  done
+    pushd %{buildroot}%{_datadir}/omar/${APP}
+      if [ -L ${APP}.jar ]; then
+       unlink ${APP}.jar
+      fi
+      if [ ! -f ${APP}.war ]; then
+        ln -s ${APP}-*.war ${app}.war
+      fi
+      chmod 755 *.sh
+    popd
+  fi  
   chmod 755 `find %{buildroot}%{_datadir}/omar -type d`
 
 %if %{is_systemd}

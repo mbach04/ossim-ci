@@ -49,9 +49,14 @@ if ls $OSSIM_DEV_HOME/tlv*install.tgz 1> /dev/null 2>&1; then
     popd
   else
     echo "ERROR: Directory $OSSIM_DEV_HOME/rpmbuild/BUILD does not exist"
+    exit 1
   fi
   echo rpmbuild -ba --define "_topdir ${OSSIM_DEV_HOME}/rpmbuild" --define "TLV_VERSION ${TLV_VERSION}" --define "TLV_BUILD_RELEASE ${TLV_BUILD_RELEASE}" ${OSSIM_DEV_HOME}/rpmbuild/SPECS/tlv.spec
   rpmbuild -ba --define "_topdir ${OSSIM_DEV_HOME}/rpmbuild" --define "TLV_VERSION ${TLV_VERSION}" --define "TLV_BUILD_RELEASE ${TLV_BUILD_RELEASE}" ${OSSIM_DEV_HOME}/rpmbuild/SPECS/tlv.spec
+  if [ $? -ne 0 ]; then
+    echo; echo "ERROR: Build failed for TLV rpm binary build."
+    exit 1
+  fi
 
 fi
 
