@@ -22,6 +22,11 @@ node {
         filter: "artifacts/install.tgz",
         flatten: true,
         target: "${env.WORKSPACE}/oldmar-install"])
+     step ([$class: 'CopyArtifact',
+        projectName: 'tlv',
+        filter: "tlv*install.tgz",
+        flatten: true,
+        target: "${env.WORKSPACE}"])
    }
    stage("Build"){
     sh "${env.WORKSPACE}/ossim-ci/scripts/linux/rpmbuild-binary.sh"
