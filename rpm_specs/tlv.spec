@@ -15,19 +15,19 @@ License:        MIT License
 %description
 O2 Packages
 
-%package    tlv-app
+%package    time_lapse
 Summary:        Time Lapse Viewer web application.
 Version:        %{TLV_VERSION}
 Group:          System Environment/Libraries
 
 
-%description  tlv-app
+%description  time_lapse
 OMAR/O2 UI
 
 %build
 
 %install
-export APP=tlv-app
+export APP=time_lapse
 pushd %{_builddir}/install
   # Install all files with default permissions
   for x in `find share`; do
@@ -66,17 +66,17 @@ pushd %{_builddir}/install
 
 popd
 
-%pre tlv-app
+%pre time_lapse
 export USER_NAME=omar
-export APP_NAME=tlv-app
+export APP_NAME=time_lapse
 if ! id -u omar > /dev/null 2>&1; then 
   adduser -r -d /usr/share/omar -s /bin/false --no-create-home --user-group ${USER_NAME}
 fi
 
 
-%post tlv-app
+%post time_lapse
 export USER_NAME=omar
-export APP_NAME=tlv-app
+export APP_NAMEtime_lapse
 
 chown -R ${USER_NAME}:${USER_NAME} %{_datadir}/omar
 if [ ! -d "/var/log/${APP_NAME}" ] ; then
@@ -91,8 +91,8 @@ chmod 755 /var/log/${APP_NAME}
 chown -R ${USER_NAME}:${USER_NAME}  /var/run/${APP_NAME}
 chmod 755 /var/run/${APP_NAME}
 
-%preun tlv-app
-export APP_NAME=tlv-app
+%preun time_lapse
+export APP_NAME=time_lapse
 ps -ef | grep $APP_NAME | grep -v grep
 if [ $? -eq "0" ] ; then
 %if %{is_systemd}
@@ -109,14 +109,14 @@ else
   echo "Service ${APP_NAME} is not running and will not be stopped."
 fi
 
-%postun tlv-app
-export APP_NAME=tlv-app
+%postun time_lapse
+export APP_NAME=time_lapse
 rm -rf /var/log/${APP_NAME}
 rm -rf /var/run/${APP_NAME}
 rm -rf /usr/share/omar/${APP_NAME}
 
-%files tlv-app
-%{_datadir}/omar/tlv-app
+%files time_lapse
+%{_datadir}/omar/time_lapse
 %if %{is_systemd}
 /usr/lib/systemd/system/omar-app.service
 %else
