@@ -42,7 +42,7 @@ node {
           git branch: 'dev', url: 'https://github.com/ossimlabs/tlv.git'
         }
         dir("tlv"){
-          git branch: 'master', url: 'https://github.com/time-lapse-viwer/tlv.git'
+          git branch: 'master', url: 'https://github.com/time-lapse-viewer/tlv.git'
         }
       }
     }
