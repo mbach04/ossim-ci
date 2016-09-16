@@ -22,7 +22,7 @@ if [ -d $OSSIM_DEV_HOME/tlv ] ; then
       install -d -m755 ${OSSIM_INSTALL_PREFIX}/etc/init.d
       install -d -m755 ${OSSIM_INSTALL_PREFIX}/lib/systemd/system
       install -d -m755 ${OSSIM_INSTALL_PREFIX}/share/omar/$app/service-templates
-      sed -e "s/{{program_name}}/${app}/g"  -e "s/{{program_user}}/omar/g" -e "s/{{program_group}}/omar/g" < service-wrapper-systemd-template >${OSSIM_INSTALL_PREFIX}/lib/systgemd/system/${app}.service 
+      sed -e "s/{{program_name}}/${app}/g"  -e "s/{{program_user}}/omar/g" -e "s/{{program_group}}/omar/g" < service-wrapper-systemd-template >${OSSIM_INSTALL_PREFIX}/lib/systemd/system/${app}.service 
       sed -e "s/{{program_name}}/${app}/g"  -e "s/{{program_user}}/omar/g" -e "s/{{program_group}}/omar/g" < service-wrapper-initd-template >${OSSIM_INSTALL_PREFIX}/etc/init.d/${app} 
       sed -e "s/{{program_name}}/${app}/g"  -e "s/{{OSSIM_INSTALL_PREFIX}}/\/usr/g" < tlv-shell-template >${OSSIM_INSTALL_PREFIX}/share/omar/$app/${app}.sh 
    fi
