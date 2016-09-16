@@ -26,7 +26,7 @@ node {
           git branch: 'dev', url: 'https://github.com/ossimlabs/ossim-ci.git'
        }
        dir("ossim-private"){
-          git branch: 'dev', url: 'git@github.com:radiantbluetechnologies/ossim-private.git'
+          git branch: 'dev', url: 'git@ossim-private.github.com:radiantbluetechnologies/ossim-private.git'
        }
    }
    echo "${env.WORKSPACE}"
@@ -51,7 +51,7 @@ node {
    stage("Test"){
      echo "NEED TO ADD TESTS FOR THE INSTALLATION!!!!"
    }
-   
+
    stage("Archive"){
      dir("${env.WORKSPACE}"){
          sh "tar cvfz install.tgz install"
