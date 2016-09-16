@@ -1,4 +1,4 @@
-Name:          o2
+Name:          tlv
 Version:        %{TLV_VERSION}
 Release:        %{TLV_BUILD_RELEASE}%{?dist}
 Summary:        New TLV Web Application Services
@@ -13,16 +13,7 @@ License:        MIT License
 %define __os_install_post %{nil}
 
 %description
-O2 Packages
-
-%package    time_lapse
-Summary:        Time Lapse Viewer web application.
-Version:        %{TLV_VERSION}
-Group:          System Environment/Libraries
-
-
-%description  time_lapse
-OMAR/O2 UI
+Time Lapse Viewer web application.
 
 %build
 
@@ -36,8 +27,8 @@ pushd %{_builddir}/install
     fi
   done
   # Loop through each app and sym link to the versioned app
-  if [ -d %{buildroot}%{_datadir}/omar/${APP} ]; then
-      pushd %{buildroot}%{_datadir}/omar/${APP}
+  if [ -d %{buildroot}%{_datadir}/${APP} ]; then
+      pushd %{buildroot}%{_datadir}/${APP}
         if [ -L ${APP}.jar ]; then
          unlink ${APP}.jar
         fi
@@ -66,7 +57,7 @@ pushd %{_builddir}/install
 
 popd
 
-%pre time_lapse
+%pre
 export USER_NAME=omar
 export APP_NAME=time_lapse
 if ! id -u omar > /dev/null 2>&1; then 
@@ -74,7 +65,7 @@ if ! id -u omar > /dev/null 2>&1; then
 fi
 
 
-%post time_lapse
+%post
 export USER_NAME=omar
 export APP_NAMEtime_lapse
 
@@ -91,7 +82,7 @@ chmod 755 /var/log/${APP_NAME}
 chown -R ${USER_NAME}:${USER_NAME}  /var/run/${APP_NAME}
 chmod 755 /var/run/${APP_NAME}
 
-%preun time_lapse
+%preun
 export APP_NAME=time_lapse
 ps -ef | grep $APP_NAME | grep -v grep
 if [ $? -eq "0" ] ; then
@@ -109,16 +100,16 @@ else
   echo "Service ${APP_NAME} is not running and will not be stopped."
 fi
 
-%postun time_lapse
+%postun
 export APP_NAME=time_lapse
 rm -rf /var/log/${APP_NAME}
 rm -rf /var/run/${APP_NAME}
-rm -rf /usr/share/omar/${APP_NAME}
+rm -rf /usr/share/${APP_NAME}
 
-%files time_lapse
-%{_datadir}/omar/time_lapse
+%files
+%{_datadir}/time_lapse
 %if %{is_systemd}
-/usr/lib/systemd/system/omar-app.service
+/usr/lib/systemd/system/time_lapse.service
 %else
-%{_sysconfdir}/init.d/omar-app
+%{_sysconfdir}/init.d/time_lapse
 %endif
