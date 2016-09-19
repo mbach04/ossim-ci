@@ -11,7 +11,7 @@ node{
     }
     stage("Archive"){
 
-        archiveArtifacts 'rpms.tgz'
+        archiveArtifacts 'dependency-rpms.tgz'
     }
     stage("Clean Workspace"){
         step([$class: 'WsCleanup'])
