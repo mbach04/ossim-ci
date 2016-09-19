@@ -36,10 +36,34 @@ if [ $? -ne 0 ]; then
 fi
 
 rpmbuild -ba --define "_topdir ${OSSIM_DEV_HOME}/rpmbuild" --define "BUILD_RELEASE 1" ${OSSIM_DEV_HOME}/rpmbuild/SPECS/hdf5a.spec
+if [ $? -ne 0 ]; then
+  echo; echo "ERROR: Build failed for hdf5a rpm build."
+  exit 1
+fi
+
 rpmbuild -ba --define "_topdir ${OSSIM_DEV_HOME}/rpmbuild" --define "BUILD_RELEASE 1" ${OSSIM_DEV_HOME}/rpmbuild/SPECS/libjpeg12-turbo.spec
+if [ $? -ne 0 ]; then
+  echo; echo "ERROR: Build failed for libjpeg12-turbo rpm build."
+  exit 1
+fi
+
 rpmbuild -ba --define "_topdir ${OSSIM_DEV_HOME}/rpmbuild" --define "BUILD_RELEASE 1" ${OSSIM_DEV_HOME}/rpmbuild/SPECS/gpstk.spec
+if [ $? -ne 0 ]; then
+  echo; echo "ERROR: Build failed for gpstk rpm build."
+  exit 1
+fi
+
 rpmbuild -ba --define "_topdir ${OSSIM_DEV_HOME}/rpmbuild" --define "BUILD_RELEASE 3" ${OSSIM_DEV_HOME}/rpmbuild/SPECS/szip.spec
+if [ $? -ne 0 ]; then
+  echo; echo "ERROR: Build failed for szip rpm build."
+  exit 1
+fi
+
 rpmbuild -ba --define "_topdir ${OSSIM_DEV_HOME}/rpmbuild" --define "BUILD_RELEASE 1" ${OSSIM_DEV_HOME}/rpmbuild/SPECS/OpenSceneGraph.spec
+if [ $? -ne 0 ]; then
+  echo; echo "ERROR: Build failed for OpenSceneGraph rpm build."
+  exit 1
+fi
 
 getOsInfo os major_version minor_version os_arch
 
