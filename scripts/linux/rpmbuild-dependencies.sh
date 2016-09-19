@@ -43,7 +43,7 @@ rpmbuild -ba --define "_topdir ${OSSIM_DEV_HOME}/rpmbuild" --define "BUILD_RELEA
 
 getOsInfo os major_version minor_version os_arch
 
-rpmdir=${OSSIM_DEV_HOME}/rpms
+rpmdir=${OSSIM_DEV_HOME}/dependency-rpms
 if [ -d "$rpmdir" ] ; then
   rm -rf $rpmdir/*
 fi
