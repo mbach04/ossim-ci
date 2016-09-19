@@ -8,7 +8,7 @@ source $SCRIPT_DIR/ossim-env.sh
 if [ -d $OSSIM_DEV_HOME/tlv ] ; then
    pushd $OSSIM_DEV_HOME/tlv/time_lapse/build/libs
    app=time_lapse
-   for artifact in  `ls *.war` ; do
+   for artifact in  `ls *.jar` ; do
       install -p -m644 -D $artifact ${OSSIM_INSTALL_PREFIX}/share/omar/$app/$artifact
       if [ $? -ne 0 ];then
           echo "INSTALL ERROR: $app failed to install..."
