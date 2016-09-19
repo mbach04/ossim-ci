@@ -54,5 +54,5 @@ pushd ${OSSIM_DEV_HOME}/rpmbuild/RPMS >/dev/null
 popd > /dev/null
 
 pushd ${OSSIM_DEV_HOME} >/dev/null
-tar cvfz rpms.tgz rpms
+tar cvfz dependency-rpms.tgz dependency-rpms
 popd > /dev/null
