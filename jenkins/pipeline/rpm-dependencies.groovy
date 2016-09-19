@@ -2,12 +2,12 @@ node{
     env.WORKSPACE=pwd()
     stage("Checkout"){
        dir("ossim-ci"){
-          git branch: 'dev', url: 'https://github.com/ossimlabs/ossim-ci.git'
+          git branch: '${GIT_BRANCH}', url: 'https://github.com/ossimlabs/ossim-ci.git'
        }
     }
     stage ("Build")
     {
-        sh "ossim-ci/scripts/linux/rpmbuild-dependencies.sh"
+        sh "${env.WORKSPACE}/ossim-ci/scripts/linux/rpmbuild-dependencies.sh"
     }
     stage("Archive"){
 
