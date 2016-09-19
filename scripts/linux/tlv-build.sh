@@ -14,6 +14,10 @@ if [ -d $OSSIM_DEV_HOME/tlv ] ; then
     cp -R $OSSIM_DEV_HOME/ossimlabs-tlv/plugins/network_specific ./plugins/
     cat $OSSIM_DEV_HOME/ossimlabs-tlv/config.yml >> ./time_lapse/grails-app/conf/application.yml  
     pushd $OSSIM_DEV_HOME/tlv/time_lapse
+    
+    # force a jar artifact 
+    sed -i '/apply plugin:"war"/d' build.gradle
+
     ./gradlew assemble
     if [ $? -ne 0 ]; then
      echo; echo "ERROR: Unable to buld Time Lapse Viewer."
