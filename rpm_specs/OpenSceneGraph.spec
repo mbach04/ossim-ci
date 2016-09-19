@@ -375,7 +375,7 @@ Sample applications for OpenSceneGraph
 %{_bindir}/osgprecipitation
 %{_bindir}/osgprerender
 %{_bindir}/osgprerendercubemap
-#%{_bindir}/osgqfont 
+%{_bindir}/osgqfont 
 %{_bindir}/osgreflect
 %{_bindir}/osgrobot
 %{_bindir}/osgscalarbar
