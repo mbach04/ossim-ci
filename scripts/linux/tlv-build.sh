@@ -11,8 +11,7 @@ if [ -d $OSSIM_DEV_HOME/tlv ] ; then
   rm -rf $OSSIM_DEV_HOME/tlv/plugins/network_specific
   
   if [ -d $OSSIM_DEV_HOME/ossimlabs-tlv ] ; then
-    cp -R $OSSIM_DEV_HOME/ossimlabs-tlv/plugins/network_specific ./plugins/
-    cat $OSSIM_DEV_HOME/ossimlabs-tlv/config.yml >> ./time_lapse/grails-app/conf/application.yml  
+    cp -R $OSSIM_DEV_HOME/ossimlabs-tlv/plugins/network_specific ./plugins/ 
     pushd $OSSIM_DEV_HOME/tlv/time_lapse
     
     # force a jar artifact 
