@@ -22,9 +22,6 @@ node {
          ${env.WORKSPACE}/ossim-ci/scripts/linux/o2-install.sh
        """
    }
-   stage("Test"){
-     echo "NEED TO ADD TESTS FOR THE INSTALLATION!!!!"
-   }
    
    stage("Archive"){
      dir("${env.WORKSPACE}"){
