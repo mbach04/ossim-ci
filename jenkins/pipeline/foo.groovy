@@ -2,7 +2,7 @@ node {
    env.WORKSPACE=pwd()
    env.OSSIM_INSTALL_DIR="${env.WORKSPACE}/install"
    env.LD_LIBRARY_PATH="${env.OSSIM_INSTALL_DIR}/lib64:${env.LD_LIBRARY_PATH}"
-   env.OSSIM_DATA=/data
+   env.OSSIM_DATA="/data"
    
    echo "WORKSPACE         = ${env.WORKSPACE}"
    echo "LD_LIBRARY_PATH   = ${env.LD_LIBRARY_PATH}"
