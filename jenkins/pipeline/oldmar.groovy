@@ -2,16 +2,16 @@ node {
     env.WORKSPACE=pwd()
     stage("Checkout"){
         dir("omar"){
-          git branch: 'dev', url: 'https://github.com/radiantbluetechnologies/omar.git'
+          git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/radiantbluetechnologies/omar.git'
         }
        dir("ossim-ci"){
-          git branch: 'dev', url: 'https://github.com/ossimlabs/ossim-ci.git'
+          git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/ossim-ci.git'
        }
     }
    stage("Download Artifacts"){
        dir("${env.WORKSPACE}"){
            step ([$class: 'CopyArtifact',
-              projectName: 'ossim-dev',
+              projectName: "ossim-g${OSSIM_GIT_BRANCH}",
               filter: "artifacts/*.jar",
               flatten: true])
        }
@@ -20,9 +20,6 @@ node {
        sh """
          ${env.WORKSPACE}/ossim-ci/scripts/linux/oldmar-build.sh
        """
-   }
-   stage("Test"){
-     echo "NEED TO ADD TESTS FOR THE INSTALLATION!!!!"
    }
    stage("Install"){
          sh "${env.WORKSPACE}/ossim-ci/scripts/linux/oldmar-install.sh"

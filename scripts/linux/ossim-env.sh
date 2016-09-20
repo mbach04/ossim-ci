@@ -17,6 +17,8 @@ else
    export OSSIM_DEV_HOME=$WORKSPACE
 fi
 
+source $SCRIPT_DIR/git-prompt.sh
+
 if [ -z $OSSIM_INSTALL_PREFIX ]; then
   export OSSIM_INSTALL_PREFIX=$OSSIM_DEV_HOME/install
 fi
@@ -29,9 +31,18 @@ fi
 if [ -z $JAVA_HOME ] ; then
   if [ -d "/usr/lib/jvm/java" ] ; then
     export JAVA_HOME="/usr/lib/jvm/java"
+  elif [ -f "/usr/libexec/java_home" ] ; then
+    export JAVA_HOME=`/usr/libexec/java_home`
   fi
 fi
 
+if [ -z $OSSIM_GIT_BRANCH ] ; then
+   pushd $OSSIM_DEV_HOME/ossim-ci
+   export OSSIM_GIT_BRANCH=`__git_ps1 "%s"`
+   popd $OSSIM_DEV_HOME/ossim-ci
+fi
+
+echo "CURRENT BRANCH = ${OSSIM_GIT_BRANCH}"
 
 if [ -z $KAKADU_VERSION ] ; then
    # later need to add tests.  This is the last version
@@ -77,10 +88,6 @@ fi
 
 if [ -z $TLV_BUILD_RELEASE ] ; then
    export TLV_BUILD_RELEASE=1
-fi
-
-if [ -z $JAVA_HOME ]; then
-   export JAVA_HOME=/usr/lib/jvm/java
 fi
 
 if [ -z $BUILD_OSSIM_APPS ] ; then
