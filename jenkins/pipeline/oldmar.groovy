@@ -11,7 +11,7 @@ node {
    stage("Download Artifacts"){
        dir("${env.WORKSPACE}"){
            step ([$class: 'CopyArtifact',
-              projectName: "ossim-${OSSIM_GIT_BRANCH}",
+              projectName: "ossim-g${OSSIM_GIT_BRANCH}",
               filter: "artifacts/*.jar",
               flatten: true])
        }
