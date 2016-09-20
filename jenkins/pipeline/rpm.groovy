@@ -2,23 +2,23 @@ node {
    env.WORKSPACE=pwd()
    stage("Checkout"){
        dir("ossim-ci"){
-          git branch: 'dev', url: 'https://github.com/ossimlabs/ossim-ci.git'
+          git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/ossim-ci.git'
        }
    }
    echo "${env.WORKSPACE}"
    stage("Download Artifacts"){
      step ([$class: 'CopyArtifact',
-        projectName: 'ossim-dev',
+        projectName: "ossim-${OSSIM_GIT_BRANCH}",
         filter: "artifacts/install.tgz",
         flatten: true,
         target: "${env.WORKSPACE}/ossim-install"])
      step ([$class: 'CopyArtifact',
-        projectName: 'o2-dev',
+        projectName: "o2-${OSSIM_GIT_BRANCH}",
         filter: "artifacts/install.tgz",
         flatten: true,
         target: "${env.WORKSPACE}/o2-install"])
      step ([$class: 'CopyArtifact',
-        projectName: 'oldmar-dev',
+        projectName: "oldmar-${OSSIM_GIT_BRANCH}",
         filter: "artifacts/install.tgz",
         flatten: true,
         target: "${env.WORKSPACE}/oldmar-install"])
