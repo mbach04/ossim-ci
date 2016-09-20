@@ -3,16 +3,16 @@
 
 if [ -z $WORKSPACE ] ; then
    if [ -z $SCRIPT_DIR ] ; then
-
       pushd `dirname $0` >/dev/null
       export SCRIPT_DIR=`pwd -P`
-      pushd $SCRIPT_DIR/../../.. >/dev/null
-      if [ -z $OSSIM_DEV_HOME ] ; then
-        export OSSIM_DEV_HOME=$PWD
-      fi
-      popd > /dev/null
-      popd >/dev/null
    fi
+   if [ -z $OSSIM_DEV_HOME ] ; then
+      pushd $SCRIPT_DIR/../../.. >/dev/null
+      export OSSIM_DEV_HOME=$PWD
+      popd > /dev/null
+   fi
+   popd >/dev/null
+
 else
    export OSSIM_DEV_HOME=$WORKSPACE
 fi
@@ -223,3 +223,22 @@ if [ \( "${BUILD_KAKADU_PLUGIN}"="ON" \) -o \( -d "$OSSIM_DEV_HOME/ossim-private
       fi
    fi
 fi
+
+# For OSSIM run-time environment:
+if [ -z $OSSIM_DATA ] ; then
+   export OSSIM_DATA="/data"
+fi
+if [ -z $OSSIM_BATCH_TEST_DATA ] ; then
+   export OSSIM_BATCH_TEST_DATA="$OSSIM_DATA/ossim-data"
+fi
+if [ -z $OSSIM_BATCH_TEST_EXPECTED ] ; then
+   export OSSIM_BATCH_TEST_EXPECTED="$OSSIM_DATA/ossim-expected"
+fi
+if [ -z $OSSIM_BATCH_TEST_RESULTS ] ; then
+   export OSSIM_BATCH_TEST_RESULTS="$OSSIM_DATA/ossim-results"
+fi
+if [ -z $OSSIM_PREFS_FILE ] ; then
+   export OSSIM_PREFS_FILE=$OSSIM_INSTALL_PREFIX/ossim.config
+fi
+
+
