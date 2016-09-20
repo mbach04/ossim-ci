@@ -10,9 +10,9 @@ node {
    echo "OSSIM_DATA        = ${env.OSSIM_DATA}"
 
    stage("Checkout"){
-       dir("ossim-ci"){
-          git branch: "${OSSIM_GIT_BRANCH}", url: "https://github.com/ossimlabs/ossim-ci.git"
-       }
+        dir("ossim-ci"){
+          git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/ossim-ci.git'
+        }
    }
  
    echo "${env.WORKSPACE}"
