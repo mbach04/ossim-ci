@@ -2,31 +2,31 @@ node {
    env.WORKSPACE=pwd()
    stage("Checkout"){
        dir("ossim"){
-          git branch: 'dev', url: 'https://github.com/ossimlabs/ossim.git'
+          git branch: "${GIT_BRANCH}", url: 'https://github.com/ossimlabs/ossim.git'
        }
        dir("ossim-video"){
-          git branch: 'dev', url: 'https://github.com/ossimlabs/ossim-video.git'
+          git branch: "${GIT_BRANCH}", url: 'https://github.com/ossimlabs/ossim-video.git'
        }
        dir("ossim-planet"){
-          git branch: 'dev', url: 'https://github.com/ossimlabs/ossim-planet.git'
+          git branch: "${GIT_BRANCH}", url: 'https://github.com/ossimlabs/ossim-planet.git'
        }
        dir("ossim-gui"){
-          git branch: 'dev', url: 'https://github.com/ossimlabs/ossim-gui.git'
+          git branch: "${GIT_BRANCH}", url: 'https://github.com/ossimlabs/ossim-gui.git'
        }
        dir("ossim-oms"){
-          git branch: 'dev', url: 'https://github.com/ossimlabs/ossim-oms.git'
+          git branch: "${GIT_BRANCH}", url: 'https://github.com/ossimlabs/ossim-oms.git'
        }
        dir("ossim-plugins"){
-          git branch: 'dev', url: 'https://github.com/ossimlabs/ossim-plugins.git'
+          git branch: "${GIT_BRANCH}", url: 'https://github.com/ossimlabs/ossim-plugins.git'
        }
        dir("ossim-wms"){
-          git branch: 'dev', url: 'https://github.com/ossimlabs/ossim-wms.git'
+          git branch: "${GIT_BRANCH}", url: 'https://github.com/ossimlabs/ossim-wms.git'
        }
        dir("ossim-ci"){
-          git branch: 'dev', url: 'https://github.com/ossimlabs/ossim-ci.git'
+          git branch: "${GIT_BRANCH}", url: 'https://github.com/ossimlabs/ossim-ci.git'
        }
        dir("ossim-private"){
-          git branch: 'dev', url: 'git@ossim-private.github.com:radiantbluetechnologies/ossim-private.git'
+          git branch: "${GIT_BRANCH}", url: 'git@ossim-private.github.com:radiantbluetechnologies/ossim-private.git'
        }
 //       dir("cucumber-oc2s"){
 //          git branch: 'dev', url: 'git@cucumber-oc2s.github.com:radiantbluetechnologies/cucumber-oc2s.git'
@@ -51,9 +51,6 @@ node {
          ${env.WORKSPACE}/ossim-ci/scripts/linux/ossim-install.sh
        """
    }
-   stage("Test"){
-     echo "NEED TO ADD TESTS FOR THE INSTALLATION!!!!"
-   }
 
    stage("Archive"){
      dir("${env.WORKSPACE}"){
@@ -65,6 +62,7 @@ node {
      }
      archiveArtifacts 'artifacts/*'
   }
+  
   stage("Clean Workspace"){
     step([$class: 'WsCleanup'])
   }
