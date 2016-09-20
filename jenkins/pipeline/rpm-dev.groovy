@@ -27,8 +27,16 @@ node {
         filter: "tlv*install.tgz",
         flatten: true,
         target: "${env.WORKSPACE}"])
+     step ([$class: 'CopyArtifact',
+        projectName: 'dependency-rpms',
+        filter: "dependency-rpms.tgz",
+        flatten: true,
+        target: "${env.WORKSPACE}"])
    }
    stage("Build"){
+    dir("${env.WORKSPACE}"){
+      sh "tar xvfz dependency-rpms.tgz"
+    }
     sh "${env.WORKSPACE}/ossim-ci/scripts/linux/rpmbuild-binary.sh"
    }
    

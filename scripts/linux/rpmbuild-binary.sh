@@ -24,6 +24,12 @@ popd > /dev/null
 source $SCRIPT_DIR/ossim-env.sh
 source $SCRIPT_DIR/functions.sh
 
+if [ -z $OSSIM_DEPS_RPMS ] ; then
+  if [ -d $OSSIM_DEV_HOME/dependency-rpms ] ;then
+  OSSIM_DEPS_RPMS=$OSSIM_DEV_HOME/dependency-rpms
+  fi
+fi
+
 #if [ ! -d $OSSIM_DEV_HOME/rpmbuild ] ; then
 mkdir -p $OSSIM_DEV_HOME/rpmbuild/{BUILD,RPMS,SOURCES,SPECS,SRPMS}
 if [ $? -ne 0 ]; then
@@ -135,7 +141,7 @@ mkdir -p $rpmdir
 pushd ${OSSIM_DEV_HOME}/rpmbuild/RPMS >/dev/null
   mv `find ./${os_arch} -name "*.rpm"` $rpmdir/
   if [ -d "${OSSIM_DEPS_RPMS}" ] ; then
-    cp $OSSIM_DEPS_RPMS/*.rpm $rpmdir/
+    cp  `find ${OSSIM_DEPS_RPMS} -name "*.rpm"` $rpmdir/
   fi
   pushd $rpmdir >/dev/null
     createrepo --simple-md-filenames .
