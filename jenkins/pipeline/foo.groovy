@@ -11,7 +11,7 @@ node {
 
    stage("Checkout"){
        dir("ossim-ci"){
-          git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/ossim-ci.git'
+          git branch: "${OSSIM_GIT_BRANCH}", url: "https://github.com/ossimlabs/ossim-ci.git"
        }
    }
  
