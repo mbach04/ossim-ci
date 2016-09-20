@@ -2,31 +2,31 @@ node {
    env.WORKSPACE=pwd()
    stage("Checkout"){
        dir("ossim"){
-          git branch: "${GIT_BRANCH}", url: 'https://github.com/ossimlabs/ossim.git'
+          git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/ossim.git'
        }
        dir("ossim-video"){
-          git branch: "${GIT_BRANCH}", url: 'https://github.com/ossimlabs/ossim-video.git'
+          git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/ossim-video.git'
        }
        dir("ossim-planet"){
-          git branch: "${GIT_BRANCH}", url: 'https://github.com/ossimlabs/ossim-planet.git'
+          git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/ossim-planet.git'
        }
        dir("ossim-gui"){
-          git branch: "${GIT_BRANCH}", url: 'https://github.com/ossimlabs/ossim-gui.git'
+          git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/ossim-gui.git'
        }
        dir("ossim-oms"){
-          git branch: "${GIT_BRANCH}", url: 'https://github.com/ossimlabs/ossim-oms.git'
+          git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/ossim-oms.git'
        }
        dir("ossim-plugins"){
-          git branch: "${GIT_BRANCH}", url: 'https://github.com/ossimlabs/ossim-plugins.git'
+          git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/ossim-plugins.git'
        }
        dir("ossim-wms"){
-          git branch: "${GIT_BRANCH}", url: 'https://github.com/ossimlabs/ossim-wms.git'
+          git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/ossim-wms.git'
        }
        dir("ossim-ci"){
-          git branch: "${GIT_BRANCH}", url: 'https://github.com/ossimlabs/ossim-ci.git'
+          git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/ossim-ci.git'
        }
        dir("ossim-private"){
-          git branch: "${GIT_BRANCH}", url: 'git@ossim-private.github.com:radiantbluetechnologies/ossim-private.git'
+          git branch: "${OSSIM_GIT_BRANCH}", url: 'git@ossim-private.github.com:radiantbluetechnologies/ossim-private.git'
        }
 //       dir("cucumber-oc2s"){
 //          git branch: 'dev', url: 'git@cucumber-oc2s.github.com:radiantbluetechnologies/cucumber-oc2s.git'
@@ -62,7 +62,7 @@ node {
      }
      archiveArtifacts 'artifacts/*'
   }
-  
+
   stage("Clean Workspace"){
     step([$class: 'WsCleanup'])
   }
