@@ -10,7 +10,9 @@ node {
    echo "OSSIM_DATA        = ${env.OSSIM_DATA}"
 
    stage("Checkout"){
-     checkout([$class: 'GitSCM', branches: [[name: '*/dev']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/ossimlabs/ossim-ci.git']]])
+       dir("ossim-ci"){
+          git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/ossim-ci.git'
+       }
    }
  
    echo "${env.WORKSPACE}"
@@ -18,7 +20,7 @@ node {
    stage("Download Artifacts"){
        dir("${env.WORKSPACE}"){
            step ([$class: 'CopyArtifact',
-              projectName: 'ossim-dev',
+              projectName: "ossim-${OSSIM_GIT_BRANCH}",
               filter: "artifacts/install.tgz",
               flatten: true])
        }
