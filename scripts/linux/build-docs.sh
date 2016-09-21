@@ -1,9 +1,9 @@
 #!/bin/bash 
 pushd `dirname $0` >/dev/null
 export SCRIPT_DIR=`pwd -P`
-pushd $SCRIPT_DIR/../../.. >/dev/null
-popd > /dev/null
 popd >/dev/null
+source $SCRIPT_DIR/ossim-env.sh
+
 export OMAR_DEV_HOME=$OSSIM_DEV_HOME/omar
 export OMAR_INSTALL_DOCS=$OSSIM_INSTALL_PREFIX/share/o2/docs
 
