@@ -2,10 +2,12 @@ node{
    env.WORKSPACE=pwd()
    env.LD_LIBRARY_PATH="${env.WORKSPACE}/install/lib64:${env.LD_LIBRARY_PATH}"
    env.PATH="${env.WORKSPACE}/install/bin:${env.PATH}"
-
+   env.S3_DATA_BUCKET="s3://o2-test-data"
+   
    echo "WORKSPACE       = ${env.WORKSPACE}"
    echo "LD_LIBRARY_PATH = ${env.LD_LIBRARY_PATH}"   
    echo "PATH            = ${env.PATH}"
+   echo "S3_DATA_BUCKET  = ${env.S3_DATA_BUCKET}"
    echo "ACCEPT_TESTS    = ${ACCEPT_TESTS}"
 
    stage("Checkout") {

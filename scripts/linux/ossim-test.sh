@@ -8,7 +8,7 @@
 #
 # Usage: ossim-test.sh [accept]
 #
-# If "accept is specified, the results will be uploaded to the expected results on S3.
+# If "accept" is specified, the results will be uploaded to the expected results on S3.
 #
 ######################################################################################
 #set -x; trap read debug
