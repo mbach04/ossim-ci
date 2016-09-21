@@ -166,7 +166,7 @@ sed -i "s/-O3 -g/$RPM_OPT_FLAGS/" configure
 %build
 mkdir generic
 mkdir tmp
-export TMPDIR=/opt/rpmbuild/tmp
+#export TMPDIR=/opt/rpmbuild/tmp
 pushd generic
 ../configure --enable-shared \
     --prefix=%{_prefix} \
