@@ -47,6 +47,8 @@ if [ ! -d $OSSIM_DATA ] || [ ! -d $OSSIM_BATCH_TEST_DATA ] || [ -z $OSSIM_BATCH_
   echo; exit 1;
 fi
 
+echo; echo "WORKSPACE = $WORKSPACE"; echo
+
 # Do basic ossim config and version check first:
 echo; echo "STATUS: Running ossim-info --config test...";
 runCommand "ossim-info --config --plugins"
