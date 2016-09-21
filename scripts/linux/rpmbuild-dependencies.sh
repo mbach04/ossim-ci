@@ -13,6 +13,7 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 pushd $OSSIM_DEV_HOME/rpmbuild/SOURCES >/dev/null
+wget https://s3.amazonaws.com/ossimlabs/dependencies/source/ffmpeg-2.1.1.tar.bz2 -O ffmpeg-2.1.1.tar.bz2
 wget https://s3.amazonaws.com/ossimlabs/dependencies/source/OpenSceneGraph-3.2.1.zip -O OpenSceneGraph-3.2.1.zip
 wget https://s3.amazonaws.com/ossimlabs/dependencies/source/0001-Cmake-fixes.patch -O 0001-Cmake-fixes.patch
 wget https://s3.amazonaws.com/ossimlabs/dependencies/source/0001-Update-Aether-to-0.9.0.M3.patch -O 0001-Update-Aether-to-0.9.0.M3.patch
@@ -32,6 +33,12 @@ popd >/dev/null
 cp $OSSIM_DEV_HOME/ossim-ci/rpm_specs/*.spec $OSSIM_DEV_HOME/rpmbuild/SPECS/
 if [ $? -ne 0 ]; then
   echo; echo "ERROR: Unable to copy spec files from $OSSIM_DEV_HOME/ossim-ci/rpm_specs/*.spec to location $OSSIM_DEV_HOME/rpmbuild/SPECS."
+  exit 1
+fi
+
+rpmbuild -ba --define "_topdir ${OSSIM_DEV_HOME}/rpmbuild" --define "BUILD_RELEASE 1" ${OSSIM_DEV_HOME}/rpmbuild/SPECS/ffmpeg.spec
+if [ $? -ne 0 ]; then
+  echo; echo "ERROR: Build failed for ffmpeg rpm build."
   exit 1
 fi
 
