@@ -2,7 +2,7 @@ node{
    env.WORKSPACE=pwd()
    env.LD_LIBRARY_PATH="${env.WORKSPACE}/install/lib64:${env.LD_LIBRARY_PATH}"
    env.PATH="${env.WORKSPACE}/install/bin:${env.PATH}"
-   
+
    echo "WORKSPACE       = ${env.WORKSPACE}"
    echo "LD_LIBRARY_PATH = ${env.LD_LIBRARY_PATH}"   
    echo "PATH            = ${env.PATH}"
@@ -27,7 +27,7 @@ node{
       """
    }
 
-   if (${ACCEPT_TESTS}) {
+   if ("${ACCEPT_TESTS}") {
      stage("Accept Results")
      {
         sh """
