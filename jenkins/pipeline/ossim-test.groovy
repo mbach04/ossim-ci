@@ -19,11 +19,11 @@ node{
             filter: "artifacts/install.tgz",
             flatten: true,
             target: "${env.WORKSPACE}"])
-      step ( sh """
-             pushd ${env.WORKSPACE}
-             tar xvfz install.tgz
-             popd
-             """)
+      sh """
+        pushd ${env.WORKSPACE}
+        tar xvfz install.tgz
+        popd
+      """
    }
 
    if (env.ACCEPT_TESTS) {
