@@ -6,6 +6,7 @@ node{
    echo "WORKSPACE       = ${env.WORKSPACE}"
    echo "LD_LIBRARY_PATH = ${env.LD_LIBRARY_PATH}"   
    echo "PATH            = ${env.PATH}"
+   echo "ACCEPT_TESTS    = ${env.ACCEPT_TESTS}"
 
    stage("Checkout") {
        dir("ossim-ci") {
