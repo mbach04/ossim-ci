@@ -1,16 +1,16 @@
 node{
    env.WORKSPACE=pwd()
-   env.LD_LIBRARY_PATH="${env.OSSIM_INSTALL_DIR}/lib64:${env.LD_LIBRARY_PATH}"
-   env.PATH="${env.OSSIM_INSTALL_DIR}/bin:${env.PATH}"
+   env.LD_LIBRARY_PATH="${env.WORKSPACE}/install/lib64:${env.LD_LIBRARY_PATH}"
+   env.PATH="${env.WORKSPACE}/install/bin:${env.PATH}"
    
    echo "WORKSPACE       = ${env.WORKSPACE}"
    echo "LD_LIBRARY_PATH = ${env.LD_LIBRARY_PATH}"   
    echo "PATH            = ${env.PATH}"
-   echo "ACCEPT_TESTS    = ${env.ACCEPT_TESTS}"
+   echo "ACCEPT_TESTS    = ${ACCEPT_TESTS}"
 
    stage("Checkout") {
        dir("ossim-ci") {
-          git branch: 'dev', url: 'https://github.com/ossimlabs/ossim-ci.git'
+          git branch: "dev", url: 'https://github.com/ossimlabs/ossim-ci.git'
        }
    }
 
@@ -27,7 +27,7 @@ node{
       """
    }
 
-   if (env.ACCEPT_TESTS) {
+   if (${ACCEPT_TESTS}) {
      stage("Accept Results")
      {
         sh """
