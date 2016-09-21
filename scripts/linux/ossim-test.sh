@@ -47,7 +47,8 @@ if [ ! -d $OSSIM_DATA ] || [ ! -d $OSSIM_BATCH_TEST_DATA ] || [ -z $OSSIM_BATCH_
   echo; exit 1;
 fi
 
-echo; echo "WORKSPACE = $WORKSPACE"; echo
+# Copy the ossim preferences file to the top install directory:
+runCommand "cp $WORKSPACE/ossim-ci/batch_tests/ossim.config $OSSIM_INSTALL_PREFIX"
 
 # Do basic ossim config and version check first:
 echo; echo "STATUS: Running ossim-info --config test...";
