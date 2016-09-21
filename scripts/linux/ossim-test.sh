@@ -6,13 +6,29 @@
 #
 #   OSSIM_DATA -- Local directory to contain elevation, imagery, and expected results
 #
+# Usage: ossim-test.sh [accept]
+#
+# If "accept is specified, the results will be uploaded to the expected results on S3.
+#
 ######################################################################################
 #set -x; trap read debug
+
+function runCommand() 
+{
+  $1
+  if [ $? != 0 ] ; then 
+    echo "ERROR: Failed while executing command: <$1>."
+    echo; exit 1;
+  fi
+}
+
 
 echo; echo; 
 echo "################################################################################"
 echo "#  Running `basename "$0"` out of <$PWD>"
 echo "################################################################################"
+
+ACCEPT_RESULTS=$1
 
 # Set run-time environment:
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
@@ -31,32 +47,12 @@ if [ ! -d $OSSIM_DATA ] || [ ! -d $OSSIM_BATCH_TEST_DATA ] || [ -z $OSSIM_BATCH_
   echo; exit 1;
 fi
 
-# Make sure the output directories are created:
-if [ ! -d $OSSIM_BATCH_TEST_RESULTS ]; then
-  echo "STATUS: Creating directory <$OSSIM_BATCH_TEST_RESULTS> to hold test output.";
-  mkdir -p $OSSIM_BATCH_TEST_RESULTS;
-fi
-if [ ! -d $OSSIM_BATCH_TEST_RESULTS/out ]; then
-  echo "STATUS: Creating directory <$OSSIM_BATCH_TEST_RESULTS/out> to hold test results.";
-  mkdir -p $OSSIM_BATCH_TEST_RESULTS/out;
-fi
-if [ ! -d $OSSIM_BATCH_TEST_RESULTS/log ]; then
-  echo "STATUS: Creating directory <$OSSIM_BATCH_TEST_RESULTS/log> to hold test logs.";
-  mkdir -p $OSSIM_BATCH_TEST_RESULTS/log;
-fi
-
-# TEST 1: Check ossim-info version:
+# Do basic ossim config and version check first:
 echo; echo "STATUS: Running ossim-info --config test...";
-COMMAND1="ossim-info --config --plugins"
-$COMMAND1
-if [ $? -ne 0 ]; then
-  echo; echo "ERROR: Failed while attempting to run <$COMMAND1>."
-  echo; exit 1;
-fi
+runCommand "ossim-info --config --plugins"
 echo "STATUS: Passed ossim-info --config test.";
 
 echo; echo "STATUS: Running ossim-info --version test...";
-ossim-info --version
 COUNT="$(ossim-info --version | grep --count 'version: 1.9')"
 echo "COUNT = <$COUNT>"
 if [ $COUNT != "1" ]; then
@@ -65,29 +61,44 @@ if [ $COUNT != "1" ]; then
 fi
 echo "STATUS: Passed ossim-info --version test.";
 
+# Make sure the output directories are created:
+if [ $ACCEPT_RESULTS == "accept" ]; then
+  TEST_OUTPUT_DIR=$OSSIM_BATCH_TEST_EXPECTED
+else
+  TEST_OUTPUT_DIR=$OSSIM_BATCH_TEST_RESULTS
+fi
+if [ ! -d $TEST_OUTPUT_DIR ]; then
+  echo "STATUS: Creating directory <$TEST_OUTPUT_DIR> to hold test output.";
+  mkdir -p $TEST_OUTPUT_DIR;
+fi
+
+
 # Sync test data against S3:
 if [ -z $S3_DATA_BUCKET ]; then
   echo "ERROR: No URL specified for S3 bucket containing test data. Expecting S3_DATA_BUCKET environment variable."
   echo; exit 1;
 fi
-aws s3 sync $S3_DATA_BUCKET/Batch_test_data $OSSIM_BATCH_TEST_DATA
-aws s3 sync $S3_DATA_BUCKET/Batch_test_expected $OSSIM_BATCH_TEST_EXPECTED
-aws s3 sync $S3_DATA_BUCKET/elevation $OSSIM_DATA/elevation
+echo "STATUS: Syncronizing test data from S3 to local agent." 
+runCommand "aws s3 sync $S3_DATA_BUCKET/Batch_test_data $OSSIM_BATCH_TEST_DATA"
+runCommand "aws s3 sync $S3_DATA_BUCKET/elevation $OSSIM_DATA/elevation"
 
-# Run batch tests
 pushd $OSSIM_DEV_HOME/ossim-ci/batch_tests;
-echo; echo "STATUS: Running batch tests in <$PWD>..."
-ossim-batch-test super-test.kwl
-EXIT_CODE=$?
-popd
-echo "STATUS: ossim-batch-test EXIT_CODE = $EXIT_CODE"
-if [ $EXIT_CODE != 0 ]; then
-  echo "FAIL: Failed batch test"
-  echo; exit 1;
-fi
 
-# Success!
+if [ $ACCEPT_RESULTS == "accept" ]; then
+  echo "STATUS: Running batch test and accepting results."   
+  runCommand "ossim_batch_test -a all super-test.kwl"
+  echo "STATUS: Uploading expected results to S3."   
+  runCommand "aws s3 sync $OSSIM_BATCH_TEST_EXPECTED $S3_DATA_BUCKET/Batch_test_expected"
+  echo "STATUS: Upload successfull."   
+else
+  echo "STATUS: Syncronizing expected results from S3 to local agent." 
+  runCommand "aws s3 sync $S3_DATA_BUCKET/Batch_test_data $OSSIM_BATCH_TEST_EXPECTED"
+  echo "STATUS: Running batch test and comparing to expected results."   
+  runCommand "ossim-batch-test super-test.kwl"
+fi
+  
 echo "STATUS: Passed all tests."
 echo
 exit 0
+
 

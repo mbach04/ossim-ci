@@ -7,13 +7,13 @@ node{
    echo "LD_LIBRARY_PATH = ${env.LD_LIBRARY_PATH}"   
    echo "PATH            = ${env.PATH}"
 
-   stage("Checkout"){
-       dir("ossim-ci"){
+   stage("Checkout") {
+       dir("ossim-ci") {
           git branch: 'dev', url: 'https://github.com/ossimlabs/ossim-ci.git'
        }
    }
 
-    stage("Download Artifacts"){
+   stage("Download Artifacts") {
       step ([$class: 'CopyArtifact',
             projectName: 'ossim-dev',
             filter: "artifacts/install.tgz",
@@ -24,17 +24,29 @@ node{
              tar xvfz install.tgz
              popd
              """)
-    }
+   }
 
-    stage("Run test")
-    {
-       sh """
-       pushd ${env.WORKSPACE}/ossim-ci/scripts/linux
-       ./ossim-test.sh
-       popd
-       """
+   if (env.ACCEPT_TESTS) {
+     stage("Accept Results")
+     {
+        sh """
+        pushd ${env.WORKSPACE}/ossim-ci/scripts/linux
+        ./ossim-test.sh accept
+        popd
+        """
     }
-    
+  }
+  else {
+     stage("Run Tests")
+     {
+        sh """
+        pushd ${env.WORKSPACE}/ossim-ci/scripts/linux
+        ./ossim-test.sh
+        popd
+        """
+     }
+  }
+ 
     
     stage("Publish Badges"){
 //      ?
