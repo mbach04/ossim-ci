@@ -3,7 +3,7 @@ node {
    env.KAKADU_VERSION="v7_5-01123C"
    env.JAVA_HOME="/usr/lib/jvm/java"
    dir("ossim-private"){
-      git branch: 'dev', url: 'git@github.com:radiantbluetechnologies/ossim-private.git'
+      git branch: 'dev', url: 'git@ossim-private.github.com:radiantbluetechnologies/ossim-private.git'
    }
    echo "${env.WORKSPACE}"
    stage("Build"){
