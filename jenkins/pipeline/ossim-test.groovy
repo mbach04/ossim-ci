@@ -50,13 +50,8 @@ node("BATCH_TEST"){
      }
   }
  
-    
-    stage("Publish Badges"){
-//      ?
-    }
-    
-    stage("Clean Workspace"){
-      step([$class: 'WsCleanup'])
-    }
+  stage("Clean Workspace"){
+     step([$class: 'WsCleanup'])
+  }
 
 }
