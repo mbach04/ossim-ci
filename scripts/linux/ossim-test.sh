@@ -48,6 +48,7 @@ if [ ! -d $OSSIM_DATA ] || [ ! -d $OSSIM_BATCH_TEST_DATA ] || [ -z $OSSIM_BATCH_
 fi
 
 # Copy the ossim preferences file to the top install directory:
+echo; echo "STATUS: Copying ossim preferences to install directory...";
 runCommand "cp $WORKSPACE/ossim-ci/batch_tests/ossim.config $OSSIM_INSTALL_PREFIX"
 
 # Do basic ossim config and version check first:
@@ -74,7 +75,6 @@ if [ ! -d $TEST_OUTPUT_DIR ]; then
   echo "STATUS: Creating directory <$TEST_OUTPUT_DIR> to hold test output.";
   mkdir -p $TEST_OUTPUT_DIR;
 fi
-
 
 # Sync test data against S3:
 if [ -z $S3_DATA_BUCKET ]; then
