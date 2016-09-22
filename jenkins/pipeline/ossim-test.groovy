@@ -1,4 +1,4 @@
-node{
+node("BATCH_TEST"){
    env.WORKSPACE=pwd()
    env.LD_LIBRARY_PATH="${env.WORKSPACE}/install/lib64:${env.WORKSPACE}/install/lib64/ossim/plugins:${env.LD_LIBRARY_PATH}"
    env.PATH="${env.WORKSPACE}/install/bin:${env.PATH}"
