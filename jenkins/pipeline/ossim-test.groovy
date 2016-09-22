@@ -4,15 +4,15 @@ node{
    env.PATH="${env.WORKSPACE}/install/bin:${env.PATH}"
    env.S3_DATA_BUCKET="s3://o2-test-data"
    
-   echo "WORKSPACE       = ${env.WORKSPACE}"
-   echo "LD_LIBRARY_PATH = ${env.LD_LIBRARY_PATH}"   
-   echo "PATH            = ${env.PATH}"
-   echo "S3_DATA_BUCKET  = ${env.S3_DATA_BUCKET}"
-   echo "ACCEPT_TESTS    = ${ACCEPT_TESTS}"
-
+   echo "WORKSPACE        = ${env.WORKSPACE}"
+   echo "LD_LIBRARY_PATH  = ${env.LD_LIBRARY_PATH}"   
+   echo "PATH             = ${env.PATH}"
+   echo "S3_DATA_BUCKET   = ${env.S3_DATA_BUCKET}"
+   echo "ACCEPT_TESTS     = ${ACCEPT_TESTS}"
+   echo "OSSIM_GIT_BRANCH = ${OSSIM_GIT_BRANCH}"
    stage("Checkout") {
        dir("ossim-ci") {
-          git branch: "dev", url: 'https://github.com/ossimlabs/ossim-ci.git'
+          git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/ossim-ci.git'
        }
    }
 
