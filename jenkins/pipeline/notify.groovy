@@ -9,4 +9,4 @@ def notifyFailed() {
 }
 
 
-return this
+this
