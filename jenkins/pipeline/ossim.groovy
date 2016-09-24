@@ -34,7 +34,7 @@ node {
   //       dir("cucumber-oc2s"){
   //          git branch: 'dev', url: 'git@cucumber-oc2s.github.com:radiantbluetechnologies/cucumber-oc2s.git'
   //       }
-       notifyObj = load "ossim-ci/jenkins/pipeline/notify.groovy"
+       notifyObj = load "${env.WORKSPACE}/ossim-ci/jenkins/pipeline/notify.groovy"
      }
      echo "${env.WORKSPACE}"
      stage("Download Artifacts"){
