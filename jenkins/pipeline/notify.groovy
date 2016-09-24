@@ -9,3 +9,4 @@ def notifyFailed() {
 }
 
 
+return this
