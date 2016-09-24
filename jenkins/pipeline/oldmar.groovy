@@ -9,7 +9,7 @@ node {
          dir("ossim-ci"){
             git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/ossim-ci.git'
          }
-         notifyObj = load "ossim-ci/jenkins/pipeline/notify.groovy"
+         notifyObj = load "${env.WORKSPACE}/ossim-ci/jenkins/pipeline/notify.groovy"
       }
      stage("Download Artifacts"){
          dir("${env.WORKSPACE}"){
