@@ -40,7 +40,7 @@ node {
      stage("Download Artifacts"){
          dir("${env.WORKSPACE}"){
              step ([$class: 'CopyArtifact',
-                projectName: 'ossim-kakadu-dev',
+                projectName: 'ossim-kakadu-${OSSIM_GIT_BRANCH}',
                 filter: "artifacts/kakadu.tgz",
                 flatten: true])
          }
