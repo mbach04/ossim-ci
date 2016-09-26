@@ -31,16 +31,13 @@ node {
          dir("ossim-private"){
             git branch: "${OSSIM_GIT_BRANCH}", url: 'git@ossim-private.github.com:radiantbluetechnologies/ossim-private.git'
          }
-  //       dir("cucumber-oc2s"){
-  //          git branch: 'dev', url: 'git@cucumber-oc2s.github.com:radiantbluetechnologies/cucumber-oc2s.git'
-  //       }
        notifyObj = load "${env.WORKSPACE}/ossim-ci/jenkins/pipeline/notify.groovy"
      }
      echo "${env.WORKSPACE}"
      stage("Download Artifacts"){
          dir("${env.WORKSPACE}"){
              step ([$class: 'CopyArtifact',
-                projectName: 'ossim-kakadu-dev',
+                projectName: 'ossim-kakadu-${OSSIM_GIT_BRANCH}',
                 filter: "artifacts/kakadu.tgz",
                 flatten: true])
          }
