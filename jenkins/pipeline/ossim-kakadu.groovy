@@ -1,45 +1,54 @@
+def notifyObj
 node {
    env.WORKSPACE=pwd()
    env.KAKADU_VERSION="v7_5-01123C"
    env.JAVA_HOME="/usr/lib/jvm/java"
-   dir("ossim-private"){
-      git branch: 'dev', url: 'git@ossim-private.github.com:radiantbluetechnologies/ossim-private.git'
-   }
-   echo "${env.WORKSPACE}"
-   stage("Build"){
-       sh """
-       mkdir -p ${env.WORKSPACE}/ossim-private/kakadu/${env.KAKADU_VERSION}/bin/Linux-x86-64-gcc
-       pushd ${env.WORKSPACE}/ossim-private/kakadu/${env.KAKADU_VERSION}/coresys/make
-       make -f Makefile-Linux-x86-64-gcc
-       popd
-       pushd ${env.WORKSPACE}/ossim-private/kakadu/${env.KAKADU_VERSION}/apps/make
-       make -f Makefile-Linux-x86-64-gcc
-       popd
-       pushd ${env.WORKSPACE}/ossim-private/kakadu/${env.KAKADU_VERSION}/managed/make
-       make -f Makefile-Linux-x86-64-gcc
-       popd
-       rm -rf ${env.WORKSPACE}/kakadu-${env.KAKADU_VERSION}
-       pushd ${env.WORKSPACE}/ossim-private/kakadu
-       cp -R ${env.KAKADU_VERSION} ${env.WORKSPACE}/kakadu-${env.KAKADU_VERSION}
-       popd
-       """
-   }
-//   stage("Install"){
-//     sh "${env.WORKSPACE}/ossim/scripts/install.sh"
-//   }
-   stage("Test"){
-     echo "NEED TO ADD TESTS FOR THE INSTALLATION!!!!"
-   }
-   
-   stage("Archive"){
-     dir("${env.WORKSPACE}"){
-         sh "tar cvfz kakadu.tgz kakadu-${env.KAKADU_VERSION}"
+   try{
+     stage("Checkout"){
+       dir("ossim-private"){
+          git branch: "${OSSIM_GIT_BRANCH}", url: 'git@ossim-private.github.com:radiantbluetechnologies/ossim-private.git'
+       }
+       dir("ossim-ci"){
+          git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/ossim-ci.git'
+       }
+       notifyObj = load "${env.WORKSPACE}/ossim-ci/jenkins/pipeline/notify.groovy"
      }
-     dir("${env.WORKSPACE}/artifacts"){
-         sh "mv ${env.WORKSPACE}/kakadu.tgz ."
+     echo "${env.WORKSPACE}"
+     stage("Build"){
+         sh """
+         mkdir -p ${env.WORKSPACE}/ossim-private/kakadu/${env.KAKADU_VERSION}/bin/Linux-x86-64-gcc
+         pushd ${env.WORKSPACE}/ossim-private/kakadu/${env.KAKADU_VERSION}/coresys/make
+         make -f Makefile-Linux-x86-64-gcc
+         popd
+         pushd ${env.WORKSPACE}/ossim-private/kakadu/${env.KAKADU_VERSION}/apps/make
+         make -f Makefile-Linux-x86-64-gcc
+         popd
+         pushd ${env.WORKSPACE}/ossim-private/kakadu/${env.KAKADU_VERSION}/managed/make
+         make -f Makefile-Linux-x86-64-gcc
+         popd
+         rm -rf ${env.WORKSPACE}/kakadu-${env.KAKADU_VERSION}
+         pushd ${env.WORKSPACE}/ossim-private/kakadu
+         cp -R ${env.KAKADU_VERSION} ${env.WORKSPACE}/kakadu-${env.KAKADU_VERSION}
+         popd
+         """
      }
-     archiveArtifacts 'artifacts/*'
-  }
+     
+     stage("Archive"){
+       dir("${env.WORKSPACE}"){
+           sh "tar cvfz kakadu.tgz kakadu-${env.KAKADU_VERSION}"
+       }
+       dir("${env.WORKSPACE}/artifacts"){
+           sh "mv ${env.WORKSPACE}/kakadu.tgz ."
+       }
+       archiveArtifacts 'artifacts/*'
+    }
+
+   }
+   catch(e)
+   {
+    currentBuild.result = "FAILED"
+    notifyObj?.notifyFailed()
+   }
   stage("Clean Workspace"){
     step([$class: 'WsCleanup'])
   }

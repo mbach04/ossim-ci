@@ -31,9 +31,6 @@ node {
          dir("ossim-private"){
             git branch: "${OSSIM_GIT_BRANCH}", url: 'git@ossim-private.github.com:radiantbluetechnologies/ossim-private.git'
          }
-  //       dir("cucumber-oc2s"){
-  //          git branch: 'dev', url: 'git@cucumber-oc2s.github.com:radiantbluetechnologies/cucumber-oc2s.git'
-  //       }
        notifyObj = load "${env.WORKSPACE}/ossim-ci/jenkins/pipeline/notify.groovy"
      }
      echo "${env.WORKSPACE}"
