@@ -3,19 +3,21 @@
 
 if [ -z $WORKSPACE ] ; then
    if [ -z $SCRIPT_DIR ] ; then
-
       pushd `dirname $0` >/dev/null
       export SCRIPT_DIR=`pwd -P`
-      pushd $SCRIPT_DIR/../../.. >/dev/null
-      if [ -z $OSSIM_DEV_HOME ] ; then
-        export OSSIM_DEV_HOME=$PWD
-      fi
-      popd > /dev/null
-      popd >/dev/null
    fi
+   if [ -z $OSSIM_DEV_HOME ] ; then
+      pushd $SCRIPT_DIR/../../.. >/dev/null
+      export OSSIM_DEV_HOME=$PWD
+      popd > /dev/null
+   fi
+   popd >/dev/null
+
 else
    export OSSIM_DEV_HOME=$WORKSPACE
 fi
+
+source $SCRIPT_DIR/git-prompt.sh
 
 if [ -z $OSSIM_INSTALL_PREFIX ]; then
   export OSSIM_INSTALL_PREFIX=$OSSIM_DEV_HOME/install
@@ -29,9 +31,18 @@ fi
 if [ -z $JAVA_HOME ] ; then
   if [ -d "/usr/lib/jvm/java" ] ; then
     export JAVA_HOME="/usr/lib/jvm/java"
+  elif [ -f "/usr/libexec/java_home" ] ; then
+    export JAVA_HOME=`/usr/libexec/java_home`
   fi
 fi
 
+if [ -z $OSSIM_GIT_BRANCH ] ; then
+   pushd $OSSIM_DEV_HOME/ossim-ci
+   export OSSIM_GIT_BRANCH=`__git_ps1 "%s"`
+   popd $OSSIM_DEV_HOME/ossim-ci
+fi
+
+echo "CURRENT BRANCH = ${OSSIM_GIT_BRANCH}"
 
 if [ -z $KAKADU_VERSION ] ; then
    # later need to add tests.  This is the last version
@@ -77,10 +88,6 @@ fi
 
 if [ -z $TLV_BUILD_RELEASE ] ; then
    export TLV_BUILD_RELEASE=1
-fi
-
-if [ -z $JAVA_HOME ]; then
-   export JAVA_HOME=/usr/lib/jvm/java
 fi
 
 if [ -z $BUILD_OSSIM_APPS ] ; then
@@ -174,7 +181,7 @@ if [ -d $OSSIM_DEV_HOME/ossim-plugins ] ; then
    fi
 
    if [ -z $BUILD_OPENCV_PLUGIN ] ; then
-      export BUILD_OPENCV_PLUGIN=OFF
+      export BUILD_OPENCV_PLUGIN=ON
    fi
 
    if [ -z $BUILD_OPENJPEG_PLUGIN ] ; then
@@ -216,3 +223,22 @@ if [ \( "${BUILD_KAKADU_PLUGIN}"="ON" \) -o \( -d "$OSSIM_DEV_HOME/ossim-private
       fi
    fi
 fi
+
+# For OSSIM run-time environment:
+if [ -z $OSSIM_DATA ] ; then
+   export OSSIM_DATA="/data"
+fi
+if [ -z $OSSIM_BATCH_TEST_DATA ] ; then
+   export OSSIM_BATCH_TEST_DATA="$OSSIM_DATA/ossim-data"
+fi
+if [ -z $OSSIM_BATCH_TEST_EXPECTED ] ; then
+   export OSSIM_BATCH_TEST_EXPECTED="$OSSIM_DATA/ossim-expected"
+fi
+if [ -z $OSSIM_BATCH_TEST_RESULTS ] ; then
+   export OSSIM_BATCH_TEST_RESULTS="$OSSIM_DATA/ossim-results"
+fi
+if [ -z $OSSIM_PREFS_FILE ] ; then
+   export OSSIM_PREFS_FILE=$OSSIM_INSTALL_PREFIX/ossim.config
+fi
+
+
