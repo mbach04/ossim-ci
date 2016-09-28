@@ -1,6 +1,6 @@
 node("docker_exporter"){
    env.WORKSPACE=pwd()
-   env.S3_DELIVERY_BUCKET="s3://o2-delivery"
+   env.S3_DELIVERY_BUCKET="s3://o2-delivery/${OSSIM_GIT_BRANCH}"
    
    echo "WORKSPACE        = ${env.WORKSPACE}"
    echo "S3_DELIVERY_BUCKET   = ${env.S3_DATA_BUCKET}"
