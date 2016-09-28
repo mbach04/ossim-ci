@@ -34,7 +34,6 @@ if [ -d $OSSIM_DEV_HOME/tlv ] ; then
     fi
     popd
   fi
-  popd
 else
   echo; echo "ERROR: TLV repo not present and will not be build"
   exit 1
