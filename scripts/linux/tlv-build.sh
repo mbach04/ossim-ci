@@ -7,11 +7,10 @@ popd >/dev/null
 source $SCRIPT_DIR/ossim-env.sh
 
 if [ -d $OSSIM_DEV_HOME/tlv ] ; then
-  pushd tlv
   rm -rf $OSSIM_DEV_HOME/tlv/plugins/network_specific
   
   if [ -d $OSSIM_DEV_HOME/ossimlabs-tlv ] ; then
-    cp -R $OSSIM_DEV_HOME/ossimlabs-tlv/plugins/network_specific ./plugins/ 
+    cp -R $OSSIM_DEV_HOME/ossimlabs-tlv/plugins/network_specific $OSSIM_DEV_HOME/tlv/plugins/
    
  
     # add documentation
@@ -19,7 +18,7 @@ if [ -d $OSSIM_DEV_HOME/tlv ] ; then
 
 
     # force a jar artifact 
-    sed -i '/apply plugin:"war"/d' build.gradle
+    sed -i '/apply plugin:"war"/d' $OSSIM_DEV_HOME/tlv/time_lapse/build.gradle
 
 
     # take into account the web proxy path
@@ -35,7 +34,6 @@ if [ -d $OSSIM_DEV_HOME/tlv ] ; then
     fi
     popd
   fi
-  popd
 else
   echo; echo "ERROR: TLV repo not present and will not be build"
   exit 1
