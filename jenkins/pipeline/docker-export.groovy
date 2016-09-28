@@ -10,14 +10,6 @@ node("docker_exporter"){
        }
    }
 
-   stage("Compose Docker Stack") {
-      sh """
-        pushd ${env.WORKSPACE}/omar/build_scripts/docker
-        ./compose.sh
-        popd
-      """
-   }
-
    stage("Export Docker Images") {
       sh """
         pushd ${env.WORKSPACE}/omar/build_scripts/docker
