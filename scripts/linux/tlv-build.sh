@@ -7,7 +7,7 @@ popd >/dev/null
 source $SCRIPT_DIR/ossim-env.sh
 
 if [ -d $OSSIM_DEV_HOME/tlv ] ; then
-  pushd tlv
+  pushd $OSSIM_DEV_HOME/tlv
   rm -rf $OSSIM_DEV_HOME/tlv/plugins/network_specific
   
   if [ -d $OSSIM_DEV_HOME/ossimlabs-tlv ] ; then
