@@ -5,7 +5,10 @@ popd >/dev/null
 source $SCRIPT_DIR/ossim-env.sh
 
 export OMAR_DEV_HOME=$OSSIM_DEV_HOME/omar
+
+if [ -z $OMAR_INSTALL_DOCS ] ; then
 export OMAR_INSTALL_DOCS=$OSSIM_INSTALL_PREFIX/share/o2/docs
+fi
 
 source $SCRIPT_DIR/ossim-env.sh
 
