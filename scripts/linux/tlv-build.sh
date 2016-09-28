@@ -10,7 +10,7 @@ if [ -d $OSSIM_DEV_HOME/tlv ] ; then
   rm -rf $OSSIM_DEV_HOME/tlv/plugins/network_specific
   
   if [ -d $OSSIM_DEV_HOME/ossimlabs-tlv ] ; then
-    cp -R $OSSIM_DEV_HOME/ossimlabs-tlv/plugins/network_specific ./plugins/ 
+    cp -R $OSSIM_DEV_HOME/ossimlabs-tlv/plugins/network_specific $OSSIM_DEV_HOME/tlv/plugins/
    
  
     # add documentation
