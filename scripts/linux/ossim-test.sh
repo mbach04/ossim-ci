@@ -78,8 +78,9 @@ fi
 
 # Sync test data against S3:
 if [ -z $S3_DATA_BUCKET ]; then
-  echo "ERROR: No URL specified for S3 bucket containing test data. Expecting S3_DATA_BUCKET environment variable."
-  echo; exit 1;
+  S3_DATA_BUCKET="s3://o2_test_data"
+  echo "WARNING: No URL specified for S3 bucket containing test data. Expecting S3_DATA_BUCKET environment variable. Defaulting to <$S3_DATA_BUCKET>"
+  echo;
 fi
 echo "STATUS: Syncronizing test data from S3 to local agent." 
 runCommand "aws s3 sync $S3_DATA_BUCKET/Batch_test_data $OSSIM_BATCH_TEST_DATA"

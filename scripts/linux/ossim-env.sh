@@ -241,4 +241,8 @@ if [ -z $OSSIM_PREFS_FILE ] ; then
    export OSSIM_PREFS_FILE=$OSSIM_INSTALL_PREFIX/ossim.config
 fi
 
+# For S3 storage/syncing of test data
+if [ -z $S3_DATA_BUCKET ] ; then
+   export S3_DATA_BUCKET="s3://o2_test_data"
+fi
 
