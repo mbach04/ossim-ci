@@ -70,7 +70,7 @@ node {
     notifyObj?.notifyFailed()
   }
 
-  stage("Clean Workspace"){
-    step([$class: 'WsCleanup'])
-  }
+//  stage("Clean Workspace"){
+//    step([$class: 'WsCleanup'])
+//  }
 }
