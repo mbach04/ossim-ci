@@ -36,8 +36,8 @@ node {
      echo "${env.WORKSPACE}"
      stage("Download Artifacts"){
          dir("${env.WORKSPACE}"){
-             step ([$class: 'CopyArtifact',
-                projectName: 'ossim-kakadu-${OSSIM_GIT_BRANCH}',
+             step ([$class: "CopyArtifact",
+                projectName: "ossim-kakadu-${OSSIM_GIT_BRANCH}",
                 filter: "artifacts/kakadu.tgz",
                 flatten: true])
          }
