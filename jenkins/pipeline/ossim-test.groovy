@@ -31,9 +31,7 @@ node("BATCH_TEST"){
           popd
         """
      }
-println "ACCEPT TESTSCOMPARE =========== ${ACCEPT_TESTS.toBoolean() == false}"
-     if (ACCEPT_TESTS) {
-      println "____________________________________________"
+     if (ACCEPT_TESTS.toBoolean()) {
        stage("Accept Results")
        {
           sh """
