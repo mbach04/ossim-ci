@@ -232,10 +232,10 @@ if [ -z $OSSIM_BATCH_TEST_DATA ] ; then
    export OSSIM_BATCH_TEST_DATA="$OSSIM_DATA/ossim-data"
 fi
 if [ -z $OSSIM_BATCH_TEST_EXPECTED ] ; then
-   export OSSIM_BATCH_TEST_EXPECTED="$OSSIM_DATA/ossim-expected"
+   export OSSIM_BATCH_TEST_EXPECTED="$OSSIM_DATA/ossim-expected/${OSSIM_GIT_BRANCH}"
 fi
 if [ -z $OSSIM_BATCH_TEST_RESULTS ] ; then
-   export OSSIM_BATCH_TEST_RESULTS="$OSSIM_DATA/ossim-results"
+   export OSSIM_BATCH_TEST_RESULTS="$OSSIM_DATA/ossim-results/${OSSIM_GIT_BRANCH}"
 fi
 if [ -z $OSSIM_PREFS_FILE ] ; then
    export OSSIM_PREFS_FILE=$OSSIM_INSTALL_PREFIX/ossim.config
