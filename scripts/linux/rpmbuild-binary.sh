@@ -1,21 +1,7 @@
 #!/bin/bash
-
-###   These will need to be passed in by the environment ####
 #
-# example: rpmbuild-binary.sh dev el6
-#
-# Usage rpmbuild.sh <git_branch> <spec> 
-#
-GIT_BRANCH=$1
-OSSIM_SPEC=$2
-
-if [ -z $GIT_BRANCH ]; then
-  export GIT_BRANCH="dev"
-fi
-
-if [ -z $OSSIM_SPEC ]; then
-  export OSSIM_SPEC=`uname -r | grep -o el[0-9]`
-fi 
+GIT_BRANCH="dev"
+OSSIM_SPEC=`uname -r | grep -o el[0-9]`
 ############################################################
 pushd `dirname $0` >/dev/null
 OSSIMCI_SCRIPT_DIR=$PWD
@@ -23,6 +9,10 @@ popd > /dev/null
 
 source $OSSIMCI_SCRIPT_DIR/ossim-env.sh
 source $OSSIMCI_SCRIPT_DIR/functions.sh
+
+if [ "$OSSIM_GIT_BRANCH" != "" ] ; then
+  GIT_BRANCH=$OSSIM_GIT_BRANCH
+fi
 
 if [ -z $OSSIM_DEPS_RPMS ] ; then
   if [ -d $OSSIM_DEV_HOME/dependency-rpms ] ;then
