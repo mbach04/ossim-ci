@@ -167,7 +167,8 @@ test4.expected_results_command0: ossim-preproc -r --ch $(OSSIM_BATCH_TEST_DATA)/
 // Info dump to expected results dir:
 test4.expected_results_command1: ossim-info -d -i -p $(OSSIM_BATCH_TEST_DATA)/rbt/YOGI_PEARL3/2012-06-15/AM/ALPHA/2012-06-15_20-00-29/HRI/HRI_2/2012-06-15_20-00-29.HRI_2.Strip_00002.corrected.hri > $(OBT_EXP_DIR)/test4-info.txt
 
-
+// Copy histogram to output dir:
+test4.expected_results_command3: $(COPY_CMD) $(OSSIM_BATCH_TEST_DATA)/rbt/YOGI_PEARL3/2012-06-15/AM/ALPHA/2012-06-15_20-00-29/HRI/HRI_2/2012-06-15_20-00-29.HRI_2.Strip_00002.corrected.his $(OBT_OUT_DIR)/test4-his.txt
 
 // The actual commands to test:
 
