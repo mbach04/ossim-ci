@@ -33,6 +33,7 @@ node("BATCH_TEST"){
      }
 
      if (ACCEPT_TESTS) {
+      println "____________________________________________"
        stage("Accept Results")
        {
           sh """
