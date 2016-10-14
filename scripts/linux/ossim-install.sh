@@ -1,13 +1,13 @@
 #!/bin/bash 
 ZIP_OPTION=$1
 pushd `dirname $0` >/dev/null
-export SCRIPT_DIR=`pwd -P`
-pushd $SCRIPT_DIR/../../.. >/dev/null
+OSSIMCI_SCRIPT_DIR=`pwd -P`
+pushd $OSSIMCI_SCRIPT_DIR/../../.. >/dev/null
 export OSSIM_DEV_HOME=$PWD
 popd > /dev/null
 popd >/dev/null
 
-source $SCRIPT_DIR/ossim-env.sh
+source $OSSIMCI_SCRIPT_DIR/ossim-env.sh
 
 # Establish CMAKE's install directory:
 if [ -z "$OSSIM_INSTALL_PREFIX" ]; then

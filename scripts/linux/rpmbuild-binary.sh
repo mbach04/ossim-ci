@@ -18,11 +18,11 @@ if [ -z $OSSIM_SPEC ]; then
 fi 
 ############################################################
 pushd `dirname $0` >/dev/null
-SCRIPT_DIR=$PWD
+OSSIMCI_SCRIPT_DIR=$PWD
 popd > /dev/null
 
-source $SCRIPT_DIR/ossim-env.sh
-source $SCRIPT_DIR/functions.sh
+source $OSSIMCI_SCRIPT_DIR/ossim-env.sh
+source $OSSIMCI_SCRIPT_DIR/functions.sh
 
 if [ -z $OSSIM_DEPS_RPMS ] ; then
   if [ -d $OSSIM_DEV_HOME/dependency-rpms ] ;then

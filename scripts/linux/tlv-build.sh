@@ -1,10 +1,10 @@
 #!/bin/bash 
 # Set GoCD-specific environment:
 pushd `dirname $0` >/dev/null
-export SCRIPT_DIR=`pwd -P`
+OSSIMCI_SCRIPT_DIR=`pwd -P`
 popd >/dev/null
 
-source $SCRIPT_DIR/ossim-env.sh
+source $OSSIMCI_SCRIPT_DIR/ossim-env.sh
 
 if [ -d $OSSIM_DEV_HOME/tlv ] ; then
   rm -rf $OSSIM_DEV_HOME/tlv/plugins/network_specific

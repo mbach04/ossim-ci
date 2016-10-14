@@ -2,12 +2,12 @@
 # Set Continuous Integration Environment:
 
 if [ -z $WORKSPACE ] ; then
-   if [ -z $SCRIPT_DIR ] ; then
+   if [ -z $OSSIMCI_SCRIPT_DIR ] ; then
       pushd `dirname $0` >/dev/null
-      export SCRIPT_DIR=`pwd -P`
+      export OSSIMCI_SCRIPT_DIR=`pwd -P`
    fi
    if [ -z $OSSIM_DEV_HOME ] ; then
-      pushd $SCRIPT_DIR/../../.. >/dev/null
+      pushd $OSSIMCI_SCRIPT_DIR/../../.. >/dev/null
       export OSSIM_DEV_HOME=$PWD
       popd > /dev/null
    fi
@@ -17,7 +17,7 @@ else
    export OSSIM_DEV_HOME=$WORKSPACE
 fi
 
-source $SCRIPT_DIR/git-prompt.sh
+source $OSSIMCI_SCRIPT_DIR/git-prompt.sh
 
 if [ -z $OSSIM_INSTALL_PREFIX ]; then
   export OSSIM_INSTALL_PREFIX=$OSSIM_DEV_HOME/install
