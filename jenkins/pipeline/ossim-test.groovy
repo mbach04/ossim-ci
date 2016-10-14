@@ -32,7 +32,7 @@ node("BATCH_TEST"){
         """
      }
 
-     if ("${ACCEPT_TESTS}") {
+     if (ACCEPT_TESTS) {
        stage("Accept Results")
        {
           sh """
