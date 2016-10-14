@@ -31,7 +31,10 @@ echo "##########################################################################
 ACCEPT_RESULTS=$1
 
 # Set run-time environment:
-OSSIMCI_SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+pushd `dirname $0` >/dev/null
+OSSIMCI_SCRIPT_DIR=`pwd -P`
+popd >/dev/null
+
 source $OSSIMCI_SCRIPT_DIR/ossim-env.sh
 if [ $? != 0 ] ; then 
   echo "ERROR: Could not set OBT environment.";

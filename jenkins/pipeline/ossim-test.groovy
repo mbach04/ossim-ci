@@ -21,7 +21,7 @@ node("BATCH_TEST"){
 
      stage("Download Artifacts") {
         step ([$class: 'CopyArtifact',
-              projectName: 'ossim-dev',
+              projectName: "ossim-${OSSIM_GIT_BRANCH}",
               filter: "artifacts/install.tgz",
               flatten: true,
               target: "${env.WORKSPACE}"])
