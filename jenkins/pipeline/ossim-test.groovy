@@ -31,8 +31,7 @@ node("BATCH_TEST"){
           popd
         """
      }
-
-     if ("${ACCEPT_TESTS}") {
+     if (ACCEPT_TESTS.toBoolean()) {
        stage("Accept Results")
        {
           sh """
