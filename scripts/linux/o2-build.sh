@@ -1,12 +1,12 @@
 #!/bin/bash 
 pushd `dirname $0` >/dev/null
-export SCRIPT_DIR=`pwd -P`
-pushd $SCRIPT_DIR/../../.. >/dev/null
+OSSIMCI_SCRIPT_DIR=`pwd -P`
+pushd $OSSIMCI_SCRIPT_DIR/../../.. >/dev/null
 popd > /dev/null
 popd >/dev/null
 export OMAR_DEV_HOME=$OSSIM_DEV_HOME/omar
 
-source $SCRIPT_DIR/ossim-env.sh
+source $OSSIMCI_SCRIPT_DIR/ossim-env.sh
 
 if [ ! -f "$OSSIM_DEV_HOME/joms-$OSSIM_VERSION.jar" ]; then
    echo "ERROR: $OSSIM_DEV_HOME/joms-$OSSIM_VERSION.jar is not found in the install artifact and OMAR can't be built."

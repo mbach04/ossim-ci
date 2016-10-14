@@ -1,11 +1,11 @@
 #!/bin/bash
 
 pushd `dirname $0` >/dev/null
-SCRIPT_DIR=$PWD
+OSSIMCI_SCRIPT_DIR=$PWD
 popd > /dev/null
 
-source $SCRIPT_DIR/ossim-env.sh
-source $SCRIPT_DIR/functions.sh
+source $OSSIMCI_SCRIPT_DIR/ossim-env.sh
+source $OSSIMCI_SCRIPT_DIR/functions.sh
 
 mkdir -p $OSSIM_DEV_HOME/rpmbuild/{BUILD,RPMS,SOURCES,SPECS,SRPMS}
 if [ $? -ne 0 ]; then
