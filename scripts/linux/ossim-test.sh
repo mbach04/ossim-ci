@@ -95,11 +95,11 @@ if [ $ACCEPT_RESULTS == "accept" ]; then
   echo "STATUS: Running batch test and accepting results."   
   runCommand "ossim-batch-test -a all super-test.kwl"
   echo "STATUS: Uploading expected results to S3."   
-  runCommand "aws s3 sync $OSSIM_BATCH_TEST_EXPECTED $S3_DATA_BUCKET/Batch_test_expected"
+  runCommand "aws s3 sync $OSSIM_BATCH_TEST_EXPECTED $S3_DATA_BUCKET/Batch_test_expected/${OSSIM_GIT_BRANCH}"
   echo "STATUS: Upload successfull."   
 else
   echo "STATUS: Syncronizing expected results from S3 to local agent." 
-  runCommand "aws s3 sync $S3_DATA_BUCKET/Batch_test_data $OSSIM_BATCH_TEST_EXPECTED"
+  runCommand "aws s3 sync $S3_DATA_BUCKET/Batch_test_expected/${OSSIM_GIT_BRANCH} $OSSIM_BATCH_TEST_EXPECTED"
   echo "STATUS: Running batch test and comparing to expected results."   
   runCommand "ossim-batch-test super-test.kwl"
 fi
