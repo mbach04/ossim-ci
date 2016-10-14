@@ -69,7 +69,7 @@ fi
 echo "STATUS: Passed ossim-info --version test.";
 
 # Make sure the output directories are created:
-if [ $ACCEPT_RESULTS == "accept" ]; then
+if [ "$ACCEPT_RESULTS" == "accept" ]; then
   TEST_OUTPUT_DIR=$OSSIM_BATCH_TEST_EXPECTED
 else
   TEST_OUTPUT_DIR=$OSSIM_BATCH_TEST_RESULTS
