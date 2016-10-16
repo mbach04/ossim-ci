@@ -57,7 +57,7 @@ fi
 
 # Copy the ossim preferences file to the top install directory:
 echo; echo "STATUS: Copying ossim preferences to install directory...";
-runCommand "cp $WORKSPACE/ossim-ci/batch_tests/ossim.config $OSSIM_INSTALL_PREFIX"
+runCommand "cp $OSSIM_DEV_HOME/ossim-ci/batch_tests/ossim.config $OSSIM_INSTALL_PREFIX"
 
 # Do basic ossim config and version check first:
 echo; echo "STATUS: Running ossim-info --config test...";

@@ -168,7 +168,7 @@ test4.expected_results_command0: ossim-preproc -r --ch $(OSSIM_BATCH_TEST_DATA)/
 test4.expected_results_command1: ossim-info -d -i -p $(OSSIM_BATCH_TEST_DATA)/rbt/YOGI_PEARL3/2012-06-15/AM/ALPHA/2012-06-15_20-00-29/HRI/HRI_2/2012-06-15_20-00-29.HRI_2.Strip_00002.corrected.hri > $(OBT_EXP_DIR)/test4-info.txt
 
 // Copy histogram to output dir:
-test4.expected_results_command2: $(COPY_CMD) $(OSSIM_BATCH_TEST_DATA)/rbt/YOGI_PEARL3/2012-06-15/AM/ALPHA/2012-06-15_20-00-29/HRI/HRI_2/2012-06-15_20-00-29.HRI_2.Strip_00002.corrected.his $(OBT_OUT_DIR)/test4-his.txt
+//test4.expected_results_command2: $(COPY_CMD) $(OSSIM_BATCH_TEST_DATA)/rbt/YOGI_PEARL3/2012-06-15/AM/ALPHA/2012-06-15_20-00-29/HRI/HRI_2/2012-06-15_20-00-29.HRI_2.Strip_00002.corrected.his $(OBT_OUT_DIR)/test4-his.txt
 
 // The actual commands to test:
 
@@ -179,7 +179,7 @@ test4.test_command0: ossim-preproc -r --ch $(OSSIM_BATCH_TEST_DATA)/rbt/YOGI_PEA
 test4.test_command1: ossim-info -d -i -p $(OSSIM_BATCH_TEST_DATA)/rbt/YOGI_PEARL3/2012-06-15/AM/ALPHA/2012-06-15_20-00-29/HRI/HRI_2/2012-06-15_20-00-29.HRI_2.Strip_00002.corrected.hri > $(OBT_OUT_DIR)/test4-info.txt
 
 // Copy histogram to output dir:
-test4.test_command2: $(COPY_CMD) $(OSSIM_BATCH_TEST_DATA)/rbt/YOGI_PEARL3/2012-06-15/AM/ALPHA/2012-06-15_20-00-29/HRI/HRI_2/2012-06-15_20-00-29.HRI_2.Strip_00002.corrected.his $(OBT_OUT_DIR)/test4-his.txt
+//test4.test_command2: $(COPY_CMD) $(OSSIM_BATCH_TEST_DATA)/rbt/YOGI_PEARL3/2012-06-15/AM/ALPHA/2012-06-15_20-00-29/HRI/HRI_2/2012-06-15_20-00-29.HRI_2.Strip_00002.corrected.his $(OBT_OUT_DIR)/test4-his.txt
 
 // Post process commands for diffs and stuff:
 
@@ -187,7 +187,7 @@ test4.test_command2: $(COPY_CMD) $(OSSIM_BATCH_TEST_DATA)/rbt/YOGI_PEARL3/2012-0
 test4.postprocess_command0: $(DIFF_CMD) $(OBT_EXP_DIR)/test4-info.txt $(OBT_OUT_DIR)/test4-info.txt
 
 // Test for histogram diffs:
-test4.postprocess_command1: $(DIFF_CMD) $(OBT_EXP_DIR)/test4-his.txt $(OBT_OUT_DIR)/test4-his.txt
+//test4.postprocess_command1: $(DIFF_CMD) $(OBT_EXP_DIR)/test4-his.txt $(OBT_OUT_DIR)/test4-his.txt
 
 // ---
 // End test4:
