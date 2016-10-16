@@ -52,9 +52,9 @@ node("BATCH_TEST"){
        }
     }
    
-    stage("Clean Workspace"){
-       step([$class: 'WsCleanup'])
-    }
+//    stage("Clean Workspace"){
+//       step([$class: 'WsCleanup'])
+//    }
   }
   catch(e)
   {
