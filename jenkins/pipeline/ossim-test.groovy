@@ -1,8 +1,8 @@
 def notifyObj
 node("BATCH_TEST"){
    env.WORKSPACE=pwd()
-   env.LD_LIBRARY_PATH="${env.WORKSPACE}/install/lib64:${env.WORKSPACE}/install/lib64/ossim/plugins:${env.LD_LIBRARY_PATH}"
-   env.PATH="${env.WORKSPACE}/install/bin:${env.PATH}"
+//   env.LD_LIBRARY_PATH="${env.WORKSPACE}/install/lib64:${env.WORKSPACE}/install/lib64/ossim/plugins:${env.LD_LIBRARY_PATH}"
+//   env.PATH="${env.WORKSPACE}/install/bin:${env.PATH}"
    env.S3_DATA_BUCKET="s3://o2-test-data"
    
    echo "WORKSPACE        = ${env.WORKSPACE}"
