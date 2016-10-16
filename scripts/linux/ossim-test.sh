@@ -13,6 +13,22 @@
 ######################################################################################
 #set -x; trap read debug
 
+# Set run-time environment:
+ACCEPT_RESULTS=$1
+
+pushd `dirname $0` >/dev/null
+OSSIMCI_SCRIPT_DIR=`pwd -P`
+popd >/dev/null
+
+source $OSSIMCI_SCRIPT_DIR/ossim-env.sh
+if [ $? != 0 ] ; then 
+  echo "ERROR: Could not set OBT environment.";
+  echo; exit 1;
+fi
+
+export LD_LIBRARY_PATH="${OSSIM_INSTALL_PREFIX}/lib64:${OSSIM_INSTALL_PREFIX}/lib64/ossim/plugins:${LD_LIBRARY_PATH}"
+export PATH="${OSSIM_INSTALL_PREFIX}/bin:${PATH}"
+
 function runCommand() 
 {
   $1
@@ -28,18 +44,7 @@ echo "##########################################################################
 echo "#  Running `basename "$0"` out of <$PWD>"
 echo "################################################################################"
 
-ACCEPT_RESULTS=$1
 
-# Set run-time environment:
-pushd `dirname $0` >/dev/null
-OSSIMCI_SCRIPT_DIR=`pwd -P`
-popd >/dev/null
-
-source $OSSIMCI_SCRIPT_DIR/ossim-env.sh
-if [ $? != 0 ] ; then 
-  echo "ERROR: Could not set OBT environment.";
-  echo; exit 1;
-fi
 
 # Check for required environment:
 if [ ! -d $OSSIM_DATA ] || [ ! -d $OSSIM_BATCH_TEST_DATA ] || [ -z $OSSIM_BATCH_TEST_RESULTS ]; then
