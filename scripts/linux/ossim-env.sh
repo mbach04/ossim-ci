@@ -5,13 +5,13 @@ if [ -z $WORKSPACE ] ; then
    if [ -z $OSSIMCI_SCRIPT_DIR ] ; then
       pushd `dirname $0` >/dev/null
       export OSSIMCI_SCRIPT_DIR=`pwd -P`
+      popd >/dev/null
    fi
    if [ -z $OSSIM_DEV_HOME ] ; then
       pushd $OSSIMCI_SCRIPT_DIR/../../.. >/dev/null
       export OSSIM_DEV_HOME=$PWD
       popd > /dev/null
    fi
-   popd >/dev/null
 
 else
    export OSSIM_DEV_HOME=$WORKSPACE
