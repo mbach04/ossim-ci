@@ -47,11 +47,11 @@ echo "##########################################################################
 
 
 # Check for required environment:
-if [ ! -d $OSSIM_DATA ] || [ ! -d $OSSIM_BATCH_TEST_DATA ] || [ -z $OSSIM_BATCH_TEST_RESULTS ]; then
+if [ -z $OSSIM_DATA ] || [  -z $OSSIM_BATCH_TEST_DATA ] || [ -z $OSSIM_BATCH_TEST_RESULTS ]; then
   echo "ERROR: Environment variables not correct. Check the following paths for problems:"
-  echo "   OSSIM_DATA = <$OSSIM_DATA> ";
-  echo "   OSSIM_BATCH_TEST_DATA = <$OSSIM_BATCH_TEST_DATA> ";
-  echo "   OSSIM_BATCH_TEST_RESULTS = <$OSSIM_BATCH_TEST_RESULTS> ";
+  echo "   OSSIM_DATA = $OSSIM_DATA ";
+  echo "   OSSIM_BATCH_TEST_DATA = $OSSIM_BATCH_TEST_DATA ";
+  echo "   OSSIM_BATCH_TEST_RESULTS = $OSSIM_BATCH_TEST_RESULTS ";
   echo; exit 1;
 fi
 

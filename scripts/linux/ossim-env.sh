@@ -229,7 +229,7 @@ if [ -z $OSSIM_DATA ] ; then
    export OSSIM_DATA="/data"
 fi
 if [ -z $OSSIM_BATCH_TEST_DATA ] ; then
-   export OSSIM_BATCH_TEST_DATA="$OSSIM_DATA/ossim-data"
+   export OSSIM_BATCH_TEST_DATA="$OSSIM_DATA/ossim-data/${OSSIM_GIT_BRANCH}"
 fi
 if [ -z $OSSIM_BATCH_TEST_EXPECTED ] ; then
    export OSSIM_BATCH_TEST_EXPECTED="$OSSIM_DATA/ossim-expected/${OSSIM_GIT_BRANCH}"
