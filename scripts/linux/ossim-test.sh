@@ -13,6 +13,22 @@
 ######################################################################################
 #set -x; trap read debug
 
+# Set run-time environment:
+ACCEPT_RESULTS=$1
+
+pushd `dirname $0` >/dev/null
+OSSIMCI_SCRIPT_DIR=`pwd -P`
+popd >/dev/null
+
+source $OSSIMCI_SCRIPT_DIR/ossim-env.sh
+if [ $? != 0 ] ; then 
+  echo "ERROR: Could not set OBT environment.";
+  echo; exit 1;
+fi
+
+export LD_LIBRARY_PATH="${OSSIM_INSTALL_PREFIX}/lib64:${OSSIM_INSTALL_PREFIX}/lib64/ossim/plugins:${LD_LIBRARY_PATH}"
+export PATH="${OSSIM_INSTALL_PREFIX}/bin:${PATH}"
+
 function runCommand() 
 {
   $1
@@ -28,18 +44,7 @@ echo "##########################################################################
 echo "#  Running `basename "$0"` out of <$PWD>"
 echo "################################################################################"
 
-ACCEPT_RESULTS=$1
 
-# Set run-time environment:
-pushd `dirname $0` >/dev/null
-OSSIMCI_SCRIPT_DIR=`pwd -P`
-popd >/dev/null
-
-source $OSSIMCI_SCRIPT_DIR/ossim-env.sh
-if [ $? != 0 ] ; then 
-  echo "ERROR: Could not set OBT environment.";
-  echo; exit 1;
-fi
 
 # Check for required environment:
 if [ ! -d $OSSIM_DATA ] || [ ! -d $OSSIM_BATCH_TEST_DATA ] || [ -z $OSSIM_BATCH_TEST_RESULTS ]; then
@@ -52,7 +57,7 @@ fi
 
 # Copy the ossim preferences file to the top install directory:
 echo; echo "STATUS: Copying ossim preferences to install directory...";
-runCommand "cp $WORKSPACE/ossim-ci/batch_tests/ossim.config $OSSIM_INSTALL_PREFIX"
+runCommand "cp $OSSIM_DEV_HOME/ossim-ci/batch_tests/ossim.config $OSSIM_INSTALL_PREFIX"
 
 # Do basic ossim config and version check first:
 echo; echo "STATUS: Running ossim-info --config test...";
@@ -94,7 +99,8 @@ pushd $OSSIM_DEV_HOME/ossim-ci/batch_tests;
 if [ $ACCEPT_RESULTS == "accept" ]; then
   echo "STATUS: Running batch test and accepting results."   
   runCommand "ossim-batch-test -a all super-test.kwl"
-  echo "STATUS: Uploading expected results to S3."   
+  echo "STATUS: Uploading expected results to S3."  
+  echo "aws s3 sync $OSSIM_BATCH_TEST_EXPECTED $S3_DATA_BUCKET/Batch_test_expected/${OSSIM_GIT_BRANCH}"
   runCommand "aws s3 sync $OSSIM_BATCH_TEST_EXPECTED $S3_DATA_BUCKET/Batch_test_expected/${OSSIM_GIT_BRANCH}"
   echo "STATUS: Upload successfull."   
 else
