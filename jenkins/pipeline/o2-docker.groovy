@@ -12,7 +12,7 @@ node("o2.radiantbluecloud.com"){
    stage("Confiure Docker"){
        //dir("${env.WORKSPACE}/omar/build_scripts/docker"){
            sh """
-           ${env.WORKSPACE}/ossim-ci/scripts/o2-docker.sh
+           ${env.WORKSPACE}/ossim-ci/scripts/linux/o2-docker.sh
            """
        //}
    }
