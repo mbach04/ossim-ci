@@ -1,12 +1,13 @@
 #!/bin/bash
 if [ -z $OMAR_SCRIPT_DIR ]; then
   pushd `dirname $0` >/dev/null
-  OMAR_SCRIPT_DIR=`pwd -P`
+  OSSIMCI_SCRIPT_DIR=`pwd -P`
   popd >/dev/null
 fi
-echo "SCRIPT DIR ================ ${OMAR_SCRIPT_DIR}"
-source ${OMAR_SCRIPT_DIR}/docker-common.sh
-DOCKER_CONFIG_DIR=$OSSIM_DEV_HOME/omar/build_scripts/docker
+echo "SCRIPT DIR ================ ${OSSIMCI_SCRIPT_DIR}"
+source "${OSSIMCI_SCRIPT_DIR}/ossim-env.sh"
+DOCKER_SCRIPT_DIR=${OSSIM_DEV_HOME}/omar/build_scripts/docker
+source ${DOCKER_SCRIPT_DIR}/docker-common.sh
 
 echo "Removing files..."
 
@@ -44,7 +45,7 @@ if [ ! -d "${DOCKER_CONFIG_DIR}" ] ; then
   echo "Can't setup containers"
   exit 1
 fi
-pushd ${DOCKER_CONFIG_DIR}
+pushd ${DOCKER_SCRIPT_DIR}
 echo DOCKER_HOST_URL=${DOCKER_HOST_URL}
 docker-compose --file=docker-compose-no-build.yml down
 for x in `docker images | grep /o2- | awk '{print $3}'`; do docker rmi -f $x; done
