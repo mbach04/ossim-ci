@@ -5,8 +5,8 @@ if [ -z $OMAR_SCRIPT_DIR ]; then
   popd >/dev/null
 fi
 echo "SCRIPT DIR ================ ${OMAR_SCRIPT_DIR}"
-
 source ${OMAR_SCRIPT_DIR}/docker-common.sh
+DOCKER_CONFIG_DIR=$OSSIM_DEV_HOME/omar/build_scripts/docker
 
 echo "Removing files..."
 
@@ -39,9 +39,15 @@ if [ -z $DOCKER_HOST_URL ] ; then
    exit 1
 fi
 
+if [ ! -d "${DOCKER_CONFIG_DIR}" ] ; then
+  echo "Directory does not exist: ${DOCKER_CONFIG_DIR}"
+  echo "Can't setup containers"
+  exit 1
+fi
+pushd ${DOCKER_CONFIG_DIR}
 echo DOCKER_HOST_URL=${DOCKER_HOST_URL}
 docker-compose --file=docker-compose-no-build.yml down
 for x in `docker images | grep /o2- | awk '{print $3}'`; do docker rmi -f $x; done
 for x in `docker images | grep /tlv | awk '{print $3}'`; do docker rmi -f $x; done
 docker-compose --file=docker-compose-no-build.yml up -d
-
+popd
