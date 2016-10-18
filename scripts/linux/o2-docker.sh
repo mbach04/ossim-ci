@@ -4,6 +4,7 @@ if [ -z $OMAR_SCRIPT_DIR ]; then
   OMAR_SCRIPT_DIR=`pwd -P`
   popd >/dev/null
 fi
+echo "SCRIPT DIR ================ ${OMAR_SCRIPT_DIR}"
 
 source ${OMAR_SCRIPT_DIR}/docker-common.sh
 
