@@ -40,7 +40,7 @@ if [ -z $DOCKER_HOST_URL ] ; then
    exit 1
 fi
 
-if [ ! -d "${DOCKER_CONFIG_DIR}" ] ; then
+if [ ! -d "${DOCKER_SCRIPT_DIR}" ] ; then
   echo "Directory does not exist: ${DOCKER_CONFIG_DIR}"
   echo "Can't setup containers"
   exit 1
