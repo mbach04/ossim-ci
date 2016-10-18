@@ -41,7 +41,7 @@ fi
 
 echo DOCKER_HOST_URL=${DOCKER_HOST_URL}
 docker-compose --file=docker-compose-no-build.yml down
-for x in `docker images | grep /o2- | awk '{print \$3}'`; do docker rmi -f \$x; done
-for x in `docker images | grep /tlv | awk '{print \$3}'`; do docker rmi -f \$x; done
+for x in `docker images | grep /o2- | awk '{print $3}'`; do docker rmi -f $x; done
+for x in `docker images | grep /tlv | awk '{print $3}'`; do docker rmi -f $x; done
 docker-compose --file=docker-compose-no-build.yml up -d
 
