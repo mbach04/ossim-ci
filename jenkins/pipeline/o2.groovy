@@ -1,6 +1,7 @@
 def notifyObj
 node {
    env.WORKSPACE=pwd()
+   env.OSSIM_MAVEN_PROXY="https://artifacts.radiantbluecloud.com/artifactory/ossim-deps"
    try{
      stage("Checkout"){
          dir("omar"){
