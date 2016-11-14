@@ -2,8 +2,13 @@ def notifyObj
 node("${DOCKER_HOST_URL}"){
    env.WORKSPACE=pwd()
    env.DOCKER_HOST_URL="${DOCKER_HOST_URL}"
-   try{
-
+   env.AWSDNS=sqs.us-east-1.amazonaws.com
+   env.AWSQUEUEPATH=320588532383/avro-tst
+   if("${OSSIM_GIT_BRANCH}" == "master")
+   {
+     env.AWSQUEUEPATH=320588532383/avro-release
+   }
+   try{   
      stage("Checkout"){
          dir("omar"){
             git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/omar.git'
