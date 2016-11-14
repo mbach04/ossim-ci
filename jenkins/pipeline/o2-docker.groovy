@@ -2,11 +2,11 @@ def notifyObj
 node("${DOCKER_HOST_URL}"){
    env.WORKSPACE=pwd()
    env.DOCKER_HOST_URL="${DOCKER_HOST_URL}"
-   env.AWSDNS=sqs.us-east-1.amazonaws.com
-   env.AWSQUEUEPATH=320588532383/avro-tst
+   env.AWSDNS="sqs.us-east-1.amazonaws.com"
+   env.AWSQUEUEPATH="320588532383/avro-tst"
    if("${OSSIM_GIT_BRANCH}" == "master")
    {
-     env.AWSQUEUEPATH=320588532383/avro-release
+     env.AWSQUEUEPATH="320588532383/avro-release"
    }
    try{   
      stage("Checkout"){
