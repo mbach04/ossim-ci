@@ -1,5 +1,5 @@
 def notifyObj
-node("o2.radiantbluecloud.com"){
+node("${DOCKER_HOST_URL}"){
    env.WORKSPACE=pwd()
    env.DOCKER_HOST_URL="${DOCKER_HOST_URL}"
    try{
