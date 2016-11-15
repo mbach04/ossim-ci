@@ -5,20 +5,20 @@ node{
   echo "WORKSPACE        = ${env.WORKSPACE}"
   echo "S3_DELIVERY_BUCKET   = ${env.S3_DATA_BUCKET}"
 
-  stage("Download RPMS"){
-     dir("${env.WORKSPACE}/rpms"){
+  stage("Download DOCS"){
+     dir("${env.WORKSPACE}/install-guide"){
          step ([$class: 'CopyArtifact',
-            projectName: "rpm-${OSSIM_GIT_BRANCH}",
-            filter: "artifacts/*.tgz",
+            projectName: "build-docs-${OSSIM_GIT_BRANCH}",
+            filter: "install.tgz",
             flatten: true])
      }
   }
-
-  stage("Deliver RPMS"){
+  
+ stage("Deliver O2 Docs"){
     dir("${env.WORKSPACE}"){
         step([$class: 'S3BucketPublisher',
               dontWaitForConcurrentBuildCompletion: false, 
-              entries: [[bucket: "o2-delivery/${OSSIM_GIT_BRANCH}/o2-rpms", 
+              entries: [[bucket: "o2-delivery/${OSSIM_GIT_BRANCH}/o2-install-guide", 
                          excludedFile: '', 
                          flatten: false, 
                          gzipFiles: false, 
@@ -27,7 +27,7 @@ node{
                          noUploadOnFailure: false, 
                          selectedRegion: 'us-east-1', 
                          showDirectlyInBrowser: true, 
-                         sourceFile: 'rpms/*.tgz', 
+                         sourceFile: 'install-guide/*.tgz', 
                          storageClass: 'STANDARD', 
                          uploadFromSlave: false, 
                          useServerSideEncryption: false]], 
@@ -35,7 +35,7 @@ node{
               userMetadata: []])
     }
         
-  }
+   }
 
   stage("Clean Workspace"){
      step([$class: 'WsCleanup'])
