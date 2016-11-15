@@ -27,7 +27,3 @@ node("docker_exporter"){
      step([$class: 'WsCleanup'])
   }
 }
-
-node{
-
-}
