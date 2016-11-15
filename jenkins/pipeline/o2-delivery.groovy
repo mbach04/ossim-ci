@@ -15,11 +15,24 @@ node("docker_exporter"){
        }
    }
 
-   stage("Export Docker Images") {
+   stage("Deliver Docker Images") {
+//      sh """
+//        pushd ${env.WORKSPACE}/omar/build_scripts/docker
+//        ./docker-export.sh
+//        popd
+//      """
+   }
+   stage("Download RPMS"){
+       dir("${env.WORKSPACE}"){
+           step ([$class: 'CopyArtifact',
+              projectName: "rpm-${OSSIM_GIT_BRANCH}",
+              filter: "artifacts/*.tgz",
+              flatten: true])
+       }
+   }
+
+   stage("Deliver RPMS") {
       sh """
-        pushd ${env.WORKSPACE}/omar/build_scripts/docker
-        ./docker-export.sh
-        popd
       """
    }
  
