@@ -44,6 +44,10 @@ fi
 
 echo "CURRENT BRANCH = ${OSSIM_GIT_BRANCH}"
 
+if [ -z $S3_DELIVERY_BUCKET ]; then
+  export S3_DELIVERY_BUCKET="s3://o2-delivery/${OSSIM_GIT_BRANCH}"
+fi
+
 if [ -z $KAKADU_VERSION ] ; then
    # later need to add tests.  This is the last version
    # before they started using C++11 and that does not build on
