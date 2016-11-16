@@ -13,6 +13,7 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 pushd $OSSIM_DEV_HOME/rpmbuild/SOURCES >/dev/null
+wget -q https://s3.amazonaws.com/ossimlabs/dependencies/source/aws-sdk-cpp-1.0.29.tgz -O aws-sdk-cpp-1.0.29.tgz
 wget -q https://s3.amazonaws.com/ossimlabs/dependencies/source/ffmpeg-2.1.1.tar.bz2 -O ffmpeg-2.1.1.tar.bz2
 wget -q https://s3.amazonaws.com/ossimlabs/dependencies/source/OpenSceneGraph-3.2.1.zip -O OpenSceneGraph-3.2.1.zip
 wget -q https://s3.amazonaws.com/ossimlabs/dependencies/source/0001-Cmake-fixes.patch -O 0001-Cmake-fixes.patch
@@ -36,9 +37,16 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
+rpmbuild -ba --define "_topdir ${OSSIM_DEV_HOME}/rpmbuild" --define "BUILD_RELEASE 1" ${OSSIM_DEV_HOME}/rpmbuild/SPECS/aws-sdk-cpp.spec
+if [ $? -ne 0 ]; then
+  echo; echo "ERROR: Build failed for aws-sdk-cpp rpm build."
+  exit 1
+fi
+
+
 rpmbuild -ba --define "_topdir ${OSSIM_DEV_HOME}/rpmbuild" --define "BUILD_RELEASE 1" ${OSSIM_DEV_HOME}/rpmbuild/SPECS/ffmpeg.spec
 if [ $? -ne 0 ]; then
-  echo; echo "ERROR: Buigld failed for ffmpeg rpm build."
+  echo; echo "ERROR: Build failed for ffmpeg rpm build."
   exit 1
 fi
 
