@@ -5,10 +5,13 @@ Summary:    aws-sdk-cpp
 Group:      Applications/Engineering
 License:    Apache License Version 2.0        
 URL:        https://github.com/aws/aws-sdk-cpp
-Source:     https://github.com/aws/aws-sdk-cpp/%{name}-%{version}.src.tar.gz
+Source:     https://github.com/aws/aws-sdk-cpp/%{name}-%{version}.tgz
 
-BuildRequires:  cmake 
+BuildRequires: cmake3 
 BuildRequires: gcc-c++
+BuildRequires: openssl-devel
+BuildRequires: curl-devel
+BuildRequires: libuuid-devel
 
 %description
 C++ SDK for amazon web services
@@ -19,8 +22,8 @@ C++ SDK for amazon web services
 %build
 mkdir -p build
 pushd build
-%cmake .. -DBUILD_ONLY="s3"
-make -j
+cmake3 .. -DBUILD_ONLY="s3;sqs;sns;logs;rds;swf;queues;dynamodb;cognito-identity"
+make
 popd
 
 %install
@@ -34,19 +37,19 @@ popd
 %postun -p /sbin/ldconfig
 
 %files
-%{_libdir}/libgpstk*
+%{_libdir}/*
 
-%package -n gpstk-devel
+%package -n aws-sdk-cpp-devel
 Summary:        Devel files gpstk
 Group:      System Environment/Libraries
 Requires:       %{name}%{?_isa} = %{version}-%{release}
-License:        LGPL
+License:        Apache License Version 2.0
 
-%description -n gpstk-devel
+%description -n aws-sdk-cpp-devel
 Development files for gpstk.
 
-%files -n gpstk-devel
-%{_includedir}/gpstk
+%files -n aws-sdk-cpp-devel
+%{_includedir}/aws
 
 %exclude %{_bindir}/*
 
