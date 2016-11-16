@@ -22,7 +22,7 @@ C++ SDK for amazon web services
 %build
 mkdir -p build
 pushd build
-cmake3 .. -DBUILD_ONLY="s3;sqs;sns;logs;rds;swf;queues;dynamodb;cognito-identity"
+cmake3 .. -DCMAKE_INSTALL_PREFIX=/usr -DBUILD_ONLY="s3;sqs;sns;logs;rds;swf;queues;dynamodb;cognito-identity"
 make
 popd
 
