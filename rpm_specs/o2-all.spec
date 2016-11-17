@@ -36,7 +36,6 @@ Summary:        OMAR/O2 download application.
 Version:        %{O2_VERSION}
 Group:          System Environment/Libraries
 
-
 %package    wfs-app
 Summary:        OMAR/O2 WFS Service
 Version:        %{O2_VERSION}
@@ -78,10 +77,10 @@ Requires: ossim-oms
 #Group:          System Environment/Libraries
 #Requires: ossim-oms
 
-%package    swipe-app
-Summary:        Swipe Services
-Version:        %{O2_VERSION}
-Group:          System Environment/Libraries
+#%package    swipe-app
+#Summary:        Swipe Services
+#Version:        %{O2_VERSION}
+#Group:          System Environment/Libraries
 
 %package    jpip-app
 Summary:        JPIP Services
@@ -127,8 +126,8 @@ Stager service for the O2 distribution.  Will support Google Earth's KML superov
 #%description  ossimtools-app
 #OSSIM Tools
 
-%description  swipe-app
-Swipe application
+#%description  swipe-app
+#Swipe application
 
 %description  jpip-app
 JPIP application
@@ -140,7 +139,7 @@ WMTS application
 %build
 
 %install
-export O2_APPS=( "omar-app" "sqs-app" "avro-app" "download-app" "wfs-app" "wms-app" "mensa-app" "wcs-app" "stager-app" "swipe-app" "superoverlay-app" "jpip-app wmts-app" )
+export O2_APPS=( "omar-app" "sqs-app" "avro-app" "download-app" "wfs-app" "wms-app" "mensa-app" "wcs-app" "stager-app" "superoverlay-app" "jpip-app wmts-app" )
 
 pushd %{_builddir}/install
   # Install all files with default permissions
@@ -150,7 +149,7 @@ pushd %{_builddir}/install
     fi
   done
   # Loop through each app and sym link to the versioned app
-  for app in ${O2_APPS[@]} ; do 
+  for app in ${O2_APPS[@]} ; do
     if [ -d %{buildroot}%{_datadir}/omar/${app} ]; then
       pushd %{buildroot}%{_datadir}/omar/${app}
         if [ -L ${app}.jar ]; then
@@ -161,7 +160,7 @@ pushd %{_builddir}/install
         fi
         chmod 755 *.sh
       popd
-    fi  
+    fi
   done
   chmod 755 `find %{buildroot}%{_datadir}/omar -type d`
 
@@ -184,56 +183,56 @@ popd
 %pre omar-app
 export USER_NAME=omar
 export APP_NAME=omar-app
-if ! id -u omar > /dev/null 2>&1; then 
+if ! id -u omar > /dev/null 2>&1; then
   adduser -r -d /usr/share/omar -s /bin/false --no-create-home --user-group ${USER_NAME}
 fi
 
 %pre sqs-app
 export USER_NAME=omar
 export APP_NAME=sqs-app
-if ! id -u omar > /dev/null 2>&1; then 
+if ! id -u omar > /dev/null 2>&1; then
   adduser -s /bin/false -m --user-group ${USER_NAME}
 fi
 
 %pre avro-app
 export USER_NAME=omar
 export APP_NAME=avro-app
-if ! id -u omar > /dev/null 2>&1; then 
+if ! id -u omar > /dev/null 2>&1; then
   adduser -s /bin/false -m --user-group ${USER_NAME}
 fi
 
 %pre download-app
 export USER_NAME=omar
 export APP_NAME=download-app
-if ! id -u omar > /dev/null 2>&1; then 
+if ! id -u omar > /dev/null 2>&1; then
   adduser -s /bin/false -m --user-group ${USER_NAME}
 fi
 
 %pre wfs-app
 export USER_NAME=omar
 export APP_NAME=wfs-app
-if ! id -u omar > /dev/null 2>&1; then 
+if ! id -u omar > /dev/null 2>&1; then
   adduser -r -d /usr/share/omar -s /bin/false --no-create-home --user-group ${USER_NAME}
 fi
 
 %pre wms-app
 export USER_NAME=omar
 export APP_NAME=wms-app
-if ! id -u omar > /dev/null 2>&1; then 
+if ! id -u omar > /dev/null 2>&1; then
   adduser -r -d /usr/share/omar -s /bin/false --no-create-home --user-group ${USER_NAME}
 fi
 
 %pre mensa-app
 export USER_NAME=omar
 export APP_NAME=mensa-app
-if ! id -u omar > /dev/null 2>&1; then 
+if ! id -u omar > /dev/null 2>&1; then
   adduser -r -d /usr/share/omar -s /bin/false --no-create-home --user-group ${USER_NAME}
 fi
 
 %pre wcs-app
 export USER_NAME=omar
 export APP_NAME=wcs-app
-if ! id -u omar > /dev/null 2>&1; then 
+if ! id -u omar > /dev/null 2>&1; then
   adduser -r -d /usr/share/omar -s /bin/false --no-create-home --user-group ${USER_NAME}
 fi
 
@@ -241,35 +240,35 @@ fi
 %pre stager-app
 export USER_NAME=omar
 export APP_NAME=stager-app
-if ! id -u omar > /dev/null 2>&1; then 
+if ! id -u omar > /dev/null 2>&1; then
   adduser -r -d /usr/share/omar -s /bin/false --no-create-home --user-group ${USER_NAME}
 fi
 
-%pre swipe-app
-export USER_NAME=omar
-export APP_NAME=swipe-app
-if ! id -u omar > /dev/null 2>&1; then 
-  adduser -r -d /usr/share/omar -s /bin/false --no-create-home --user-group ${USER_NAME}
-fi
+#%pre swipe-app
+#export USER_NAME=omar
+#export APP_NAME=swipe-app
+#if ! id -u omar > /dev/null 2>&1; then
+#  adduser -r -d /usr/share/omar -s /bin/false --no-create-home --user-group ${USER_NAME}
+#fi
 
 %pre superoverlay-app
 export USER_NAME=omar
 export APP_NAME=superoverlay-app
-if ! id -u omar > /dev/null 2>&1; then 
+if ! id -u omar > /dev/null 2>&1; then
   adduser -r -d /usr/share/omar -s /bin/false --no-create-home --user-group ${USER_NAME}
 fi
 
 %pre jpip-app
 export USER_NAME=omar
 export APP_NAME=jpip-app
-if ! id -u omar > /dev/null 2>&1; then 
+if ! id -u omar > /dev/null 2>&1; then
   adduser -r -d /usr/share/omar -s /bin/false --no-create-home --user-group ${USER_NAME}
 fi
 
 %pre wmts-app
 export USER_NAME=omar
 export APP_NAME=wmts-app
-if ! id -u omar > /dev/null 2>&1; then 
+if ! id -u omar > /dev/null 2>&1; then
   adduser -r -d /usr/share/omar -s /bin/false --no-create-home --user-group ${USER_NAME}
 fi
 
@@ -427,22 +426,22 @@ chmod 755 /var/log/${APP_NAME}
 chown -R ${USER_NAME}:${USER_NAME}  /var/run/${APP_NAME}
 chmod 755 /var/run/${APP_NAME}
 
-%post swipe-app
-export USER_NAME=omar
-export APP_NAME=swipe-app
+#%post swipe-app
+#export USER_NAME=omar
+#export APP_NAME=swipe-app
 
-chown -R ${USER_NAME}:${USER_NAME} %{_datadir}/omar
-if [ ! -d "/var/log/${APP_NAME}" ] ; then
-  mkdir /var/log/${APP_NAME}
-fi
-if [ ! -d "/var/run/${APP_NAME}" ] ; then
-  mkdir /var/run/${APP_NAME}
-fi
+#chown -R ${USER_NAME}:${USER_NAME} %{_datadir}/omar
+#if [ ! -d "/var/log/${APP_NAME}" ] ; then
+#  mkdir /var/log/${APP_NAME}
+#fi
+#if [ ! -d "/var/run/${APP_NAME}" ] ; then
+#  mkdir /var/run/${APP_NAME}
+#fi
 
-chown -R ${USER_NAME}:${USER_NAME}  /var/log/${APP_NAME}
-chmod 755 /var/log/${APP_NAME}
-chown -R ${USER_NAME}:${USER_NAME}  /var/run/${APP_NAME}
-chmod 755 /var/run/${APP_NAME}
+#chown -R ${USER_NAME}:${USER_NAME}  /var/log/${APP_NAME}
+#chmod 755 /var/log/${APP_NAME}
+#chown -R ${USER_NAME}:${USER_NAME}  /var/run/${APP_NAME}
+#chmod 755 /var/run/${APP_NAME}
 
 %post superoverlay-app
 export USER_NAME=omar
@@ -658,23 +657,23 @@ else
   echo "Service ${APP_NAME} is not running and will not be stopped."
 fi
 
-%preun swipe-app
-export APP_NAME=swipe-app
-ps -ef | grep $APP_NAME | grep -v grep
-if [ $? -eq "0" ] ; then
-%if %{is_systemd}
-systemctl stop $APP_NAME
-%else
-service $APP_NAME stop
-%endif
-  if [ "$?" -eq "0" ]; then
-     echo "Service $APP_NAME stopped successfully"
-  else
-     echo "Problems stopping $APP_NAME.  Ignoring..."
-  fi
-else
-  echo "Service ${APP_NAME} is not running and will not be stopped."
-fi
+#%preun swipe-app
+#export APP_NAME=swipe-app
+#ps -ef | grep $APP_NAME | grep -v grep
+#if [ $? -eq "0" ] ; then
+#%if %{is_systemd}
+#systemctl stop $APP_NAME
+#%else
+#service $APP_NAME stop
+#%endif
+#  if [ "$?" -eq "0" ]; then
+#     echo "Service $APP_NAME stopped successfully"
+#  else
+#     echo "Problems stopping $APP_NAME.  Ignoring..."
+#  fi
+#else
+#  echo "Service ${APP_NAME} is not running and will not be stopped."
+#fi
 
 %preun superoverlay-app
 export APP_NAME=superoverlay-app
@@ -784,11 +783,11 @@ rm -rf /var/log/${APP_NAME}
 rm -rf /var/run/${APP_NAME}
 rm -rf /usr/share/omar/${APP_NAME}
 
-%postun swipe-app
-export APP_NAME=swipe-app
-rm -rf /var/log/${APP_NAME}
-rm -rf /var/run/${APP_NAME}
-rm -rf /usr/share/omar/${APP_NAME}
+#%postun swipe-app
+#export APP_NAME=swipe-app
+#rm -rf /var/log/${APP_NAME}
+#rm -rf /var/run/${APP_NAME}
+#rm -rf /usr/share/omar/${APP_NAME}
 
 %postun superoverlay-app
 export APP_NAME=superoverlay-app
@@ -883,13 +882,13 @@ rm -rf /usr/share/omar/${APP_NAME}
 %{_sysconfdir}/init.d/stager-app
 %endif
 
-%files swipe-app
-%{_datadir}/omar/swipe-app
-%if %{is_systemd}
-/usr/lib/systemd/system/swipe-app.service
-%else
-%{_sysconfdir}/init.d/swipe-app
-%endif
+#%files swipe-app
+#%{_datadir}/omar/swipe-app
+#%if %{is_systemd}
+#/usr/lib/systemd/system/swipe-app.service
+#%else
+#%{_sysconfdir}/init.d/swipe-app
+#%endif
 
 %files superoverlay-app
 %{_datadir}/omar/superoverlay-app
