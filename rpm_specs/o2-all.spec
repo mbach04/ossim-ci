@@ -77,10 +77,10 @@ Requires: ossim-oms
 #Group:          System Environment/Libraries
 #Requires: ossim-oms
 
-#%package    swipe-app
-#Summary:        Swipe Services
-#Version:        %{O2_VERSION}
-#Group:          System Environment/Libraries
+%package    disk-cleanup
+Summary:        Disk Cleanup
+Version:        %{O2_VERSION}
+Group:          System Environment/Libraries
 
 %package    jpip-app
 Summary:        JPIP Services
@@ -126,8 +126,8 @@ Stager service for the O2 distribution.  Will support Google Earth's KML superov
 #%description  ossimtools-app
 #OSSIM Tools
 
-#%description  swipe-app
-#Swipe application
+%description  disk-cleanup
+Disk Cleanup
 
 %description  jpip-app
 JPIP application
@@ -244,12 +244,12 @@ if ! id -u omar > /dev/null 2>&1; then
   adduser -r -d /usr/share/omar -s /bin/false --no-create-home --user-group ${USER_NAME}
 fi
 
-#%pre swipe-app
-#export USER_NAME=omar
-#export APP_NAME=swipe-app
-#if ! id -u omar > /dev/null 2>&1; then
-#  adduser -r -d /usr/share/omar -s /bin/false --no-create-home --user-group ${USER_NAME}
-#fi
+%pre disk-cleanup
+export USER_NAME=omar
+export APP_NAME=disk-cleanup
+if ! id -u omar > /dev/null 2>&1; then
+  adduser -r -d /usr/share/omar -s /bin/false --no-create-home --user-group ${USER_NAME}
+fi
 
 %pre superoverlay-app
 export USER_NAME=omar
@@ -426,17 +426,17 @@ chmod 755 /var/log/${APP_NAME}
 chown -R ${USER_NAME}:${USER_NAME}  /var/run/${APP_NAME}
 chmod 755 /var/run/${APP_NAME}
 
-#%post swipe-app
-#export USER_NAME=omar
-#export APP_NAME=swipe-app
+%post disk-cleanup
+export USER_NAME=omar
+export APP_NAME=disk-cleanup
 
-#chown -R ${USER_NAME}:${USER_NAME} %{_datadir}/omar
-#if [ ! -d "/var/log/${APP_NAME}" ] ; then
-#  mkdir /var/log/${APP_NAME}
-#fi
-#if [ ! -d "/var/run/${APP_NAME}" ] ; then
-#  mkdir /var/run/${APP_NAME}
-#fi
+chown -R ${USER_NAME}:${USER_NAME} %{_datadir}/omar
+if [ ! -d "/var/log/${APP_NAME}" ] ; then
+  mkdir /var/log/${APP_NAME}
+fi
+if [ ! -d "/var/run/${APP_NAME}" ] ; then
+  mkdir /var/run/${APP_NAME}
+fi
 
 #chown -R ${USER_NAME}:${USER_NAME}  /var/log/${APP_NAME}
 #chmod 755 /var/log/${APP_NAME}
@@ -657,23 +657,23 @@ else
   echo "Service ${APP_NAME} is not running and will not be stopped."
 fi
 
-#%preun swipe-app
-#export APP_NAME=swipe-app
-#ps -ef | grep $APP_NAME | grep -v grep
-#if [ $? -eq "0" ] ; then
-#%if %{is_systemd}
-#systemctl stop $APP_NAME
-#%else
-#service $APP_NAME stop
-#%endif
-#  if [ "$?" -eq "0" ]; then
-#     echo "Service $APP_NAME stopped successfully"
-#  else
-#     echo "Problems stopping $APP_NAME.  Ignoring..."
-#  fi
-#else
-#  echo "Service ${APP_NAME} is not running and will not be stopped."
-#fi
+%preun disk-cleanup
+export APP_NAME=disk-cleanup
+ps -ef | grep $APP_NAME | grep -v grep
+if [ $? -eq "0" ] ; then
+%if %{is_systemd}
+systemctl stop $APP_NAME
+%else
+service $APP_NAME stop
+%endif
+  if [ "$?" -eq "0" ]; then
+     echo "Service $APP_NAME stopped successfully"
+  else
+     echo "Problems stopping $APP_NAME.  Ignoring..."
+  fi
+else
+  echo "Service ${APP_NAME} is not running and will not be stopped."
+fi
 
 %preun superoverlay-app
 export APP_NAME=superoverlay-app
@@ -783,11 +783,11 @@ rm -rf /var/log/${APP_NAME}
 rm -rf /var/run/${APP_NAME}
 rm -rf /usr/share/omar/${APP_NAME}
 
-#%postun swipe-app
-#export APP_NAME=swipe-app
-#rm -rf /var/log/${APP_NAME}
-#rm -rf /var/run/${APP_NAME}
-#rm -rf /usr/share/omar/${APP_NAME}
+%postun disk-cleanup
+export APP_NAME=disk-cleanup
+rm -rf /var/log/${APP_NAME}
+rm -rf /var/run/${APP_NAME}
+rm -rf /usr/share/omar/${APP_NAME}
 
 %postun superoverlay-app
 export APP_NAME=superoverlay-app
@@ -882,13 +882,13 @@ rm -rf /usr/share/omar/${APP_NAME}
 %{_sysconfdir}/init.d/stager-app
 %endif
 
-#%files swipe-app
-#%{_datadir}/omar/swipe-app
-#%if %{is_systemd}
-#/usr/lib/systemd/system/swipe-app.service
-#%else
-#%{_sysconfdir}/init.d/swipe-app
-#%endif
+%files disk-cleanup
+%{_datadir}/omar/disk-cleanup
+%if %{is_systemd}
+/usr/lib/systemd/system/disk-cleanup.service
+%else
+%{_sysconfdir}/init.d/disk-cleanup
+%endif
 
 %files superoverlay-app
 %{_datadir}/omar/superoverlay-app
