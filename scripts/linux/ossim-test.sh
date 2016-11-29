@@ -96,7 +96,7 @@ runCommand "aws s3 sync $S3_DATA_BUCKET/elevation $OSSIM_DATA/elevation"
 
 pushd $OSSIM_DEV_HOME/ossim-ci/batch_tests;
 
-if [ $ACCEPT_RESULTS == "accept" ]; then
+if [ "$ACCEPT_RESULTS" == "accept" ]; then
   echo "STATUS: Running batch test and accepting results."   
   runCommand "ossim-batch-test -a all super-test.kwl"
   echo "STATUS: Uploading expected results to S3."  
