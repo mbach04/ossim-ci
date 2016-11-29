@@ -242,7 +242,11 @@ if [ -z $OSSIM_BATCH_TEST_RESULTS ] ; then
    export OSSIM_BATCH_TEST_RESULTS="$OSSIM_DATA/ossim-results/${OSSIM_GIT_BRANCH}"
 fi
 if [ -z $OSSIM_PREFS_FILE ] ; then
-   export OSSIM_PREFS_FILE=$OSSIM_INSTALL_PREFIX/ossim.config
+   if [ -f $OSSIM_INSTALL_PREFIX/share/ossim/ossim-preferences-template ] ; then
+      export OSSIM_PREFS_FILE=$OSSIM_INSTALL_PREFIX/share/ossim/ossim-preferences-template
+   elif [ -f $OSSIM_PREFS_FILE=$OSSIM_INSTALL_PREFIX/ossim.config ] ; then
+      export OSSIM_PREFS_FILE=$OSSIM_INSTALL_PREFIX/ossim.config
+   fi
 fi
 
 # For S3 storage/syncing of test data
