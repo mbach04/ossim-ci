@@ -242,10 +242,10 @@ if [ -z $OSSIM_BATCH_TEST_RESULTS ] ; then
    export OSSIM_BATCH_TEST_RESULTS="$OSSIM_DATA/ossim-results/${OSSIM_GIT_BRANCH}"
 fi
 if [ -z $OSSIM_PREFS_FILE ] ; then
-   if [ -f $OSSIM_INSTALL_PREFIX/share/ossim/ossim-preferences-template ] ; then
-      export OSSIM_PREFS_FILE=$OSSIM_INSTALL_PREFIX/share/ossim/ossim-preferences-template
-   elif [ -f $OSSIM_PREFS_FILE=$OSSIM_INSTALL_PREFIX/ossim.config ] ; then
+   if [ -f $OSSIM_PREFS_FILE=$OSSIM_INSTALL_PREFIX/ossim.config ] ; then
       export OSSIM_PREFS_FILE=$OSSIM_INSTALL_PREFIX/ossim.config
+   elif [ -f $OSSIM_INSTALL_PREFIX/share/ossim/ossim-preferences-template ] ; then
+      export OSSIM_PREFS_FILE=$OSSIM_INSTALL_PREFIX/share/ossim/ossim-preferences-template
    fi
 fi
 
@@ -259,3 +259,4 @@ echo "S3_DATA_BUCKET = ${S3_DATA_BUCKET}"
 echo "OSSIM_DATA = ${OSSIM_DATA}"
 echo "OSSIM_BATCH_TEST_DATA = ${OSSIM_BATCH_TEST_DATA}"
 echo "OSSIM_INSTALL_PREFIX = ${OSSIM_INSTALL_PREFIX}"
+echo "OSSIM_PREFS_FILE = ${OSSIM_PREFS_FILE}"
