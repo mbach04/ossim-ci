@@ -254,3 +254,8 @@ if [ -z $S3_DATA_BUCKET ] ; then
    export S3_DATA_BUCKET="s3://o2_test_data"
 fi
 
+
+echo "S3_DATA_BUCKET = ${S3_DATA_BUCKET}"
+echo "OSSIM_DATA = ${OSSIM_DATA}"
+echo "OSSIM_BATCH_TEST_DATA = ${OSSIM_BATCH_TEST_DATA}"
+echo "OSSIM_INSTALL_PREFIX = ${OSSIM_INSTALL_PREFIX}"
