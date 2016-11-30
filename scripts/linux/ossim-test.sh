@@ -86,7 +86,7 @@ fi
 
 # Sync test data against S3:
 if [ -z $S3_DATA_BUCKET ]; then
-  S3_DATA_BUCKET="s3://o2_test_data"
+  S3_DATA_BUCKET="s3://o2-test-data"
   echo "WARNING: No URL specified for S3 bucket containing test data. Expecting S3_DATA_BUCKET environment variable. Defaulting to <$S3_DATA_BUCKET>"
   echo;
 fi
