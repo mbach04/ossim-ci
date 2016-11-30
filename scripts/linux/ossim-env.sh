@@ -142,6 +142,7 @@ else
    export BUILD_OSSIM_WMS=OFF
 fi
 
+
 if [ -d $OSSIM_DEV_HOME/ossim-plugins ] ; then
 
    if [ -z $BUILD_CNES_PLUGIN ] ; then
@@ -168,6 +169,9 @@ if [ -d $OSSIM_DEV_HOME/ossim-plugins ] ; then
       export BUILD_GDAL_PLUGIN=ON
    fi
 
+   if [ -z $BUILD_AWS_PLUGIN ] ; then
+      export BUILD_AWS_PLUGIN=ON
+   fi
    #if [ -z $BUILD_HDF5_PLUGIN ] ; then
    #   export BUILD_HDF5_PLUGIN=ON
    #fi

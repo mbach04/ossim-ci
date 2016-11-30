@@ -215,9 +215,18 @@ Summary:        kakadu ossim plugin
 Group:          System Environment/Libraries
 Requires:       %{name}-libs%{?_isa} = %{version}-%{release}
 
+
 %description    kakadu-plugin
 This sub-package contains the kakadu ossim plugin for reading/writing
 J2K compressed data via the Kakadu library.
+
+%package    aws-plugin
+Summary:        aws (Amazon plugin for S3 access) ossim plugin
+Group:          System Environment/Libraries
+Requires:       %{name}-libs%{?_isa} = %{version}-%{release}
+
+%description    aws-plugin
+This sub-package contains the AWS ossim plugin for reading from an S3 bucket.
 
 %package    jpeg12-plugin
 Summary:        jpeg12 ossim plugin
@@ -576,6 +585,10 @@ rm -rf /usr/share/ossim/${APP_NAME}
 %files kakadu-plugin
 %{_libdir}/ossim/plugins/libossim_kakadu_plugin.so
 %{_libdir}/libkdu_*.so
+
+%files aws-plugin
+%{_libdir}/ossim/plugins/libossim_aws_plugin.so
+
 
 #%files mrsid-plugin
 #%{_libdir}/ossim/plugins/libossim_mrsid_plugin.so
