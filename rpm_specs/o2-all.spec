@@ -82,6 +82,12 @@ Summary:        Disk Cleanup
 Version:        %{O2_VERSION}
 Group:          System Environment/Libraries
 
+%package    tlv-app
+Summary:        Time Lapse Viewer
+Version:        %{O2_VERSION}
+Group:          System Environment/Libraries
+
+
 %package    jpip-app
 Summary:        JPIP Services
 Version:        %{O2_VERSION}
@@ -128,6 +134,9 @@ Stager service for the O2 distribution.  Will support Google Earth's KML superov
 
 %description  disk-cleanup
 Disk Cleanup
+
+%description  tlv-app
+Time Lapse Viewer
 
 %description  jpip-app
 JPIP application
@@ -247,6 +256,13 @@ fi
 %pre disk-cleanup
 export USER_NAME=omar
 export APP_NAME=disk-cleanup
+if ! id -u omar > /dev/null 2>&1; then
+  adduser -r -d /usr/share/omar -s /bin/false --no-create-home --user-group ${USER_NAME}
+fi
+
+%pre tlv-app
+export USER_NAME=omar
+export APP_NAME=tlv-app
 if ! id -u omar > /dev/null 2>&1; then
   adduser -r -d /usr/share/omar -s /bin/false --no-create-home --user-group ${USER_NAME}
 fi
@@ -442,6 +458,24 @@ fi
 #chmod 755 /var/log/${APP_NAME}
 #chown -R ${USER_NAME}:${USER_NAME}  /var/run/${APP_NAME}
 #chmod 755 /var/run/${APP_NAME}
+
+%post tlv-app
+export USER_NAME=omar
+export APP_NAME=tlv-app
+
+chown -R ${USER_NAME}:${USER_NAME} %{_datadir}/omar
+if [ ! -d "/var/log/${APP_NAME}" ] ; then
+  mkdir /var/log/${APP_NAME}
+fi
+if [ ! -d "/var/run/${APP_NAME}" ] ; then
+  mkdir /var/run/${APP_NAME}
+fi
+
+chown -R ${USER_NAME}:${USER_NAME}  /var/log/${APP_NAME}
+chmod 755 /var/log/${APP_NAME}
+chown -R ${USER_NAME}:${USER_NAME}  /var/run/${APP_NAME}
+chmod 755 /var/run/${APP_NAME}
+
 
 %post superoverlay-app
 export USER_NAME=omar
@@ -675,6 +709,24 @@ else
   echo "Service ${APP_NAME} is not running and will not be stopped."
 fi
 
+%preun tlv-app
+export APP_NAME=tlv-app
+ps -ef | grep $APP_NAME | grep -v grep
+if [ $? -eq "0" ] ; then
+%if %{is_systemd}
+systemctl stop $APP_NAME
+%else
+service $APP_NAME stop
+%endif
+  if [ "$?" -eq "0" ]; then
+     echo "Service $APP_NAME stopped successfully"
+  else
+     echo "Problems stopping $APP_NAME.  Ignoring..."
+  fi
+else
+  echo "Service ${APP_NAME} is not running and will not be stopped."
+fi
+
 %preun superoverlay-app
 export APP_NAME=superoverlay-app
 ps -ef | grep $APP_NAME | grep -v grep
@@ -789,6 +841,12 @@ rm -rf /var/log/${APP_NAME}
 rm -rf /var/run/${APP_NAME}
 rm -rf /usr/share/omar/${APP_NAME}
 
+%postun tlv-app
+export APP_NAME=tlv-app
+rm -rf /var/log/${APP_NAME}
+rm -rf /var/run/${APP_NAME}
+rm -rf /usr/share/omar/${APP_NAME}
+
 %postun superoverlay-app
 export APP_NAME=superoverlay-app
 rm -rf /var/log/${APP_NAME}
@@ -888,6 +946,14 @@ rm -rf /usr/share/omar/${APP_NAME}
 /usr/lib/systemd/system/disk-cleanup.service
 %else
 %{_sysconfdir}/init.d/disk-cleanup
+%endif
+
+%files tlv-app
+%{_datadir}/omar/tlv-app
+%if %{is_systemd}
+/usr/lib/systemd/system/tlv-app.service
+%else
+%{_sysconfdir}/init.d/tlv-app
 %endif
 
 %files superoverlay-app
