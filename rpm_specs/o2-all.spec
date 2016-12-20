@@ -148,7 +148,7 @@ WMTS application
 %build
 
 %install
-export O2_APPS=( "omar-app" "sqs-app" "avro-app" "download-app" "wfs-app" "wms-app" "mensa-app" "wcs-app" "stager-app" "superoverlay-app" "jpip-app wmts-app" )
+export O2_APPS=( "avro-app" "download-app" "jpip-app" "mensa-app" "omar-app" "sqs-app" "stager-app" "tlv-app" "superoverlay-app" "wcs-app" "wfs-app" "wms-app" "wmts-app" )
 
 pushd %{_builddir}/install
   # Install all files with default permissions
