@@ -2,22 +2,22 @@
 # Set Continuous Integration Environment:
 
 if [ -z $WORKSPACE ] ; then
-   if [ -z $SCRIPT_DIR ] ; then
+   if [ -z $OSSIMCI_SCRIPT_DIR ] ; then
       pushd `dirname $0` >/dev/null
-      export SCRIPT_DIR=`pwd -P`
+      export OSSIMCI_SCRIPT_DIR=`pwd -P`
+      popd >/dev/null
    fi
    if [ -z $OSSIM_DEV_HOME ] ; then
-      pushd $SCRIPT_DIR/../../.. >/dev/null
+      pushd $OSSIMCI_SCRIPT_DIR/../../.. >/dev/null
       export OSSIM_DEV_HOME=$PWD
       popd > /dev/null
    fi
-   popd >/dev/null
 
 else
    export OSSIM_DEV_HOME=$WORKSPACE
 fi
 
-source $SCRIPT_DIR/git-prompt.sh
+source $OSSIMCI_SCRIPT_DIR/git-prompt.sh
 
 if [ -z $OSSIM_INSTALL_PREFIX ]; then
   export OSSIM_INSTALL_PREFIX=$OSSIM_DEV_HOME/install
@@ -43,6 +43,10 @@ if [ -z $OSSIM_GIT_BRANCH ] ; then
 fi
 
 echo "CURRENT BRANCH = ${OSSIM_GIT_BRANCH}"
+
+if [ -z $S3_DELIVERY_BUCKET ]; then
+  export S3_DELIVERY_BUCKET="s3://o2-delivery/${OSSIM_GIT_BRANCH}"
+fi
 
 if [ -z $KAKADU_VERSION ] ; then
    # later need to add tests.  This is the last version
@@ -138,6 +142,7 @@ else
    export BUILD_OSSIM_WMS=OFF
 fi
 
+
 if [ -d $OSSIM_DEV_HOME/ossim-plugins ] ; then
 
    if [ -z $BUILD_CNES_PLUGIN ] ; then
@@ -164,6 +169,9 @@ if [ -d $OSSIM_DEV_HOME/ossim-plugins ] ; then
       export BUILD_GDAL_PLUGIN=ON
    fi
 
+   if [ -z $BUILD_AWS_PLUGIN ] ; then
+      export BUILD_AWS_PLUGIN=ON
+   fi
    #if [ -z $BUILD_HDF5_PLUGIN ] ; then
    #   export BUILD_HDF5_PLUGIN=ON
    #fi
@@ -229,16 +237,20 @@ if [ -z $OSSIM_DATA ] ; then
    export OSSIM_DATA="/data"
 fi
 if [ -z $OSSIM_BATCH_TEST_DATA ] ; then
-   export OSSIM_BATCH_TEST_DATA="$OSSIM_DATA/ossim-data"
+   export OSSIM_BATCH_TEST_DATA="$OSSIM_DATA/ossim-data/${OSSIM_GIT_BRANCH}"
 fi
 if [ -z $OSSIM_BATCH_TEST_EXPECTED ] ; then
-   export OSSIM_BATCH_TEST_EXPECTED="$OSSIM_DATA/ossim-expected"
+   export OSSIM_BATCH_TEST_EXPECTED="$OSSIM_DATA/ossim-expected/${OSSIM_GIT_BRANCH}"
 fi
 if [ -z $OSSIM_BATCH_TEST_RESULTS ] ; then
-   export OSSIM_BATCH_TEST_RESULTS="$OSSIM_DATA/ossim-results"
+   export OSSIM_BATCH_TEST_RESULTS="$OSSIM_DATA/ossim-results/${OSSIM_GIT_BRANCH}"
 fi
 if [ -z $OSSIM_PREFS_FILE ] ; then
-   export OSSIM_PREFS_FILE=$OSSIM_INSTALL_PREFIX/ossim.config
+   if [ -f $OSSIM_INSTALL_PREFIX/ossim.config ] ; then
+      export OSSIM_PREFS_FILE=$OSSIM_INSTALL_PREFIX/ossim.config
+   elif [ -f $OSSIM_INSTALL_PREFIX/share/ossim/ossim-preferences-template ] ; then
+      export OSSIM_PREFS_FILE=$OSSIM_INSTALL_PREFIX/share/ossim/ossim-preferences-template
+   fi
 fi
 
 # For S3 storage/syncing of test data
@@ -246,3 +258,9 @@ if [ -z $S3_DATA_BUCKET ] ; then
    export S3_DATA_BUCKET="s3://o2_test_data"
 fi
 
+
+echo "S3_DATA_BUCKET = ${S3_DATA_BUCKET}"
+echo "OSSIM_DATA = ${OSSIM_DATA}"
+echo "OSSIM_BATCH_TEST_DATA = ${OSSIM_BATCH_TEST_DATA}"
+echo "OSSIM_INSTALL_PREFIX = ${OSSIM_INSTALL_PREFIX}"
+echo "OSSIM_PREFS_FILE = ${OSSIM_PREFS_FILE}"

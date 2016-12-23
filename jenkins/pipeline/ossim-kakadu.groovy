@@ -46,6 +46,7 @@ node {
    }
    catch(e)
    {
+    println e
     currentBuild.result = "FAILED"
     notifyObj?.notifyFailed()
    }
