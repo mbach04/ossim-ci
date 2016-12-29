@@ -31,7 +31,7 @@ node{
                          storageClass: 'STANDARD',
                          uploadFromSlave: false,
                          useServerSideEncryption: false]],
-              profileName: 'o2-cicd-modapps',
+              profileName: 'o2-cicd',
               userMetadata: []])
     }
 
