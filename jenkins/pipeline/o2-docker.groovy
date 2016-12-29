@@ -1,6 +1,8 @@
 def notifyObj
 node("${DOCKER_HOST_URL}"){
    env.WORKSPACE=pwd()
+   env.AWS_ACCESS_KEY_ID=AWS_ACCESS_KEY_ID
+   env.AWS_SECRET_ACCESS_KEY=AWS_SECRET_ACCESS_KEY
    env.DOCKER_HOST_URL="${DOCKER_HOST_URL}"
    env.AWSDNS="sqs.us-east-1.amazonaws.com"
    env.AWSQUEUEPATH="320588532383/avro-tst"
@@ -8,7 +10,7 @@ node("${DOCKER_HOST_URL}"){
    {
      env.AWSQUEUEPATH="320588532383/avro-release"
    }
-   try{   
+   try{
      stage("Checkout"){
          dir("omar"){
             git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/omar.git'
