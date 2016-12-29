@@ -1,14 +1,16 @@
 node{
     env.WORKSPACE=pwd()
-    env.AWS_ACCESS_KEY_ID=AWS_ACCESS_KEY_ID
-    env.AWS_SECRET_ACCESS_KEY=AWS_SECRET_ACCESS_KEY
     if (USE_C2S_ACCOUNT=="true") {
         echo "Using C2S account"
         env.USE_C2S_ACCOUNT="true"
+        env.AWS_ACCESS_KEY_ID=AWS_ACCESS_KEY_ID_C2S
+        env.AWS_SECRET_ACCESS_KEY=AWS_SECRET_ACCESS_KEY_C2S
     }
     else {
         echo "Using ModApps account"
         env.USE_C2S_ACCOUNT="false"
+        env.AWS_ACCESS_KEY_ID=AWS_ACCESS_KEY_ID_MODAPPS
+        env.AWS_SECRET_ACCESS_KEY=AWS_SECRET_ACCESS_KEY_MODAPPS
     }
     stage("Checkout"){
         dir("o2-paas"){
