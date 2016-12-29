@@ -1,7 +1,7 @@
 node{
     env.WORKSPACE=pwd()
-    env.AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
-    env.AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+    env.AWS_ACCESS_KEY_ID=AWS_ACCESS_KEY_ID
+    env.AWS_SECRET_ACCESS_KEY=AWS_SECRET_ACCESS_KEY
     if (USE_C2S_ACCOUNT=="true") {
         echo "Using C2S account"
         env.USE_C2S_ACCOUNT="true"
