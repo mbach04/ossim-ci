@@ -1,4 +1,6 @@
 #!/bin/bash
+PS4='$LINENO: ' ; set -x
+
 if [ -z $OMAR_SCRIPT_DIR ]; then
   pushd `dirname $0` >/dev/null
   OSSIMCI_SCRIPT_DIR=`pwd -P`
@@ -21,13 +23,12 @@ fi
 
 echo "Initializing directories"
 mkdir -p /data/jpip-cache
-
 if [ $? != 0 ] ; then
   echo "Unable to create directory /data/jpip-cache"
   exit 1
 fi
-echo "Getting login information"
 
+echo "Getting login information"
 eval `aws ecr get-login --region us-east-1`
 if [ $? != 0 ] ; then
    echo "Unable to obtain login for containers"
@@ -47,7 +48,7 @@ if [ ! -d "${DOCKER_SCRIPT_DIR}" ] ; then
 fi
 pushd ${DOCKER_SCRIPT_DIR}
 echo DOCKER_HOST_URL=${DOCKER_HOST_URL}
-docker-compose --file=docker-compose-no-build.yml down
+docker-compose --verbose --file=docker-compose-no-build.yml down
 for x in `docker images | grep /o2- | awk '{print $3}'`; do docker rmi -f $x; done
 for x in `docker images | grep /tlv | awk '{print $3}'`; do docker rmi -f $x; done
 docker-compose --file=docker-compose-no-build.yml up -d

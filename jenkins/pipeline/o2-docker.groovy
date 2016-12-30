@@ -20,7 +20,7 @@ node("${DOCKER_HOST_URL}"){
          }
         notifyObj = load "${env.WORKSPACE}/ossim-ci/jenkins/pipeline/notify.groovy"
     }
-     stage("Confiure Docker"){
+     stage("Configure Docker"){
          //dir("${env.WORKSPACE}/omar/build_scripts/docker"){
              sh """
              ${env.WORKSPACE}/ossim-ci/scripts/linux/o2-docker.sh
