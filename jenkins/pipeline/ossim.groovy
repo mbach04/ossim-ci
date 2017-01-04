@@ -5,7 +5,7 @@ node {
    try{
      stage("Checkout"){
          dir("ossim"){
-            git branch: "dev/41d134bb9fcbf81670bdc5f666e3a2dff4aa0d3e", url: 'https://github.com/ossimlabs/ossim.git'
+            git branch: "41d134bb9fcbf81670bdc5f666e3a2dff4aa0d3e", url: 'https://github.com/ossimlabs/ossim.git'
          }
          dir("ossim-video"){
             git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/ossim-video.git'
