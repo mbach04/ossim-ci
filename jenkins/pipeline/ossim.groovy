@@ -5,8 +5,7 @@ node {
    try{
      stage("Checkout"){
          dir("ossim"){
-            git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/ossim.git'
-         }
+checkout([$class: 'GitSCM', branches: [[name: 'eb52cbe18e30b06c844156d9ef104387cc7467b9']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/ossimlabs/ossim.git']]])         }
          dir("ossim-video"){
             git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/ossim-video.git'
          }
