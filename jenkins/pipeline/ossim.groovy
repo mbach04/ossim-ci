@@ -4,6 +4,9 @@ node {
    env.WORKSPACE=pwd()
    try{
      stage("Checkout"){
+         dir("ossim"){
+            git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/ossim.git'
+         }
          dir("ossim-video"){
             git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/ossim-video.git'
          }
