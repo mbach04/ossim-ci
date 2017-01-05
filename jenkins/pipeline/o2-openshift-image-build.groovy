@@ -12,7 +12,7 @@ node("master"){
         env.USE_C2S_ACCOUNT="false"
         env.DOCKER_REGISTRY_URI="docker-registry-default.o2.radiantbluecloud.com"
         env.DOCKER_REGISTRY_PW="2fOqq6fPnmNqXTrK-tSztJZE2d5u2MJmMRsI3bKrxPU"
-        env.OPENSHIFT_PROJECT_PATH="/${OSSIM_GIT_BRANCH}"
+        env.OPENSHIFT_PROJECT_PATH="/omar-${OSSIM_GIT_BRANCH}"
     }
     stage("Checkout"){
         dir("o2-paas"){
