@@ -24,11 +24,11 @@ node{
     try{
         stage("Build")
         {
-            dir("${env.WORKSPACE}/o2-paas/spring-cloud"){
-                sh "./docker-build.sh"
-            }
             dir("${env.WORKSPACE}/o2-paas/docker"){
                 sh "./dockeraws-build.sh"
+            }
+            dir("${env.WORKSPACE}/o2-paas/spring-cloud"){
+                sh "./docker-build.sh"
             }
         }
         stage("Clean Workspace"){
