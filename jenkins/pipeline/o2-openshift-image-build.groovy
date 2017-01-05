@@ -2,11 +2,13 @@ node{
     env.WORKSPACE=pwd()
     if (USE_C2S_ACCOUNT=="true") {
         echo "Using C2S account"
+        env.USE_C2S_ACCOUNT="true"
         env.DOCKER_REGISTRY_URI="docker-registry-default.cloudapps.ossimc2s.com"
         env.DOCKER_REGISTRY_PW="2ndtAhWidV9PX_VwqWW_PnLPfCWBAc-vWSDYEUiJhQg"
     }
     else {
         echo "Using ModApps account"
+        env.USE_C2S_ACCOUNT="false"
         env.DOCKER_REGISTRY_URI="docker-registry-default.o2.radiantbluecloud.com"
         env.DOCKER_REGISTRY_PW="oQkGyJA7G3daTUDPKNZKRo_dRJ1ANkkRske99zUkBGA"
     }
