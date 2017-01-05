@@ -2,11 +2,13 @@ node{
     env.WORKSPACE=pwd()
     if (USE_C2S_ACCOUNT=="true") {
         echo "Using C2S account"
-        env.DOCKER_REGISTRY_URI="https://docker-registry-default.ossimc2s.com/"
+        env.DOCKER_REGISTRY_URI="docker-registry-default.cloudapss.ossimc2s.com"
+        env.DOCKER_REGISTRY_PW="2ndtAhWidV9PX_VwqWW_PnLPfCWBAc-vWSDYEUiJhQg"
     }
     else {
         echo "Using ModApps account"
-        env.DOCKER_REGISTRY_URI="https://docker-registry-default.o2.radiantbluecloud.com/"
+        env.DOCKER_REGISTRY_URI="docker-registry-default.o2.radiantbluecloud.com"
+        env.DOCKER_REGISTRY_PW="oQkGyJA7G3daTUDPKNZKRo_dRJ1ANkkRske99zUkBGA"
     }
     stage("Checkout"){
         dir("o2-paas"){
