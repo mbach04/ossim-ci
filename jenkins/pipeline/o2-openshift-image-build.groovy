@@ -4,7 +4,8 @@ node("master"){
         echo "Using C2S account"
         env.USE_C2S_ACCOUNT="true"
         env.DOCKER_REGISTRY_URI="docker-registry-default.cloudapps.ossimc2s.com"
-        env.DOCKER_REGISTRY_PW="2ndtAhWidV9PX_VwqWW_PnLPfCWBAc-vWSDYEUiJhQg"
+        "oc login openshift-master.ossimc2s.com -u admin -p P@ssw()rd".execute()
+        env.DOCKER_REGISTRY_PW="oc whoami -t".execute().text
         env.OPENSHIFT_PROJECT_PATH="/oc2s"
     }
     else {
