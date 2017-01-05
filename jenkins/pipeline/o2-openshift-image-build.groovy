@@ -1,4 +1,4 @@
-node{
+node("master"){
     env.WORKSPACE=pwd()
     if (USE_C2S_ACCOUNT=="true") {
         echo "Using C2S account"
