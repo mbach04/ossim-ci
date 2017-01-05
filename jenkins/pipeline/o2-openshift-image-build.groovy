@@ -2,7 +2,7 @@ node{
     env.WORKSPACE=pwd()
     if (USE_C2S_ACCOUNT=="true") {
         echo "Using C2S account"
-        env.DOCKER_REGISTRY_URI="docker-registry-default.cloudapss.ossimc2s.com"
+        env.DOCKER_REGISTRY_URI="docker-registry-default.cloudapps.ossimc2s.com"
         env.DOCKER_REGISTRY_PW="2ndtAhWidV9PX_VwqWW_PnLPfCWBAc-vWSDYEUiJhQg"
     }
     else {
