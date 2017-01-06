@@ -1,6 +1,6 @@
 
 def notifyObj
-node (){
+node ("master"){
    env.WORKSPACE=pwd()
    try{
      stage("Checkout"){
