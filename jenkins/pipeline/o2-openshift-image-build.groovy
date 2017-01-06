@@ -7,14 +7,14 @@ node("master"){
         sh "oc login https://openshift-master.ossimc2s.com:8443 -u admin -p 'P@ssw()rd' --insecure-skip-tls-verify=true"
         sh "oc whoami -t > ocwhoami.txt"
         env.DOCKER_REGISTRY_PW=readFile("ocwhoami.txt").trim()
-        env.OPENSHIFT_PROJECT_PATH="/oc2s"
+        env.OPENSHIFT_PROJECT_PATH="oc2s"
     }
     else {
         echo "Using ModApps account"
         env.USE_C2S_ACCOUNT="false"
         env.DOCKER_REGISTRY_URI="docker-registry-default.o2.radiantbluecloud.com"
         env.DOCKER_REGISTRY_PW="2fOqq6fPnmNqXTrK-tSztJZE2d5u2MJmMRsI3bKrxPU"
-        env.OPENSHIFT_PROJECT_PATH="/omar-${OSSIM_GIT_BRANCH}"
+        env.OPENSHIFT_PROJECT_PATH="omar-${OSSIM_GIT_BRANCH}"
     }
     stage("Checkout"){
         dir("o2-paas"){
