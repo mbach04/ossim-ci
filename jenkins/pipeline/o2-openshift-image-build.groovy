@@ -12,7 +12,7 @@ node("master"){
         echo "Using C2S account"
         env.USE_C2S_ACCOUNT="true"
         env.DOCKER_REGISTRY_URI="docker-registry-default.cloudapps.ossimc2s.com"
-        sh "oc login https://openshift-master.ossimc2s.com:8443 -u admin -p 'P@ssw()rd' --insecure-skip-tls-verify=true"
+        sh "oc login $C2S_OC_LOGIN --insecure-skip-tls-verify=true"
         sh "oc whoami -t > ocwhoami.txt"
         env.DOCKER_REGISTRY_PW=readFile("ocwhoami.txt").trim()
         env.OPENSHIFT_PROJECT_PATH="oc2s"
@@ -21,7 +21,7 @@ node("master"){
         echo "Using ModApps account"
         env.USE_C2S_ACCOUNT="false"
         env.DOCKER_REGISTRY_URI="docker-registry-default.o2.radiantbluecloud.com"
-        sh "oc login https://openshift-master.radiantbluecloud.com:8443 -u admin -p 'P@ssw()rd' --insecure-skip-tls-verify=true"
+        sh "oc login $MODAPPS_OC_LOGIN --insecure-skip-tls-verify=true"
         sh "oc whoami -t > ocwhoami.txt"
         env.DOCKER_REGISTRY_PW=readFile("ocwhoami.txt").trim()
         env.OPENSHIFT_PROJECT_PATH="omar-${OSSIM_GIT_BRANCH}"
