@@ -1,6 +1,6 @@
 node("docker_exporter"){
    env.WORKSPACE=pwd()
-   env.S3_DELIVERY_BUCKET="s3://o2-delivery/${OSSIM_GIT_BRANCH}"/docker
+   env.S3_DELIVERY_BUCKET="s3://o2-delivery/${OSSIM_GIT_BRANCH}/docker"
    env.DOCKER_REGISTRY_URI="320588532383.dkr.ecr.us-east-1.amazonaws.com"
    
    echo "WORKSPACE        = ${env.WORKSPACE}"
