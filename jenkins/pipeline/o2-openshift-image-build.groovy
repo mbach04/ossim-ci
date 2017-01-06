@@ -1,3 +1,11 @@
+//==================================================================================================
+// This is the Jenkins pipeline script for building all O2-OMAR-related docker containers including
+// the spring-cloud-related components. The script accepts two parameters:
+//    OSSIM_GIT_BRANCH -- Branch tag applies to *all* repositories being accessed.
+//    USE_C2S_ACCOUNT -- Boolean (actually passed as string true|false). Indicates which AWS
+//       account being used to push container images.
+// The container images are pushed to the corresponding OpenShift container registry.
+//==================================================================================================
 node("master"){
     env.WORKSPACE=pwd()
     if (USE_C2S_ACCOUNT=="true") {
@@ -13,9 +21,12 @@ node("master"){
         echo "Using ModApps account"
         env.USE_C2S_ACCOUNT="false"
         env.DOCKER_REGISTRY_URI="docker-registry-default.o2.radiantbluecloud.com"
-        env.DOCKER_REGISTRY_PW="2fOqq6fPnmNqXTrK-tSztJZE2d5u2MJmMRsI3bKrxPU"
+        sh "oc login https://openshift-master.radiantbluecloud.com:8443 -u admin -p 'P@ssw()rd' --insecure-skip-tls-verify=true"
+        sh "oc whoami -t > ocwhoami.txt"
+        env.DOCKER_REGISTRY_PW=readFile("ocwhoami.txt").trim()
         env.OPENSHIFT_PROJECT_PATH="omar-${OSSIM_GIT_BRANCH}"
     }
+
     stage("Checkout"){
         dir("o2-paas"){
             git branch: "${OSSIM_GIT_BRANCH}", url: 'git@o2-paas.github.com:radiantbluetechnologies/o2-paas.git'
