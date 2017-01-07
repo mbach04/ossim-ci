@@ -1,6 +1,6 @@
 
 def notifyObj
-node ("slave_build"){
+node ("master"){
    env.WORKSPACE=pwd()
    env.MAKE_VERBOSE="${MAKE_VERBOSE}"
    try{
