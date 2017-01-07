@@ -2,7 +2,7 @@
 def notifyObj
 node ("slave_build"){
    env.WORKSPACE=pwd()
-   env.MAKE_VERBOSE="VERBOSE=true"
+   env.MAKE_VERBOSE="${MAKE_VERBOSE}"
    try{
      stage("Checkout"){
          dir("ossim"){
