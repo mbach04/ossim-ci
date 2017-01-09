@@ -24,7 +24,7 @@ node("master"){
         sh "oc login $MODAPPS_OC_LOGIN --insecure-skip-tls-verify=true"
         sh "oc whoami -t > ocwhoami.txt"
         env.DOCKER_REGISTRY_PW=readFile("ocwhoami.txt").trim()
-        env.OPENSHIFT_PROJECT_PATH="omar-${OSSIM_GIT_BRANCH}"
+        env.OPENSHIFT_PROJECT_PATH="o2"
     }
 
     stage("Checkout"){
