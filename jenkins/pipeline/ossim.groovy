@@ -1,7 +1,8 @@
 
 def notifyObj
-node (){
+node ("master"){
    env.WORKSPACE=pwd()
+   env.MAKE_VERBOSE="${MAKE_VERBOSE}"
    try{
      stage("Checkout"){
          dir("ossim"){
