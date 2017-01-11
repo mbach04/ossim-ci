@@ -34,6 +34,12 @@ node(){
                   target: "rpm-${OSSIM_GIT_BRANCH}",
                   flatten: true])
                }
+               step ([$class: 'CopyArtifact',
+                  projectName: "ossim-${OSSIM_GIT_BRANCH}",
+                  filter: "artifacts/*.tgz",
+                  target: "ossim-${OSSIM_GIT_BRANCH}/",
+                  flatten: true])
+               }
        }
 
     stage("Deliver Artifacts"){
@@ -76,6 +82,19 @@ node(){
                            selectedRegion: 'us-east-1',
                            showDirectlyInBrowser: true,
                            sourceFile: "rpm-${OSSIM_GIT_BRANCH}/*",
+                           storageClass: 'STANDARD',
+                           uploadFromSlave: false,
+                           useServerSideEncryption: false]],
+                           [bucket: "o2-delivery/${OSSIM_GIT_BRANCH}/ossim",
+                           excludedFile: '',
+                           flatten: false,
+                           gzipFiles: false,
+                           keepForever: false,
+                           managedArtifacts: false,
+                           noUploadOnFailure: false,
+                           selectedRegion: 'us-east-1',
+                           showDirectlyInBrowser: true,
+                           sourceFile: "ossim-${OSSIM_GIT_BRANCH}/*",
                            storageClass: 'STANDARD',
                            uploadFromSlave: false,
                            useServerSideEncryption: false]], 
