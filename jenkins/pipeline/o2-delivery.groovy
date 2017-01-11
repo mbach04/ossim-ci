@@ -84,7 +84,7 @@ node(){
                            sourceFile: "rpm-${OSSIM_GIT_BRANCH}/*",
                            storageClass: 'STANDARD',
                            uploadFromSlave: false,
-                           useServerSideEncryption: false]],
+                           useServerSideEncryption: false],
                            [bucket: "o2-delivery/${OSSIM_GIT_BRANCH}/ossim",
                            excludedFile: '',
                            flatten: false,
