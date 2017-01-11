@@ -11,6 +11,7 @@
 node("master"){
     env.S3_DELIVERY_BUCKET="s3://o2-delivery/${OSSIM_GIT_BRANCH}/docker"
     env.WORKSPACE=pwd()
+    skipBuldStage=${SKIP_BUILD_STAGE}
     if (USE_C2S_ACCOUNT=="true") {
         echo "Using C2S account"
         env.USE_C2S_ACCOUNT="true"
@@ -40,6 +41,8 @@ node("master"){
          notifyObj = load "${env.WORKSPACE}/ossim-ci/jenkins/pipeline/notify.groovy"
     }
     try{
+      if (skipBuldStage="false")
+      {
         stage("Build")
         {
             dir("${env.WORKSPACE}/o2-paas/docker"){
@@ -49,6 +52,7 @@ node("master"){
                 sh "./docker-build.sh"
             }
         }
+      }
         stage("Export Docker Images")
         {
            sh """
