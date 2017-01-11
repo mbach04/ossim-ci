@@ -41,7 +41,7 @@ node("master"){
          notifyObj = load "${env.WORKSPACE}/ossim-ci/jenkins/pipeline/notify.groovy"
     }
     try{
-      if (skipBuldStage="false")
+      if (skipBuldStage=="false")
       {
         stage("Build")
         {
