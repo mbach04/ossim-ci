@@ -36,7 +36,7 @@ node(){
                }
                step ([$class: 'CopyArtifact',
                   projectName: "ossim-${OSSIM_GIT_BRANCH}",
-                  filter: "artifacts/*.tgz",
+                  filter: "artifacts/*",
                   target: "ossim-${OSSIM_GIT_BRANCH}/",
                   flatten: true])
                }
