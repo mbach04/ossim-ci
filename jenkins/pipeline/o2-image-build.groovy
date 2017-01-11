@@ -9,7 +9,6 @@
 
 
 node("master"){
-    env.S3_DELIVERY_BUCKET="s3://o2-delivery/${OSSIM_GIT_BRANCH}/docker"
     env.WORKSPACE=pwd()
     if (USE_C2S_ACCOUNT=="true") {
         echo "Using C2S account"
