@@ -33,13 +33,12 @@ node(){
                   filter: "artifacts/*.tgz",
                   target: "rpm-${OSSIM_GIT_BRANCH}",
                   flatten: true])
-               }
                step ([$class: 'CopyArtifact',
                   projectName: "ossim-${OSSIM_GIT_BRANCH}",
                   filter: "artifacts/*",
                   target: "ossim-${OSSIM_GIT_BRANCH}/",
                   flatten: true])
-               }
+            }
        }
 
     stage("Deliver Artifacts"){
