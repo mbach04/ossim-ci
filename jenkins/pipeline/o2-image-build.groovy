@@ -52,7 +52,7 @@ node("master"){
         stage("Export Docker Images")
         {
            sh """
-             pushd ${env.WORKSPACE}/o2-paas/build_scripts/docker
+             pushd ${env.WORKSPACE}/o2-paas/docker
              ./docker-export.sh
              popd
            """
