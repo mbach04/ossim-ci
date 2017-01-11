@@ -6,7 +6,10 @@
 //       account being used to push container images.
 // The container images are pushed to the corresponding OpenShift container registry.
 //==================================================================================================
+
+
 node("master"){
+    env.S3_DELIVERY_BUCKET="s3://o2-delivery/${OSSIM_GIT_BRANCH}/docker"
     env.WORKSPACE=pwd()
     if (USE_C2S_ACCOUNT=="true") {
         echo "Using C2S account"
@@ -40,13 +43,22 @@ node("master"){
         stage("Build")
         {
             dir("${env.WORKSPACE}/o2-paas/docker"){
-                sh "./dockeraws-build.sh"
+                sh "./docker-build.sh"
             }
             dir("${env.WORKSPACE}/o2-paas/spring-cloud"){
                 sh "./docker-build.sh"
             }
         }
-        stage("Clean Workspace"){
+        stage("Export Docker Images")
+        {
+           sh """
+             pushd ${env.WORKSPACE}/o2-paas/build_scripts/docker
+             ./docker-export.sh
+             popd
+           """
+        }
+        stage("Clean Workspace")
+        {
             step([$class: 'WsCleanup'])
         }
     }
