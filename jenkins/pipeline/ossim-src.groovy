@@ -46,7 +46,7 @@ node {
            git branch: "${OSSIM_GIT_BRANCH}", url: 'git@cucumber-oc2s.github.com:radiantbluetechnologies/cucumber-oc2s.git'
       }
     }
-   stage("Archive"){
+   stage("Packaging source"){
      dir("${env.WORKSPACE}"){
          sh "rm -rf ossim-${OSSIM_GIT_BRANCH}-src/oldmar/.git"
          sh "tar cvfz ossim-${OSSIM_GIT_BRANCH}-src.tgz ossim-${OSSIM_GIT_BRANCH}-src"
@@ -54,6 +54,8 @@ node {
          sh "tar cvfz ossim-private-${OSSIM_GIT_BRANCH}-src.tgz ossim-private-${OSSIM_GIT_BRANCH}-src"
          sh "tar cvfz cucumber-${OSSIM_GIT_BRANCH}-src.tgz cucumber-${OSSIM_GIT_BRANCH}-src"
      }
+   }
+   stage("Archiving"){
      dir("${env.WORKSPACE}/artifacts"){
          sh "mv ${env.WORKSPACE}/ossim-${OSSIM_GIT_BRANCH}-src.tgz ."
          sh "mv ${env.WORKSPACE}/o2-paas-${OSSIM_GIT_BRANCH}-src.tgz ."
