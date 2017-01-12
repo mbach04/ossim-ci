@@ -48,6 +48,7 @@ node {
     }
    stage("Archive"){
      dir("${env.WORKSPACE}"){
+         sh "rm -rf ossim-${OSSIM_GIT_BRANCH}-src/oldmar/.git"
          sh "tar cvfz ossim-${OSSIM_GIT_BRANCH}-src.tgz ossim-${OSSIM_GIT_BRANCH}-src"
          sh "tar cvfz o2-paas-${OSSIM_GIT_BRANCH}-src.tgz o2-paas-${OSSIM_GIT_BRANCH}-src"
          sh "tar cvfz ossim-private-${OSSIM_GIT_BRANCH}-src.tgz ossim-private-${OSSIM_GIT_BRANCH}-src"
