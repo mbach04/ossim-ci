@@ -35,12 +35,6 @@ node {
         dir("ossim-ci"){
           git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/ossim-ci.git'
         }
-        dir("ossimlabs-tlv"){
-          git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/tlv.git'
-        }
-        dir("tlv"){
-          git branch: '${OSSIM_GIT_BRANCH}', url: 'https://github.com/ossimlabs/tlv.git'
-        }
       }
       dir("ossim-private-${OSSIM_GIT_BRANCH}-src"){
            git branch: "${OSSIM_GIT_BRANCH}", url: 'git@ossim-private.github.com:radiantbluetechnologies/ossim-private.git'
