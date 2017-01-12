@@ -63,7 +63,7 @@ node {
          sh "mv ${env.WORKSPACE}/cucumber-${OSSIM_GIT_BRANCH}-src.tgz ."
      }
      archiveArtifacts 'artifacts/*'
-  }g
+  }
   stage("Clean Workspace"){
     step([$class: 'WsCleanup'])
   }
