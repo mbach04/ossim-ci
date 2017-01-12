@@ -29,7 +29,7 @@ node {
         dir("omar"){
           git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/omar.git'
         }
-        dir("oldomar"){
+        dir("oldmar"){
           git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/radiantbluetechnologies/omar.git'
         }
         dir("ossim-ci"){
@@ -63,7 +63,7 @@ node {
          sh "mv ${env.WORKSPACE}/cucumber-${OSSIM_GIT_BRANCH}-src.tgz ."
      }
      archiveArtifacts 'artifacts/*'
-  }
+  }g
   stage("Clean Workspace"){
     step([$class: 'WsCleanup'])
   }
