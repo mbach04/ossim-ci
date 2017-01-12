@@ -48,8 +48,8 @@ node {
     }
    stage("Packaging source"){
      dir("${env.WORKSPACE}"){
-         sh "rm -rf ossim-${OSSIM_GIT_BRANCH}-src/oldmar/.git"
-         sh "rm -rf cucumber-${OSSIM_GIT_BRANCH}-src/cucumber-oc2s/.git"
+         sh "rm -rf `find ossim-${OSSIM_GIT_BRANCH}-src -name .git`"
+         sh "rm -rf `find cucumber-${OSSIM_GIT_BRANCH}-src -name .git`"
          sh "tar cvfz ossim-${OSSIM_GIT_BRANCH}-src.tgz ossim-${OSSIM_GIT_BRANCH}-src"
          sh "tar cvfz o2-paas-${OSSIM_GIT_BRANCH}-src.tgz o2-paas-${OSSIM_GIT_BRANCH}-src"
          sh "tar cvfz ossim-private-${OSSIM_GIT_BRANCH}-src.tgz ossim-private-${OSSIM_GIT_BRANCH}-src"
