@@ -45,8 +45,8 @@ node {
       dir("cucumber-${OSSIM_GIT_BRANCH}-src"){
            git branch: "${OSSIM_GIT_BRANCH}", url: 'git@cucumber-oc2s.github.com:radiantbluetechnologies/cucumber-oc2s.git'
       }
-      dir("config-repo-${OSSIM_GIT_BRANCH}-src"){
-           git branch: "${OSSIM_GIT_BRANCH}", url: 'git@config-repo.github.com:radiantbluetechnologies/config-repo.git'
+      dir("config-repo-src"){
+           git branch: "master", url: 'git@config-repo.github.com:radiantbluetechnologies/config-repo.git'
       }
     }
    stage("Packaging source"){
@@ -57,7 +57,7 @@ node {
          sh "tar cvfz o2-paas-${OSSIM_GIT_BRANCH}-src.tgz o2-paas-${OSSIM_GIT_BRANCH}-src"
          sh "tar cvfz ossim-private-${OSSIM_GIT_BRANCH}-src.tgz ossim-private-${OSSIM_GIT_BRANCH}-src"
          sh "tar cvfz cucumber-${OSSIM_GIT_BRANCH}-src.tgz cucumber-${OSSIM_GIT_BRANCH}-src"
-         sh "tar cvfz config-repo-${OSSIM_GIT_BRANCH}-src.tgz config-repo-${OSSIM_GIT_BRANCH}-src"
+         sh "tar cvfz config-repo-src.tgz config-repo-src"
      }
    }
    stage("Archiving"){
@@ -66,7 +66,7 @@ node {
          sh "mv ${env.WORKSPACE}/o2-paas-${OSSIM_GIT_BRANCH}-src.tgz ."
          sh "mv ${env.WORKSPACE}/ossim-private-${OSSIM_GIT_BRANCH}-src.tgz ."
          sh "mv ${env.WORKSPACE}/cucumber-${OSSIM_GIT_BRANCH}-src.tgz ."
-         sh "mv ${env.WORKSPACE}/config-repo-${OSSIM_GIT_BRANCH}-src.tgz ."
+         sh "mv ${env.WORKSPACE}/config-repo-src.tgz ."
      }
      archiveArtifacts 'artifacts/*'
   }
