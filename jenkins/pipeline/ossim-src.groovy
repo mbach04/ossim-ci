@@ -57,6 +57,7 @@ node {
          sh "tar cvfz o2-paas-${OSSIM_GIT_BRANCH}-src.tgz o2-paas-${OSSIM_GIT_BRANCH}-src"
          sh "tar cvfz ossim-private-${OSSIM_GIT_BRANCH}-src.tgz ossim-private-${OSSIM_GIT_BRANCH}-src"
          sh "tar cvfz cucumber-${OSSIM_GIT_BRANCH}-src.tgz cucumber-${OSSIM_GIT_BRANCH}-src"
+         sh "pushd config-repo-src;git pull --all;popd"
          sh "tar cvfz config-repo-src.tgz config-repo-src"
      }
    }
