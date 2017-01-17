@@ -61,6 +61,9 @@ node("master"){
         }
         stage("Clean Workspace")
         {
+            dir("${env.WORKSPACE}/ossim-ci/scripts/linux"){
+                sh "./docker-cleanup.sh"
+            }
             step([$class: 'WsCleanup'])
         }
     }
