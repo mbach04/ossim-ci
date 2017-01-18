@@ -31,7 +31,8 @@ node("master"){
 
     stage("Checkout"){
         dir("o2-paas"){
-            git branch: "${OSSIM_GIT_BRANCH}", url: 'git@o2-paas.github.com:radiantbluetechnologies/o2-paas.git'
+          //git branch: "${OSSIM_GIT_BRANCH}", url: 'git@o2-paas.github.com:radiantbluetechnologies/o2-paas.git'
+          git branch: "o2-ossim", url: 'git@o2-paas.github.com:radiantbluetechnologies/o2-paas.git'
         }
         dir("ossim-ci") {
             git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/ossim-ci.git'
