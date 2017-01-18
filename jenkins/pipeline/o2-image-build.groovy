@@ -56,12 +56,15 @@ node("master"){
         {
            sh """
              pushd ${env.WORKSPACE}/o2-paas/docker
-             ./docker-export.sh
+             ./docker-export.sh -a
              popd
            """
         }
         stage("Clean Workspace")
         {
+            dir("${env.WORKSPACE}/ossim-ci/scripts/linux"){
+                sh "./docker-cleanup.sh"
+            }
             step([$class: 'WsCleanup'])
         }
     }
