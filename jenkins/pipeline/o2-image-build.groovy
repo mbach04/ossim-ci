@@ -25,30 +25,39 @@ node("master"){
       {
         stage("Build")
         {
-            dir("${env.WORKSPACE}/o2-paas/docker"){
-                sh "./docker-build.sh"
-            }
-            dir("${env.WORKSPACE}/o2-paas/spring-cloud"){
-                sh "./docker-build.sh"
-            }
-        }
-      }
-        stage("Export Docker Images")
-        {
+          // TODO: cdowin: Currently the docker-build.sh script is looking to build and push
+          // to one environment. Refactor this script to only build once, but re-tag and
+          // push images to multiple environment
           switch(EXPORT_REGISTRY) {
             case "oc2s":
-              exportDockerToC2S()
+              setupC2SRegistry()
+              buildAndPushImages()
             break
             case "modapps":
-              exportDockerToModapps()
+              setupModappsRegistry()
+              buildAndPushImages()
             break
             default:
               // default = all
-              exportDockerToC2S()
-              exportDockerToModapps()
+              setupC2SRegistry()
+              buildAndPushImages()
+              setupModappsRegistry()
+              buildAndPushImages()
             break
+        }
+      }
+      if (SKIP_EXPORT_STAGE=="false")
+      {
+        stage("Export Docker Images to S3")
+        {
+          sh """
+            pushd ${env.WORKSPACE}/o2-paas/docker
+            ./docker-export.sh -a
+            popd
+          """
           }
         }
+      }
         stage("Clean Workspace")
         {
             dir("${env.WORKSPACE}/ossim-ci/scripts/linux"){
@@ -84,22 +93,11 @@ def setupModappsRegistry() {
   env.OPENSHIFT_PROJECT_PATH="o2"
 }
 
-def exportDockerToC2S() {
-  // Setup and export to the OC2S cluster registry
-  setupC2SRegistry()
-   sh """
-     pushd ${env.WORKSPACE}/o2-paas/docker
-     ./docker-export.sh -a
-     popd
-   """
-}
-
-def exportDockerToModapps() {
-  // Setup and export to the Modapps cluster registry
-  setupModappsRegistry()
-   sh """
-     pushd ${env.WORKSPACE}/o2-paas/docker
-     ./docker-export.sh -a
-     popd
-   """
+def buildAndPushImages() {
+  dir("${env.WORKSPACE}/o2-paas/docker"){
+      sh "./docker-build.sh"
+  }
+  dir("${env.WORKSPACE}/o2-paas/spring-cloud"){
+      sh "./docker-build.sh"
+  }
 }
