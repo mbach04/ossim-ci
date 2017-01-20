@@ -24,10 +24,11 @@ node("master"){
         stage("Build")
         {
           // The base images are pulled from the modapps registry for building.
-          // NOTE: The builds necessarily need to pull base images (o2-base, o2-ossim)
-          // from a common registry for both oc2s and modapps destinations. Therefore,
-          // all builds (oc2s and modapps) will always push images to the modapps
-          // registry. In any case, the jenkins builds will be defaulting to "all".
+          // NOTE: The builds necessarily pull base images (o2-base, o2-ossim) from
+          // a common registry for both oc2s and modapps destinations. Therefore,
+          // all builds (oc2s and modapps) need to always push images to the modapps
+          // registry to avoid stale base images for subsequent builds. In any case,
+          // the jenkins builds will be defaulting to "all" which makes this moot.
           setupModappsRegistry()
           buildImages()
           pushImages()
