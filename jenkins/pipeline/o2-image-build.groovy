@@ -10,24 +10,6 @@
 
 node("master"){
     env.WORKSPACE=pwd()
-    if (USE_C2S_ACCOUNT=="true") {
-        echo "Using C2S account"
-        env.USE_C2S_ACCOUNT="true"
-        env.DOCKER_REGISTRY_URI="docker-registry-default.cloudapps.ossimc2s.com"
-        sh "oc login $C2S_OC_LOGIN --insecure-skip-tls-verify=true"
-        sh "oc whoami -t > ocwhoami.txt"
-        env.DOCKER_REGISTRY_PW=readFile("ocwhoami.txt").trim()
-        env.OPENSHIFT_PROJECT_PATH="oc2s"
-    }
-    else {
-        echo "Using ModApps account"
-        env.USE_C2S_ACCOUNT="false"
-        env.DOCKER_REGISTRY_URI="docker-registry-default.o2.radiantbluecloud.com"
-        sh "oc login $MODAPPS_OC_LOGIN --insecure-skip-tls-verify=true"
-        sh "oc whoami -t > ocwhoami.txt"
-        env.DOCKER_REGISTRY_PW=readFile("ocwhoami.txt").trim()
-        env.OPENSHIFT_PROJECT_PATH="o2"
-    }
 
     stage("Checkout"){
         dir("o2-paas"){
@@ -53,11 +35,21 @@ node("master"){
       }
         stage("Export Docker Images")
         {
+          // Setup and export to the OC2S cluster registry
+          setupC2SRegistry()
            sh """
              pushd ${env.WORKSPACE}/o2-paas/docker
              ./docker-export.sh -a
              popd
            """
+
+           // Setup and export to the Modapps cluster registry
+           setupModappsRegistry()
+            sh """
+              pushd ${env.WORKSPACE}/o2-paas/docker
+              ./docker-export.sh -a
+              popd
+            """
         }
         stage("Clean Workspace")
         {
@@ -72,4 +64,24 @@ node("master"){
         currentBuild.result = "FAILED"
         notifyObj?.notifyFailed()
     }
+}
+
+def setupC2SRegistry() {
+  echo "Using C2S account"
+  env.USE_C2S_ACCOUNT="true"
+  env.DOCKER_REGISTRY_URI="docker-registry-default.cloudapps.ossimc2s.com"
+  sh "oc login $C2S_OC_LOGIN --insecure-skip-tls-verify=true"
+  sh "oc whoami -t > ocwhoami.txt"
+  env.DOCKER_REGISTRY_PW=readFile("ocwhoami.txt").trim()
+  env.OPENSHIFT_PROJECT_PATH="oc2s"
+}
+
+def setupModappsRegistry() {
+  echo "Using ModApps account"
+  env.USE_C2S_ACCOUNT="false"
+  env.DOCKER_REGISTRY_URI="docker-registry-default.o2.radiantbluecloud.com"
+  sh "oc login $MODAPPS_OC_LOGIN --insecure-skip-tls-verify=true"
+  sh "oc whoami -t > ocwhoami.txt"
+  env.DOCKER_REGISTRY_PW=readFile("ocwhoami.txt").trim()
+  env.OPENSHIFT_PROJECT_PATH="o2"
 }
