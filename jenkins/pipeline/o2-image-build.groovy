@@ -35,21 +35,19 @@ node("master"){
       }
         stage("Export Docker Images")
         {
-          // Setup and export to the OC2S cluster registry
-          setupC2SRegistry()
-           sh """
-             pushd ${env.WORKSPACE}/o2-paas/docker
-             ./docker-export.sh -a
-             popd
-           """
-
-           // Setup and export to the Modapps cluster registry
-           setupModappsRegistry()
-            sh """
-              pushd ${env.WORKSPACE}/o2-paas/docker
-              ./docker-export.sh -a
-              popd
-            """
+          switch(EXPORT_REGISTRY) {
+            case "oc2s":
+              exportDockerToC2S()
+            break
+            case "modapps":
+              exportDockerToModapps()
+            break
+            default:
+              // default = all
+              exportDockerToC2S()
+              exportDockerToModapps()
+            break
+          }
         }
         stage("Clean Workspace")
         {
@@ -84,4 +82,24 @@ def setupModappsRegistry() {
   sh "oc whoami -t > ocwhoami.txt"
   env.DOCKER_REGISTRY_PW=readFile("ocwhoami.txt").trim()
   env.OPENSHIFT_PROJECT_PATH="o2"
+}
+
+def exportDockerToC2S() {
+  // Setup and export to the OC2S cluster registry
+  setupC2SRegistry()
+   sh """
+     pushd ${env.WORKSPACE}/o2-paas/docker
+     ./docker-export.sh -a
+     popd
+   """
+}
+
+def exportDockerToModapps() {
+  // Setup and export to the Modapps cluster registry
+  setupModappsRegistry()
+   sh """
+     pushd ${env.WORKSPACE}/o2-paas/docker
+     ./docker-export.sh -a
+     popd
+   """
 }
