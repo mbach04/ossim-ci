@@ -2,8 +2,6 @@
 // This is the Jenkins pipeline script for building all O2-OMAR-related docker containers including
 // the spring-cloud-related components. The script accepts two parameters:
 //    OSSIM_GIT_BRANCH -- Branch tag applies to *all* repositories being accessed.
-//    USE_C2S_ACCOUNT -- Boolean (actually passed as string true|false). Indicates which AWS
-//       account being used to push container images.
 // The container images are pushed to the corresponding OpenShift container registry.
 //==================================================================================================
 
@@ -25,24 +23,22 @@ node("master"){
       {
         stage("Build")
         {
-          // TODO: cdowin: Currently the docker-build.sh script is looking to build and push
-          // to one environment. Refactor this script to only build once, but re-tag and
-          // push images to multiple environment
+          buildImages()
           switch(EXPORT_REGISTRY) {
             case "oc2s":
               setupC2SRegistry()
-              buildAndPushImages()
+              pushImages()
             break
             case "modapps":
               setupModappsRegistry()
-              buildAndPushImages()
+              pushImages()
             break
             default:
               // default = all
               setupC2SRegistry()
-              buildAndPushImages()
+              pushImages()
               setupModappsRegistry()
-              buildAndPushImages()
+              pushImages()
             break
         }
       }
@@ -74,8 +70,7 @@ node("master"){
 }
 
 def setupC2SRegistry() {
-  echo "Using C2S account"
-  env.USE_C2S_ACCOUNT="true"
+  echo "Logging into C2S docker registry"
   env.DOCKER_REGISTRY_URI="docker-registry-default.cloudapps.ossimc2s.com"
   sh "oc login $C2S_OC_LOGIN --insecure-skip-tls-verify=true"
   sh "oc whoami -t > ocwhoami.txt"
@@ -84,8 +79,7 @@ def setupC2SRegistry() {
 }
 
 def setupModappsRegistry() {
-  echo "Using ModApps account"
-  env.USE_C2S_ACCOUNT="false"
+  echo "Logging into ModApps docker registry"
   env.DOCKER_REGISTRY_URI="docker-registry-default.o2.radiantbluecloud.com"
   sh "oc login $MODAPPS_OC_LOGIN --insecure-skip-tls-verify=true"
   sh "oc whoami -t > ocwhoami.txt"
@@ -93,11 +87,19 @@ def setupModappsRegistry() {
   env.OPENSHIFT_PROJECT_PATH="o2"
 }
 
-def buildAndPushImages() {
+def buildImages() {
   dir("${env.WORKSPACE}/o2-paas/docker"){
       sh "./docker-build.sh"
   }
   dir("${env.WORKSPACE}/o2-paas/spring-cloud"){
       sh "./docker-build.sh"
+  }
+}
+def pushImages() {
+  dir("${env.WORKSPACE}/o2-paas/docker"){
+      sh "./docker-push.sh"
+  }
+  dir("${env.WORKSPACE}/o2-paas/spring-cloud"){
+      sh "./docker-push.sh"
   }
 }
