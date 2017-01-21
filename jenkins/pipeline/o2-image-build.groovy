@@ -19,31 +19,31 @@ node("master"){
          notifyObj = load "${env.WORKSPACE}/ossim-ci/jenkins/pipeline/notify.groovy"
     }
     try{
-        stage("Build")
-        {
-          // The base images are pulled from the modapps registry for building.
-          // NOTE: The builds necessarily pull base images (o2-base, o2-ossim) from
-          // a common registry for both oc2s and modapps destinations. Therefore,
-          // all builds (oc2s and modapps) need to always push images to the modapps
-          // registry to avoid stale base images for subsequent builds. In any case,
-          // the jenkins builds will be defaulting to "all" which makes this moot.
-          setupModappsRegistry()
-          buildImages()
-          pushImages()
+      stage("Build")
+      {
+        // The base images are pulled from the modapps registry for building.
+        // NOTE: The builds necessarily pull base images (o2-base, o2-ossim) from
+        // a common registry for both oc2s and modapps destinations. Therefore,
+        // all builds (oc2s and modapps) need to always push images to the modapps
+        // registry to avoid stale base images for subsequent builds. In any case,
+        // the jenkins builds will be defaulting to "all" which makes this moot.
+        setupModappsRegistry()
+        buildImages()
+        pushImages()
 
-          switch(EXPORT_REGISTRY) {
-            case "modapps":
-              // Nothing to do here since already done above.
-            break
-            case "oc2s":
-              setupC2SRegistry()
-              pushImages()
-            break
-            default:
-              // default = all
-              setupC2SRegistry()
-              pushImages()
-            break
+        switch(EXPORT_REGISTRY) {
+          case "modapps":
+            // Nothing to do here since already done above.
+          break
+          case "oc2s":
+            setupC2SRegistry()
+            pushImages()
+          break
+          default:
+            // default = all
+            setupC2SRegistry()
+            pushImages()
+          break
       }
       if (SKIP_EXPORT_STAGE=="false")
       {
@@ -70,6 +70,7 @@ node("master"){
     }
     catch(e)
     {
+        echo e
         currentBuild.result = "FAILED"
         notifyObj?.notifyFailed()
     }
