@@ -70,7 +70,7 @@ node("master"){
     }
     catch(e)
     {
-        echo e
+        echo e.toString()
         currentBuild.result = "FAILED"
         notifyObj?.notifyFailed()
     }
