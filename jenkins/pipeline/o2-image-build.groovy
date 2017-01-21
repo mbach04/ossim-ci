@@ -19,8 +19,6 @@ node("master"){
          notifyObj = load "${env.WORKSPACE}/ossim-ci/jenkins/pipeline/notify.groovy"
     }
     try{
-      if (SKIP_BUILD_STAGE=="false")
-      {
         stage("Build")
         {
           // The base images are pulled from the modapps registry for building.
@@ -46,7 +44,6 @@ node("master"){
               setupC2SRegistry()
               pushImages()
             break
-        }
       }
       if (SKIP_EXPORT_STAGE=="false")
       {
@@ -60,6 +57,8 @@ node("master"){
           }
         }
       }
+      if (SKIP_CLEANUP_STAGE=="false")
+      {
         stage("Clean Workspace")
         {
             dir("${env.WORKSPACE}/ossim-ci/scripts/linux"){
@@ -67,6 +66,7 @@ node("master"){
             }
             step([$class: 'WsCleanup'])
         }
+      }
     }
     catch(e)
     {
@@ -94,18 +94,26 @@ def setupModappsRegistry() {
 }
 
 def buildImages() {
-  dir("${env.WORKSPACE}/o2-paas/docker"){
-      sh "./docker-build.sh"
-  }
-  dir("${env.WORKSPACE}/o2-paas/spring-cloud"){
-      sh "./docker-build.sh"
+  if (SKIP_BUILD_STAGE=="false")
+  {
+    dir("${env.WORKSPACE}/o2-paas/docker"){
+        sh "./docker-build.sh"
+    }
+    dir("${env.WORKSPACE}/o2-paas/spring-cloud"){
+        sh "./docker-build.sh"
+    }
   }
 }
 def pushImages() {
-  dir("${env.WORKSPACE}/o2-paas/docker"){
-      sh "./docker-push.sh"
-  }
-  dir("${env.WORKSPACE}/o2-paas/spring-cloud"){
-      sh "./docker-push.sh"
+  if (SKIP_IMAGE_PUSH=="false")
+  {
+    echo "############# Pushing images to repositories ###############"
+    echo ""
+    dir("${env.WORKSPACE}/o2-paas/docker"){
+        sh "./docker-push.sh"
+    }
+    dir("${env.WORKSPACE}/o2-paas/spring-cloud"){
+        sh "./docker-push.sh"
+    }
   }
 }
