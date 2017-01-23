@@ -19,34 +19,33 @@ node("master"){
          notifyObj = load "${env.WORKSPACE}/ossim-ci/jenkins/pipeline/notify.groovy"
     }
     try{
-      if (SKIP_BUILD_STAGE=="false")
+      stage("Build")
       {
-        stage("Build")
-        {
-          // The base images are pulled from the modapps registry for building.
-          // NOTE: The builds necessarily pull base images (o2-base, o2-ossim) from
-          // a common registry for both oc2s and modapps destinations. Therefore,
-          // all builds (oc2s and modapps) need to always push images to the modapps
-          // registry to avoid stale base images for subsequent builds. In any case,
-          // the jenkins builds will be defaulting to "all" which makes this moot.
-          setupModappsRegistry()
-          buildImages()
-          pushImages()
+        // The base images are pulled from the modapps registry for building.
+        // NOTE: The builds necessarily pull base images (o2-base, o2-ossim) from
+        // a common registry for both oc2s and modapps destinations. Therefore,
+        // all builds (oc2s and modapps) need to always push images to the modapps
+        // registry to avoid stale base images for subsequent builds. In any case,
+        // the jenkins builds will be defaulting to "all" which makes this moot.
+        setupModappsRegistry()
+        buildImages()
+        pushImages()
 
-          switch(EXPORT_REGISTRY) {
-            case "modapps":
-              // Nothing to do here since already done above.
-            break
-            case "oc2s":
-              setupC2SRegistry()
-              pushImages()
-            break
-            default:
-              // default = all
-              setupC2SRegistry()
-              pushImages()
-            break
-        }
+        switch(EXPORT_REGISTRY) {
+          case "modapps":
+            // Nothing to do here since already done above.
+          break
+          case "oc2s":
+            setupC2SRegistry()
+            buildImages()
+            pushImages()
+          break
+          default:
+            // default = all
+            setupC2SRegistry()
+            buildImages()
+            pushImages()
+          break
       }
       if (SKIP_EXPORT_STAGE=="false")
       {
@@ -60,6 +59,8 @@ node("master"){
           }
         }
       }
+      if (SKIP_CLEANUP_STAGE=="false")
+      {
         stage("Clean Workspace")
         {
             dir("${env.WORKSPACE}/ossim-ci/scripts/linux"){
@@ -67,9 +68,11 @@ node("master"){
             }
             step([$class: 'WsCleanup'])
         }
+      }
     }
     catch(e)
     {
+        echo e.toString()
         currentBuild.result = "FAILED"
         notifyObj?.notifyFailed()
     }
@@ -94,18 +97,26 @@ def setupModappsRegistry() {
 }
 
 def buildImages() {
-  dir("${env.WORKSPACE}/o2-paas/docker"){
-      sh "./docker-build.sh"
-  }
-  dir("${env.WORKSPACE}/o2-paas/spring-cloud"){
-      sh "./docker-build.sh"
+  if (SKIP_BUILD_STAGE=="false")
+  {
+    dir("${env.WORKSPACE}/o2-paas/docker"){
+        sh "./docker-build.sh"
+    }
+    dir("${env.WORKSPACE}/o2-paas/spring-cloud"){
+        sh "./docker-build.sh"
+    }
   }
 }
 def pushImages() {
-  dir("${env.WORKSPACE}/o2-paas/docker"){
-      sh "./docker-push.sh"
-  }
-  dir("${env.WORKSPACE}/o2-paas/spring-cloud"){
-      sh "./docker-push.sh"
+  if (SKIP_IMAGE_PUSH=="false")
+  {
+    echo "############# Pushing images to repositories ###############"
+    echo ""
+    dir("${env.WORKSPACE}/o2-paas/docker"){
+        sh "./docker-push.sh"
+    }
+    dir("${env.WORKSPACE}/o2-paas/spring-cloud"){
+        sh "./docker-push.sh"
+    }
   }
 }
