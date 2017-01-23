@@ -37,11 +37,13 @@ node("master"){
           break
           case "oc2s":
             setupC2SRegistry()
+            buildImages()
             pushImages()
           break
           default:
             // default = all
             setupC2SRegistry()
+            buildImages()
             pushImages()
           break
       }
