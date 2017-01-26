@@ -1,5 +1,8 @@
 #!/bin/bash
-DOCKER_COMMAND="sudo docker"
+if [ -z $DOCKER_COMMAND ] ; then
+   DOCKER_COMMAND="sudo docker"
+fi
+
 ITEMS_TO_REMOVE=$(docker ps -q -f status=exited)
 if [ "${ITEMS_TO_REMOVE}" != "" ] ; then
    $DOCKER_COMMAND rm ${ITEMS_TO_REMOVE}
