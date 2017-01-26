@@ -59,22 +59,22 @@ node("master"){
           }
         }
       }
-      if (SKIP_CLEANUP_STAGE=="false")
-      {
-        stage("Clean Workspace")
-        {
-            dir("${env.WORKSPACE}/ossim-ci/scripts/linux"){
-                sh "./docker-cleanup.sh"
-            }
-            step([$class: 'WsCleanup'])
-        }
-      }
     }
     catch(e)
     {
         echo e.toString()
         currentBuild.result = "FAILED"
         notifyObj?.notifyFailed()
+    }
+    if (SKIP_CLEANUP_STAGE=="false")
+    {
+      stage("Clean Workspace")
+      {
+          dir("${env.WORKSPACE}/ossim-ci/scripts/linux"){
+              sh "./docker-cleanup.sh"
+          }
+          step([$class: 'WsCleanup'])
+      }
     }
 }
 
