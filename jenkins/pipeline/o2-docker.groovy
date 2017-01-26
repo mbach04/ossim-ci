@@ -6,6 +6,7 @@ node("${DOCKER_HOST_URL}"){
    env.DOCKER_HOST_URL="${DOCKER_HOST_URL}"
    env.AWSDNS="sqs.us-east-1.amazonaws.com"
    env.AWSQUEUEPATH="320588532383/avro-tst"
+   env.OSSIM_MAVEN_PROXY="https://artifacts.radiantbluecloud.com/artifactory/ossim-deps"
    if("${OSSIM_GIT_BRANCH}" == "master")
    {
      env.AWSQUEUEPATH="320588532383/avro-release"
