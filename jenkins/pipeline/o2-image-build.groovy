@@ -8,7 +8,7 @@
 
 node("master"){
     env.WORKSPACE=pwd()
-
+    env.OSSIM_MAVEN_PROXY="https://artifacts.radiantbluecloud.com/artifactory/ossim-deps"
     stage("Checkout"){
         dir("o2-paas"){
           git branch: "${OSSIM_GIT_BRANCH}", url: 'git@o2-paas.github.com:radiantbluetechnologies/o2-paas.git'
