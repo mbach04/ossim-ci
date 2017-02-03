@@ -19,6 +19,13 @@ node("master"){
          notifyObj = load "${env.WORKSPACE}/ossim-ci/jenkins/pipeline/notify.groovy"
     }
     try{
+      stage("Cleanupo docker")
+      {
+        dir("${env.WORKSPACE}/ossim-ci/scripts/linux"){
+            sh "./docker-cleanup.sh"
+        }
+
+      }
       stage("Build")
       {
         // The base images are pulled from the modapps registry for building.
