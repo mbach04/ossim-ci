@@ -21,6 +21,8 @@ node("master"){
                  projectName: "build-docs-${OSSIM_GIT_BRANCH}",
                  filter: "install.tgz",
                  flatten: true])
+            sh "pwd"
+            sh "ls -alhR"
          }
          notifyObj = load "${env.WORKSPACE}/ossim-ci/jenkins/pipeline/notify.groovy"
     }
