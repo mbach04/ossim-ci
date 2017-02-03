@@ -1,4 +1,5 @@
 #!/bin/bash
+echo "Starting docker cleanup"
 if [ -z $DOCKER_COMMAND ] ; then
    DOCKER_COMMAND="sudo docker"
 fi
@@ -22,3 +23,5 @@ ITEMS_TO_REMOVE=$(sudo docker images | grep "<none>" | awk '{print $3}')
 if [ "${ITEMS_TO_REMOVE}" != "" ] ; then
    $DOCKER_COMMAND rmi ${ITEMS_TO_REMOVE}
 fi
+
+echo "Finished docker cleanup!"
