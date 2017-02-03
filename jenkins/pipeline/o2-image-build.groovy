@@ -16,7 +16,7 @@ node("master"){
         dir("ossim-ci") {
             git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/ossim-ci.git'
         }
-        dir("${o2-pass/docker/o2-docs}") {
+        dir("o2-pass/docker/o2-docs") {
             step ([$class: 'CopyArtifact',
                  projectName: "build-docs-${OSSIM_GIT_BRANCH}",
                  filter: "install.tgz",
