@@ -13,28 +13,28 @@ node{
             flatten: true])
      }
   }
-  
+
  stage("Deliver O2 Docs"){
     dir("${env.WORKSPACE}"){
         step([$class: 'S3BucketPublisher',
-              dontWaitForConcurrentBuildCompletion: false, 
-              entries: [[bucket: "o2-delivery/${OSSIM_GIT_BRANCH}/o2-install-guide", 
-                         excludedFile: '', 
-                         flatten: false, 
-                         gzipFiles: false, 
-                         keepForever: false, 
-                         managedArtifacts: false, 
-                         noUploadOnFailure: false, 
-                         selectedRegion: 'us-east-1', 
-                         showDirectlyInBrowser: true, 
-                         sourceFile: 'install-guide/*.tgz', 
-                         storageClass: 'STANDARD', 
-                         uploadFromSlave: false, 
-                         useServerSideEncryption: false]], 
+              dontWaitForConcurrentBuildCompletion: false,
+              entries: [[bucket: "o2-delivery/${OSSIM_GIT_BRANCH}/o2-install-guide",
+                         excludedFile: '',
+                         flatten: false,
+                         gzipFiles: false,
+                         keepForever: false,
+                         managedArtifacts: false,
+                         noUploadOnFailure: false,
+                         selectedRegion: 'us-east-1',
+                         showDirectlyInBrowser: true,
+                         sourceFile: 'install-guide/*.tgz',
+                         storageClass: 'STANDARD',
+                         uploadFromSlave: false,
+                         useServerSideEncryption: false]],
               profileName: 'o2-cicd', 
               userMetadata: []])
     }
-        
+
    }
 
   stage("Clean Workspace"){

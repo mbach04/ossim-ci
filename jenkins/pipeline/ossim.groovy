@@ -1,10 +1,20 @@
 
 def notifyObj
-node {
+node ("master"){
    env.WORKSPACE=pwd()
+   env.MAKE_VERBOSE="${MAKE_VERBOSE}"
    try{
      stage("Checkout"){
          dir("ossim"){
+//            checkout(
+//              [ $class: 'GitSCM',
+//                branches: [[name: '47b8445333f9d092aba8f04f171f2dbc5983821e']],
+//                doGenerateSubmoduleConfigurations: false,
+//                extensions: [],
+//                submoduleCfg: [],
+//                userRemoteConfigs: [[url: 'https://github.com/ossimlabs/ossim.git']]
+//              ]
+//            )
             git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/ossim.git'
          }
          dir("ossim-video"){
