@@ -24,4 +24,4 @@ if [ "${ITEMS_TO_REMOVE}" != "" ] ; then
    $DOCKER_COMMAND rmi ${ITEMS_TO_REMOVE}
 fi
 
-echo "Finished docker cleanup!"
+echo "Finished docker cleanup"
