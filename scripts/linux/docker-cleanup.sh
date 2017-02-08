@@ -21,7 +21,7 @@ fi
  
 ITEMS_TO_REMOVE=$(sudo docker images | grep "<none>" | awk '{print $3}')
 if [ "${ITEMS_TO_REMOVE}" != "" ] ; then
-   $DOCKER_COMMAND rmi ${ITEMS_TO_REMOVE}
+   $DOCKER_COMMAND rmi -f ${ITEMS_TO_REMOVE}
 fi
 
 echo "Finished docker cleanup"
