@@ -24,4 +24,7 @@ if [ "${ITEMS_TO_REMOVE}" != "" ] ; then
    $DOCKER_COMMAND rmi -f ${ITEMS_TO_REMOVE}
 fi
 
+#oadm prune images --confirm=true
+#oadm prune deployments --confirm=true
+
 echo "Finished docker cleanup"
