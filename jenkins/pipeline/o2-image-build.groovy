@@ -93,7 +93,7 @@ node("master"){
 
 def setupC2SRegistry() {
   echo "Logging into C2S docker registry"
-  env.DOCKER_REGISTRY_URI="docker-registry-default.cloudapps.ossimc2s.com"
+  env.DOCKER_REGISTRY_URI="docker-registry-default.o2.ossimc2s.com"
   sh "oc login $C2S_OC_LOGIN --insecure-skip-tls-verify=true"
   sh "oc whoami -t > ocwhoami.txt"
   env.DOCKER_REGISTRY_PW=readFile("ocwhoami.txt").trim()
