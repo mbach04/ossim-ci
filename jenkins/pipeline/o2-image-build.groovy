@@ -9,6 +9,7 @@
 node("master"){
     env.WORKSPACE=pwd()
     env.OSSIM_MAVEN_PROXY="https://artifacts.radiantbluecloud.com/artifactory/ossim-deps"
+
     stage("Checkout"){
         dir("o2-paas"){
           git branch: "${OSSIM_GIT_BRANCH}", url: 'git@o2-paas.github.com:radiantbluetechnologies/o2-paas.git'
@@ -24,59 +25,45 @@ node("master"){
          }
          notifyObj = load "${env.WORKSPACE}/ossim-ci/jenkins/pipeline/notify.groovy"
     }
+
     try{
-      stage("Cleanupo docker")
-      {
+      stage("Cleanupo docker"){
         dir("${env.WORKSPACE}/ossim-ci/scripts/linux"){
             sh "./docker-cleanup.sh"
         }
-
       }
-      stage("Build")
-      {
+
+      stage("Build"){
         // The base images are pulled from the modapps registry for building.
         setupModappsRegistry()
         buildImages()
         pushImages()
       }
-      if (SKIP_EXPORT_STAGE=="false")
-      {
-        stage("Export Docker Images to S3")
-        {
+
+      if (SKIP_EXPORT_STAGE=="false"){
+        stage("Export Docker Images to S3"){
           sh """
             pushd ${env.WORKSPACE}/o2-paas/docker
             ./docker-export.sh -a
             popd
           """
-          }
         }
       }
     }
-    catch(e)
-    {
+    catch(e){
         echo e.toString()
         currentBuild.result = "FAILED"
         notifyObj?.notifyFailed()
     }
-    if (SKIP_CLEANUP_STAGE=="false")
-    {
-      stage("Clean Workspace")
-      {
+
+    if (SKIP_CLEANUP_STAGE=="false"){
+      stage("Clean Workspace"){
           dir("${env.WORKSPACE}/ossim-ci/scripts/linux"){
               sh "./docker-cleanup.sh"
           }
           step([$class: 'WsCleanup'])
       }
     }
-}
-
-def setupC2SRegistry() {
-  echo "Logging into C2S docker registry"
-  env.DOCKER_REGISTRY_URI="docker-registry-default.o2.ossimc2s.com"
-  sh "oc login $C2S_OC_LOGIN --insecure-skip-tls-verify=true"
-  sh "oc whoami -t > ocwhoami.txt"
-  env.DOCKER_REGISTRY_PW=readFile("ocwhoami.txt").trim()
-  env.OPENSHIFT_PROJECT_PATH="oc2s"
 }
 
 def setupModappsRegistry() {
