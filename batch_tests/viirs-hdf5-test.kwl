@@ -38,6 +38,10 @@ test1.expected_results_command1: ossim-cli hdf5 --info $OSSIM_BATCH_TEST_DATA/pu
 test1.expected_results_command2: ossim-cli hdf5 -i $OSSIM_BATCH_TEST_DATA/public/hdf5/d20131210_t1840144/GDNBO-SVDNB_npp_d20131210_t1840144_e1845548_b10987_c20131211154952933454_noaa_ops.h5 -o $(OBT_EXP_DIR)/d20131210_t1840144.tif
 test1.expected_results_command3: ossim-create-histo $(OBT_EXP_DIR)/d20131210_t1840144.tif
 
+test1.expected_results_command4: ossim-info -d $OSSIM_BATCH_TEST_DATA/public/hdf5/dateline/GDNBO-SVDNB_npp_d20150929_t1328510_e1334296_b20319_c20150930181043587070_noaa_ops.h5 > $(OBT_EXP_DIR)/GDNBO-SVDNB_npp_d20150929_t1328510_e1334296_b20319_c20150930181043587070_noaa_ops.txt
+
+test1.expected_results_command5: ossim-info -d $OSSIM_BATCH_TEST_DATA/public/hdf5/dateline/GDNBO-SVDNB_npp_d20150929_t0114505_e0120292_b20312_c20150930180012393617_noaa_ops.h5 > $(OBT_EXP_DIR)/GDNBO-SVDNB_npp_d20150929_t0114505_e0120292_b20312_c20150930180012393617_noaa_ops.txt
+
 //---------------------------------------
 // The actual commands to test.
 //---------------------------------------
@@ -45,6 +49,11 @@ test1.test_command0: ossim-info $OSSIM_BATCH_TEST_DATA/public/hdf5/d20131210_t18
 test1.test_command1: ossim-cli hdf5 --info $OSSIM_BATCH_TEST_DATA/public/hdf5/d20131210_t1840144/GDNBO-SVDNB_npp_d20131210_t1840144_e1845548_b10987_c20131211154952933454_noaa_ops.h5 > $(OBT_OUT_DIR)/d20131210_t1840144.info
 test1.test_command2: ossim-cli hdf5 -i $OSSIM_BATCH_TEST_DATA/public/hdf5/d20131210_t1840144/GDNBO-SVDNB_npp_d20131210_t1840144_e1845548_b10987_c20131211154952933454_noaa_ops.h5 -o $(OBT_OUT_DIR)/d20131210_t1840144.tif
 test1.test_command3: ossim-create-histo $(OBT_OUT_DIR)/d20131210_t1840144.tif
+
+test1.test_command4: ossim-info -d $OSSIM_BATCH_TEST_DATA/public/hdf5/dateline/GDNBO-SVDNB_npp_d20150929_t1328510_e1334296_b20319_c20150930181043587070_noaa_ops.h5 > $(OBT_OUT_DIR)/GDNBO-SVDNB_npp_d20150929_t1328510_e1334296_b20319_c20150930181043587070_noaa_ops.txt
+
+
+test1.test_command5: ossim-info -d $OSSIM_BATCH_TEST_DATA/public/hdf5/dateline/GDNBO-SVDNB_npp_d20150929_t0114505_e0120292_b20312_c20150930180012393617_noaa_ops.h5 > $(OBT_OUT_DIR)/GDNBO-SVDNB_npp_d20150929_t0114505_e0120292_b20312_c20150930180012393617_noaa_ops.txt
 
 //---------------------------------------
 // The post-processing (comparison) commands. Typically these involve a file 
@@ -54,6 +63,9 @@ test1.postprocess_command0: $(DIFF_CMD) $(OBT_EXP_DIR)/d20131210_t1840144.txt $(
 test1.postprocess_command1: $(DIFF_CMD) $(OBT_EXP_DIR)/d20131210_t1840144.info $(OBT_OUT_DIR)/d20131210_t1840144.info
 test1.postprocess_command2: $(DIFF_CMD) $(OBT_EXP_DIR)/d20131210_t1840144.geom $(OBT_OUT_DIR)/d20131210_t1840144.geom
 test1.postprocess_command3: $(DIFF_CMD) $(OBT_EXP_DIR)/d20131210_t1840144.ocg $(OBT_OUT_DIR)/d20131210_t1840144.ocg
+test1.postprocess_command4: $(DIFF_CMD) $(OBT_EXP_DIR)/GDNBO-SVDNB_npp_d20150929_t1328510_e1334296_b20319_c20150930181043587070_noaa_ops.txt $(OBT_OUT_DIR)/GDNBO-SVDNB_npp_d20150929_t1328510_e1334296_b20319_c20150930181043587070_noaa_ops.txt
+
+test1.postprocess_command5: $(DIFF_CMD) $(OBT_EXP_DIR)/GDNBO-SVDNB_npp_d20150929_t0114505_e0120292_b20312_c20150930180012393617_noaa_ops.txt $(OBT_OUT_DIR)/GDNBO-SVDNB_npp_d20150929_t0114505_e0120292_b20312_c20150930180012393617_noaa_ops.txt
 
 
 
