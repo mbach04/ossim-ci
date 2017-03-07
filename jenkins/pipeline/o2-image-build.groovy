@@ -27,7 +27,7 @@ node("master"){
     }
 
     try{
-      stage("Cleanupo docker"){
+      stage("Cleanup docker"){
         dir("${env.WORKSPACE}/ossim-ci/scripts/linux"){
             sh "./docker-cleanup.sh"
         }
