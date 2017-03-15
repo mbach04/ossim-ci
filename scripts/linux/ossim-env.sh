@@ -204,6 +204,13 @@ if [ -d $OSSIM_DEV_HOME/ossim-plugins ] ; then
       export BUILD_JPEG12_PLUGIN=ON
    fi
 
+   if [ -z $BUILD_CSM_PLUGIN ] ; then
+      export BUILD_CSM_PLUGIN=OFF
+   fi
+
+   if [ -z $BUILD_OSSIM_HDF5_SUPPORT ] ; then
+      export BUILD_OSSIM_HDF5_SUPPORT=ON
+   fi
    if [ -z $BUILD_OSSIM_HDF5_SUPPORT ] ; then
       export BUILD_OSSIM_HDF5_SUPPORT=ON
    fi
