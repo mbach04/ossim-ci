@@ -68,7 +68,7 @@ node("master"){
 
 def setupModappsRegistry() {
   echo "Logging into ModApps docker registry"
-  env.DOCKER_REGISTRY_URI="docker-registry-default.o2.radiantbluecloud.com"
+  env.DOCKER_REGISTRY_URI="docker-registry-default.ossim.io"
   sh "oc login $MODAPPS_OC_LOGIN --insecure-skip-tls-verify=true"
   sh "oc whoami -t > ocwhoami.txt"
   env.DOCKER_REGISTRY_PW=readFile("ocwhoami.txt").trim()
