@@ -7,6 +7,9 @@ node {
          dir("omar"){
             git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/omar.git'
          }
+         dir("omar-common"){
+            git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/omar-common.git'
+         }
          dir("ossim-ci"){
             git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/ossim-ci.git'
          }
