@@ -40,9 +40,7 @@ node("master"){
 
     try {
       stage("Build"){
-        exec {
-            commandLine '${workspaceDir}/plugin/gradlew', 'assemble'
-        }
+        sh  '${workspaceDir}/plugin/gradlew', 'assemble'
         // exec {
         //     commandLine '${workspaceDir}/app/gradlew', 'doAll'
         // }
