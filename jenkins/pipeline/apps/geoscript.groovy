@@ -40,7 +40,7 @@ node("master"){
 
     try {
       stage("Build"){
-        sh  "${workspaceDir}/plugins/gradlew install"
+        sh  "${workspaceDir}/plugins/omar-geoscript/gradlew install"
         // exec {
         //     commandLine '${workspaceDir}/apps/gradlew', 'doAll'
         // }
