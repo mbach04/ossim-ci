@@ -16,14 +16,14 @@ node("master"){
 
     stage("Checkout"){
         dir("ossim-ci") {
-            git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/ossim-ci.git'
+            git branch: "${OSSIM_GIT_BRANCH}", url: "https://github.com/ossimlabs/ossim-ci.git"
         }
         dir(appName) {
-            git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/' + appName + '.git'
+            git branch: "${OSSIM_GIT_BRANCH}", url: "https://github.com/ossimlabs/${appName}.git"
         }
 
         dir(omarCommonProjName) {
-            git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/' + omarCommonProjName + '.git'
+            git branch: "${OSSIM_GIT_BRANCH}", url: "https://github.com/ossimlabs/${omarCommonProjName}.git"
         }
 
         // Set the environment variable for the gradle build
@@ -35,14 +35,14 @@ node("master"){
         //          filter: "install.tgz",
         //          flatten: true])
         //  }
-         notifyObj = load workspaceDir + "/ossim-ci/jenkins/pipeline/notify.groovy"
+         notifyObj = load "${workspaceDir}/ossim-ci/jenkins/pipeline/notify.groovy"
     }
 
     try {
       stage("Build"){
-        sh  "${workspaceDir}/plugin/gradlew assemble"
+        sh  "${workspaceDir}/plugins/gradlew install"
         // exec {
-        //     commandLine '${workspaceDir}/app/gradlew', 'doAll'
+        //     commandLine '${workspaceDir}/apps/gradlew', 'doAll'
         // }
       }
     }
