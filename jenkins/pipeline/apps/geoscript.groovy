@@ -15,9 +15,9 @@ node("master"){
     
 
     stage("Checkout"){
-        // dir("ossim-ci") {
-        //     git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/ossim-ci.git'
-        // }
+        dir("ossim-ci") {
+            git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/ossim-ci.git'
+        }
         dir(appName) {
             git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/' + appName + '.git'
         }
