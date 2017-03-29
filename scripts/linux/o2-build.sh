@@ -8,7 +8,7 @@ export OMAR_DEV_HOME=$OSSIM_DEV_HOME/omar
 
 source $OSSIMCI_SCRIPT_DIR/ossim-env.sh
 
-if [ ! -f "$OSSIM_DEV_HOME/joms-$OSSIM_VERSION.jar" ]; then
+if [ ! -f "$OSSIM_DEV_HOME/joms-$OSSIM_VERSION-$OSSIM_VERSION_TAG.jar" ]; then
    echo "ERROR: $OSSIM_DEV_HOME/joms-$OSSIM_VERSION.jar is not found in the install artifact and OMAR can't be built."
    exit 1
 fi
