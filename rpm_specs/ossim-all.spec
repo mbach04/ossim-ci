@@ -524,7 +524,7 @@ rm -rf /usr/share/ossim/${APP_NAME}
 %{_libdir}/libossimGui.so*
 
 %files oms
-%{_javadir}/joms-%{version}.jar
+%{_javadir}/joms-%{version}*.jar
 %{_libdir}/libjoms.so
 %{_libdir}/liboms.so*
 
