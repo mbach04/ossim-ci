@@ -66,6 +66,14 @@ if [ -z $OSSIM_VERSION ] ; then
    export OSSIM_VERSION=1.9.0
 fi
 
+if [ -z $OSSIM_VERSION_TAG ] ; then
+   if [ "${OSSIM_GIT_BRANCH}" == "dev" ] ; then
+      export OSSIM_VERSION_TAG="SNAPSHOT"
+   else 
+       export OSSIM_VERSION_TAG="RELEASE"
+   fi
+fi
+
 # for packaging and general version number 
 #
 if [ -z $O2_VERSION ] ; then
