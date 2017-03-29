@@ -428,7 +428,7 @@ fi
 %post oms
 /sbin/ldconfig
 rm -f %{_javadir}/joms.jar
-ln -s %{_javadir}/joms-%{version}.jar %{_javadir}/joms.jar
+ln -s %{_javadir}/joms-%{version}*.jar %{_javadir}/joms.jar
 
 %post planet
 /sbin/ldconfig
