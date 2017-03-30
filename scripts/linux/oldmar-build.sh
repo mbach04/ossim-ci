@@ -4,10 +4,9 @@ OSSIMCI_SCRIPT_DIR=`pwd -P`
 pushd $OSSIMCI_SCRIPT_DIR/../../.. >/dev/null
 popd > /dev/null
 popd >/dev/null
-
 source $OSSIMCI_SCRIPT_DIR/ossim-env.sh
 
-if [ ! -f "$OSSIM_DEV_HOME/joms-$OSSIM_VERSION-$OSSIM_VERSION_TAG.jar.jar" ]; then
+if [ ! -f "$OSSIM_DEV_HOME/joms-$OSSIM_VERSION-$OSSIM_VERSION_TAG.jar" ]; then
    echo "ERROR: $OSSIM_DEV_HOME/joms-$OSSIM_VERSION-$OSSIM_VERSION_TAG.jar is not found in the install artifact and OMAR can't be built."
    exit 1
 fi
