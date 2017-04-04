@@ -17,12 +17,12 @@ node("master"){
         dir("ossim-ci") {
             git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/ossim-ci.git'
         }
-        dir("o2-paas/docker/o2-docs") {
-            step ([$class: 'CopyArtifact',
-                 projectName: "build-docs-${OSSIM_GIT_BRANCH}",
-                 filter: "install.tgz",
-                 flatten: true])
-         }
+//        dir("o2-paas/docker/o2-docs") {
+//            step ([$class: 'CopyArtifact',
+//                 projectName: "build-docs-${OSSIM_GIT_BRANCH}",
+//                 filter: "install.tgz",
+//                 flatten: true])
+//         }
          notifyObj = load "${env.WORKSPACE}/ossim-ci/jenkins/pipeline/notify.groovy"
     }
 
