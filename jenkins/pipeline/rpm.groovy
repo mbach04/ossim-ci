@@ -17,21 +17,16 @@ node {
           filter: "artifacts/install.tgz",
           flatten: true,
           target: "${env.WORKSPACE}/ossim-install"])
-       step ([$class: 'CopyArtifact',
-          projectName: "o2-${OSSIM_GIT_BRANCH}",
-          filter: "artifacts/install.tgz",
-          flatten: true,
-          target: "${env.WORKSPACE}/o2-install"])
+//       step ([$class: 'CopyArtifact',
+//          projectName: "o2-${OSSIM_GIT_BRANCH}",
+//          filter: "artifacts/install.tgz",
+//          flatten: true,
+//          target: "${env.WORKSPACE}/o2-install"])
        step ([$class: 'CopyArtifact',
           projectName: "oldmar-${OSSIM_GIT_BRANCH}",
           filter: "artifacts/install.tgz",
           flatten: true,
           target: "${env.WORKSPACE}/oldmar-install"])
-       step ([$class: 'CopyArtifact',
-          projectName: 'tlv',
-          filter: "tlv*install.tgz",
-          flatten: true,
-          target: "${env.WORKSPACE}"])
        step ([$class: 'CopyArtifact',
           projectName: 'dependency-rpms',
           filter: "dependency-rpms.tgz",
