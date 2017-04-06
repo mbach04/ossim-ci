@@ -35,6 +35,111 @@ node {
         dir("ossim-ci"){
           git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/ossim-ci.git'
         }
+        dir("omar-common"){
+          git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/omar-common.git'
+        }
+        dir("omar-geoscript"){
+          git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/omar-geoscript.git'
+        }
+        dir("omar-stager"){
+          git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/omar-stager.git'
+        }
+        dir("omar-core"){
+          git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/omar-core.git'
+        }
+        dir("omar-ingest-metrics"){
+          git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/omar-ingest-metrics.git'
+        }
+        dir("omar-openlayers"){
+          git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/omar-openlayers.git'
+        }
+        dir("omar-oms"){
+          git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/omar-oms.git'
+        }
+        dir("omar-wms"){
+          git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/omar-wms.git'
+        }
+        dir("omar-avro"){
+          git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/omar-avro.git'
+        }
+        dir("omar-wfs"){
+          git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/omar-wfs.git'
+        }
+        dir("omar-wmts"){
+          git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/omar-wmts.git'
+        }
+        dir("omar-superoverlay"){
+          git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/omar-superoverlay.git'
+        }
+        dir("omar-download"){
+          git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/omar-download.git'
+        }
+        dir("omar-jpip"){
+          git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/omar-jpip.git'
+        }
+        dir("omar-mensa"){
+          git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/omar-mensa.git'
+        }
+        dir("omar-opir"){
+          git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/omar-opir.git'
+        }
+        dir("omar-raster"){
+          git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/omar-raster.git'
+        }
+        dir("omar-security"){
+          git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/omar-security.git'
+        }
+        dir("omar-video"){
+          git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/omar-video.git'
+        }
+        dir("omar-wcs"){
+          git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/omar-wcs.git'
+        }
+        dir("omar-oldmar"){
+          git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/omar-oldmar.git'
+        }
+        dir("omar-ui"){
+          git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/omar-ui.git'
+        }
+        dir("omar-ossimtools"){
+          git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/omar-ossimtools.git'
+        }
+        dir("omar-sqs"){
+          git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/omar-sqs.git'
+        }
+        dir("omar-services"){
+          git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/omar-services.git'
+        }
+        dir("omar-base"){
+          git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/omar-base.git'
+        }
+        dir("omar-docs"){
+          git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/omar-docs.git'
+        }
+        dir("omar-disk-cleanup"){
+          git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/omar-disk-cleanup.git'
+        }
+        dir("omar-eureka-server"){
+          git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/omar-eureka-server.git'
+        }
+        dir("omar-hibernate-spatial"){
+          git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/omar-hibernate-spatial.git'
+        }
+        dir("omar-service-proxy"){
+          git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/omar-service-proxy.git'
+        }
+        dir("omar-ossim-base"){
+          git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/omar-ossim-base.git'
+        }
+        dir("omar-turbine-server"){
+          git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/omar-turbine-server.git'
+        }
+        dir("omar-zuul-server"){
+          git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/omar-zuul-server.git'
+        }
+        dir("tlv"){
+          git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/tlv.git'
+        }
       }
       dir("ossim-private-${OSSIM_GIT_BRANCH}-src"){
            git branch: "${OSSIM_GIT_BRANCH}", url: 'git@ossim-private.github.com:radiantbluetechnologies/ossim-private.git'
