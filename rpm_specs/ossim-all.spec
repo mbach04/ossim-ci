@@ -595,8 +595,8 @@ rm -rf /usr/share/ossim/${APP_NAME}
 #%{_libdir}/liblti_lidar_dsdk.so
 #%{_libdir}/libltidsdk.so
 
-%files opencv-plugin
-%{_libdir}/ossim/plugins/libossim_opencv_plugin.so
+#%files opencv-plugin
+#%{_libdir}/ossim/plugins/libossim_opencv_plugin.so
 
 %files openjpeg-plugin
 %{_libdir}/ossim/plugins/libossim_openjpeg_plugin.so
