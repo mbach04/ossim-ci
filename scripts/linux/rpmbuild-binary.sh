@@ -112,12 +112,12 @@ fi
 
 # disabling the O2 rpm builds and instead going to do JAR artifacts and docker containers instead
 #
-# echo rpmbuild -ba --define "_topdir ${OSSIM_DEV_HOME}/rpmbuild" --define "O2_VERSION ${O2_VERSION}" --define "O2_BUILD_RELEASE ${O2_BUILD_RELEASE}" ${OSSIM_DEV_HOME}/rpmbuild/SPECS/o2-all.spec
-# rpmbuild -ba --define "_topdir ${OSSIM_DEV_HOME}/rpmbuild" --define "O2_VERSION ${O2_VERSION}" --define "O2_BUILD_RELEASE ${O2_BUILD_RELEASE}" ${OSSIM_DEV_HOME}/rpmbuild/SPECS/o2-all.spec
-# if [ $? -ne 0 ]; then
-#   echo; echo "ERROR: Build failed for O2 rpm binary build."
-#   exit 1
-# fi
+ echo rpmbuild -ba --define "_topdir ${OSSIM_DEV_HOME}/rpmbuild" --define "O2_VERSION ${O2_VERSION}" --define "O2_BUILD_RELEASE ${O2_BUILD_RELEASE}" ${OSSIM_DEV_HOME}/rpmbuild/SPECS/o2-all.spec
+ rpmbuild -ba --define "_topdir ${OSSIM_DEV_HOME}/rpmbuild" --define "O2_VERSION ${O2_VERSION}" --define "O2_BUILD_RELEASE ${O2_BUILD_RELEASE}" ${OSSIM_DEV_HOME}/rpmbuild/SPECS/o2-all.spec
+ if [ $? -ne 0 ]; then
+   echo; echo "ERROR: Build failed for O2 rpm binary build."
+   exit 1
+ fi
 
 # now create the yum repo artifact tgz file
 #
