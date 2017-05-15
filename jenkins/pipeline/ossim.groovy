@@ -41,6 +41,9 @@ node ("master"){
          dir("ossim-private"){
             git branch: "${OSSIM_GIT_BRANCH}", url: 'git@ossim-private.github.com:radiantbluetechnologies/ossim-private.git'
          }
+         dir("ossim-msp"){
+            git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/radiantbluetechnologies/ossim-msp.git', credentialsId: 'cicdGithub'
+         }
        notifyObj = load "${env.WORKSPACE}/ossim-ci/jenkins/pipeline/notify.groovy"
      }
      echo "${env.WORKSPACE}"
