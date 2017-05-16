@@ -3,6 +3,7 @@ def notifyObj
 node ("master"){
    env.WORKSPACE=pwd()
    env.MAKE_VERBOSE="${MAKE_VERBOSE}"
+   env.BUILD_OSSIM_MSP="${BUILD_OSSIM_MSP}"
    try{
      stage("Checkout"){
          dir("ossim"){
