@@ -93,7 +93,7 @@ echo on
 %exclude %{_bindir}/ossim-jpip-server
 
 %files ossim-msp-devel
-%{_includedir}/ossim-msp
+%{_includedir}/ossimMsp
 
 %files ossim-msp-libs
 #%doc ossim/LICENSE.txt
