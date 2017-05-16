@@ -142,16 +142,19 @@ node {
         }
       }
       dir("ossim-private-${OSSIM_GIT_BRANCH}-src"){
-           git branch: "${OSSIM_GIT_BRANCH}", url: 'git@ossim-private.github.com:radiantbluetechnologies/ossim-private.git'
+           git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/radiantbluetechnologies/ossim-private.git', credentialsId: "cicdGithub"
       }
       dir("o2-paas-${OSSIM_GIT_BRANCH}-src"){
-           git branch: "${OSSIM_GIT_BRANCH}", url: 'git@o2-paas.github.com:radiantbluetechnologies/o2-paas.git'
+           git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com:radiantbluetechnologies/o2-paas.git', credentialsId: "cicdGithub"
       }
       dir("cucumber-${OSSIM_GIT_BRANCH}-src"){
-           git branch: "${OSSIM_GIT_BRANCH}", url: 'git@cucumber-oc2s.github.com:radiantbluetechnologies/cucumber-oc2s.git'
+           git branch: "${OSSIM_GIT_BRANCH}", url: 'https://radiantbluetechnologies/cucumber-oc2s.git', credentialsId: "cicdGithub"
+      }
+      dir("ossim-msp-${OSSIM_GIT_BRANCH}-src"){
+           git branch: "${OSSIM_GIT_BRANCH}", url: 'https://radiantbluetechnologies/ossim-msp.git', credentialsId: "cicdGithub"
       }
       dir("config-repo-src"){
-           git branch: "master", url: 'git@config-repo.github.com:radiantbluetechnologies/config-repo.git'
+           git branch: "master", url: 'https://radiantbluetechnologies/config-repo.git', credentialsId: "cicdGithub"
       }
     }
    stage("Packaging source"){
