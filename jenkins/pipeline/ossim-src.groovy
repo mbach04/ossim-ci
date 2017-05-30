@@ -142,16 +142,19 @@ node {
         }
       }
       dir("ossim-private-${OSSIM_GIT_BRANCH}-src"){
-           git branch: "${OSSIM_GIT_BRANCH}", url: 'git@ossim-private.github.com:radiantbluetechnologies/ossim-private.git'
+           git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/radiantbluetechnologies/ossim-private.git', credentialsId: "cicdGithub"
       }
       dir("o2-paas-${OSSIM_GIT_BRANCH}-src"){
-           git branch: "${OSSIM_GIT_BRANCH}", url: 'git@o2-paas.github.com:radiantbluetechnologies/o2-paas.git'
+           git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/radiantbluetechnologies/o2-paas.git', credentialsId: "cicdGithub"
       }
       dir("cucumber-${OSSIM_GIT_BRANCH}-src"){
-           git branch: "${OSSIM_GIT_BRANCH}", url: 'git@cucumber-oc2s.github.com:radiantbluetechnologies/cucumber-oc2s.git'
+           git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/radiantbluetechnologies/cucumber-oc2s.git', credentialsId: "cicdGithub"
+      }
+      dir("ossim-msp-${OSSIM_GIT_BRANCH}-src"){
+           git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/radiantbluetechnologies/ossim-msp.git', credentialsId: "cicdGithub"
       }
       dir("config-repo-src"){
-           git branch: "master", url: 'git@config-repo.github.com:radiantbluetechnologies/config-repo.git'
+           git branch: "master", url: 'https://github.com/radiantbluetechnologies/config-repo.git', credentialsId: "cicdGithub"
       }
     }
    stage("Packaging source"){
@@ -162,6 +165,7 @@ node {
          sh "tar cvfz o2-paas-${OSSIM_GIT_BRANCH}-src.tgz o2-paas-${OSSIM_GIT_BRANCH}-src"
          sh "tar cvfz ossim-private-${OSSIM_GIT_BRANCH}-src.tgz ossim-private-${OSSIM_GIT_BRANCH}-src"
          sh "tar cvfz cucumber-${OSSIM_GIT_BRANCH}-src.tgz cucumber-${OSSIM_GIT_BRANCH}-src"
+         sh "tar cvfz ossim-msp-${OSSIM_GIT_BRANCH}-src.tgz ossim-msp-${OSSIM_GIT_BRANCH}-src"
          sh "tar cvfz config-repo-src.tgz config-repo-src"
      }
    }
@@ -170,7 +174,7 @@ node {
          sh "mv ${env.WORKSPACE}/ossim-${OSSIM_GIT_BRANCH}-src.tgz ."
          sh "mv ${env.WORKSPACE}/o2-paas-${OSSIM_GIT_BRANCH}-src.tgz ."
          sh "mv ${env.WORKSPACE}/ossim-private-${OSSIM_GIT_BRANCH}-src.tgz ."
-         sh "mv ${env.WORKSPACE}/cucumber-${OSSIM_GIT_BRANCH}-src.tgz ."
+         sh "mv ${env.WORKSPACE}/ossim-msp-${OSSIM_GIT_BRANCH}-src.tgz ."
          sh "mv ${env.WORKSPACE}/config-repo-src.tgz ."
      }
      archiveArtifacts 'artifacts/*'
