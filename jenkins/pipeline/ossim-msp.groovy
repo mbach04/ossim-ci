@@ -6,7 +6,7 @@ node ("master"){
    try{
      stage("Checkout"){
          dir("ossim-ci"){
-            git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/radiantbluetechnologies/ossim-ci.git'
+            git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/ossim-ci.git'
          }
          dir("ossim-msp"){
             git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/radiantbluetechnologies/ossim-msp.git', credentialsId: 'cicdGithub'
