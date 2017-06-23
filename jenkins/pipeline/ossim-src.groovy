@@ -189,9 +189,6 @@ node {
       dir("ossim-private-${OSSIM_GIT_BRANCH}-src"){
            git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/radiantbluetechnologies/ossim-private.git', credentialsId: "cicdGithub"
       }
-      dir("ossim_kakadu_jpip_server-${OSSIM_GIT_BRANCH}-src"){
-           git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/radiantbluetechnologies/ossim_kakadu_jpip_server.git', credentialsId: "cicdGithub"
-      }
       dir("o2-paas-${OSSIM_GIT_BRANCH}-src"){
            git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/radiantbluetechnologies/o2-paas.git', credentialsId: "cicdGithub"
       }
