@@ -227,6 +227,9 @@ node {
          sh "mv ${env.WORKSPACE}/o2-paas-${OSSIM_GIT_BRANCH}-src.tgz ."
          sh "mv ${env.WORKSPACE}/ossim-private-${OSSIM_GIT_BRANCH}-src.tgz ."
          sh "mv ${env.WORKSPACE}/ossim-msp-${OSSIM_GIT_BRANCH}-src.tgz ."
+         sh "mv ${env.WORKSPACE}/cucumber-${OSSIM_GIT_BRANCH}-src.tgz ."
+         sh "mv ${env.WORKSPACE}/ossim-msp-${OSSIM_GIT_BRANCH}-src.tgz ."
+         sh "mv ${env.WORKSPACE}/isa-${OSSIM_GIT_BRANCH}-src.tgz ."
          sh "mv ${env.WORKSPACE}/config-repo-src.tgz ."
      }
      archiveArtifacts 'artifacts/*'
