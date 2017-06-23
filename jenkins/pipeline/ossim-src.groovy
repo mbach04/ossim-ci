@@ -140,18 +140,72 @@ node {
         dir("tlv"){
           git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/tlv.git'
         }
+        dir("omar-scdf"){
+          git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/omar-scdf.git'
+        }
+        dir("omar-scdf-stager"){
+          git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/omar-scdf-stager.git'
+        }
+        dir("omar-scdf-aggregator"){
+          git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/omar-scdf-aggregator.git'
+        }
+        dir("omar-scdf-sqs"){
+          git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/omar-scdf-sqs.git'
+        }
+        dir("omar-scdf-extractor"){
+          git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/omar-scdf-extractor.git'
+        }
+        dir("omar-scdf-zookeeper"){
+          git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/omar-scdf-zookeeper.git'
+        }
+        dir("omar-scdf-kafka"){
+          git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/omar-scdf-kafka.git'
+        }
+        dir("omar-scdf-indexer"){
+          git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/omar-scdf-indexer.git'
+        }
+        dir("omar-scdf-notifier-email"){
+          git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/omar-scdf-notifier-email.git'
+        }
+        dir("omar-scdf-server"){
+          git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/omar-scdf-server.git'
+        }
+        dir("omar-scdf-file-parser"){
+          git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/omar-scdf-file-parser.git'
+        }
+        dir("omar-scdf-downloader"){
+          git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/omar-scdf-downloader.git'
+        }
+        dir("omar-scdf-s3-uploader"){
+          git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/omar-scdf-s3-uploader.git'
+        }
+        dir("omar-scdf-s3-filter"){
+          git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/omar-scdf-s3-filter.git'
+        }
+        dir("omar-scdf-s3-extractor-filter"){
+          git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/omar-scdf-s3-extractor-filter.git'
+        }
       }
       dir("ossim-private-${OSSIM_GIT_BRANCH}-src"){
-           git branch: "${OSSIM_GIT_BRANCH}", url: 'git@ossim-private.github.com:radiantbluetechnologies/ossim-private.git'
+           git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/radiantbluetechnologies/ossim-private.git', credentialsId: "cicdGithub"
+      }
+      dir("ossim_kakadu_jpip_server-${OSSIM_GIT_BRANCH}-src"){
+           git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/radiantbluetechnologies/ossim_kakadu_jpip_server.git', credentialsId: "cicdGithub"
       }
       dir("o2-paas-${OSSIM_GIT_BRANCH}-src"){
-           git branch: "${OSSIM_GIT_BRANCH}", url: 'git@o2-paas.github.com:radiantbluetechnologies/o2-paas.git'
+           git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/radiantbluetechnologies/o2-paas.git', credentialsId: "cicdGithub"
       }
       dir("cucumber-${OSSIM_GIT_BRANCH}-src"){
-           git branch: "${OSSIM_GIT_BRANCH}", url: 'git@cucumber-oc2s.github.com:radiantbluetechnologies/cucumber-oc2s.git'
+           git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/radiantbluetechnologies/cucumber-oc2s.git', credentialsId: "cicdGithub"
+      }
+      dir("isa-${OSSIM_GIT_BRANCH}-src"){
+           git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/radiantbluetechnologies/isa.git', credentialsId: "cicdGithub"
+      }
+      dir("ossim-msp-${OSSIM_GIT_BRANCH}-src"){
+           git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/radiantbluetechnologies/ossim-msp.git', credentialsId: "cicdGithub"
       }
       dir("config-repo-src"){
-           git branch: "master", url: 'git@config-repo.github.com:radiantbluetechnologies/config-repo.git'
+           git branch: "master", url: 'https://github.com/radiantbluetechnologies/config-repo.git', credentialsId: "cicdGithub"
       }
     }
    stage("Packaging source"){
@@ -162,6 +216,8 @@ node {
          sh "tar cvfz o2-paas-${OSSIM_GIT_BRANCH}-src.tgz o2-paas-${OSSIM_GIT_BRANCH}-src"
          sh "tar cvfz ossim-private-${OSSIM_GIT_BRANCH}-src.tgz ossim-private-${OSSIM_GIT_BRANCH}-src"
          sh "tar cvfz cucumber-${OSSIM_GIT_BRANCH}-src.tgz cucumber-${OSSIM_GIT_BRANCH}-src"
+         sh "tar cvfz ossim-msp-${OSSIM_GIT_BRANCH}-src.tgz ossim-msp-${OSSIM_GIT_BRANCH}-src"
+         sh "tar cvfz isa-${OSSIM_GIT_BRANCH}-src.tgz isa-${OSSIM_GIT_BRANCH}-src"
          sh "tar cvfz config-repo-src.tgz config-repo-src"
      }
    }
@@ -170,7 +226,10 @@ node {
          sh "mv ${env.WORKSPACE}/ossim-${OSSIM_GIT_BRANCH}-src.tgz ."
          sh "mv ${env.WORKSPACE}/o2-paas-${OSSIM_GIT_BRANCH}-src.tgz ."
          sh "mv ${env.WORKSPACE}/ossim-private-${OSSIM_GIT_BRANCH}-src.tgz ."
+         sh "mv ${env.WORKSPACE}/ossim-msp-${OSSIM_GIT_BRANCH}-src.tgz ."
          sh "mv ${env.WORKSPACE}/cucumber-${OSSIM_GIT_BRANCH}-src.tgz ."
+         sh "mv ${env.WORKSPACE}/ossim-msp-${OSSIM_GIT_BRANCH}-src.tgz ."
+         sh "mv ${env.WORKSPACE}/isa-${OSSIM_GIT_BRANCH}-src.tgz ."
          sh "mv ${env.WORKSPACE}/config-repo-src.tgz ."
      }
      archiveArtifacts 'artifacts/*'
