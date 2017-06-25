@@ -21,7 +21,7 @@ node(){
                step ([$class: 'CopyArtifact',
                   projectName: "ossim-${OSSIM_GIT_BRANCH}-src",
                   filter: "artifacts/*",
-                  target: "ossim-${OSSIM_GIT_BRANCH}-src",
+                  target: "ossim-src-${OSSIM_GIT_BRANCH}",
                   flatten: true])
                step ([$class: 'CopyArtifact',
                   projectName: "rpm-${OSSIM_GIT_BRANCH}",
