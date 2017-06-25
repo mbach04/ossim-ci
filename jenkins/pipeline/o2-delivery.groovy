@@ -19,7 +19,7 @@ node(){
        stage("Download Artifacts"){
            dir("${env.WORKSPACE}"){
                step ([$class: 'CopyArtifact',
-                  projectName: "ossim-${OSSIM_GIT_BRANCH}-src",
+                  projectName: "ossim-src-${OSSIM_GIT_BRANCH}",
                   filter: "artifacts/*",
                   target: "ossim-src-${OSSIM_GIT_BRANCH}",
                   flatten: true])
@@ -50,7 +50,7 @@ node(){
                            noUploadOnFailure: false,
                            selectedRegion: 'us-east-1',
                            showDirectlyInBrowser: true,
-                           sourceFile: "ossim-${OSSIM_GIT_BRANCH}-src/*",
+                           sourceFile: "ossim-src-${OSSIM_GIT_BRANCH}/*",
                            storageClass: 'STANDARD',
                            uploadFromSlave: false,
                            useServerSideEncryption: false],
