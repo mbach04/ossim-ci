@@ -28,7 +28,7 @@ node {
           flatten: true,
           target: "${env.WORKSPACE}/oldmar-install"])
        step ([$class: 'CopyArtifact',
-          projectName: 'dependency-rpms',
+          projectName: 'ossim-rpm-dependencies',
           filter: "dependency-rpms.tgz",
           flatten: true,
           target: "${env.WORKSPACE}"])
