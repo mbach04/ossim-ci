@@ -197,7 +197,7 @@ if [ -d $OSSIM_DEV_HOME/ossim-plugins ] ; then
    fi
 
    if [ -z $BUILD_OPENCV_PLUGIN ] ; then
-      export BUILD_OPENCV_PLUGIN=ON
+      export BUILD_OPENCV_PLUGIN=OFF
    fi
 
    if [ -z $BUILD_OPENJPEG_PLUGIN ] ; then
