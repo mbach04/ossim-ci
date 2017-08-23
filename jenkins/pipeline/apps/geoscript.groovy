@@ -13,7 +13,7 @@
 // TODO: get to run on any node
 node("master"){
     def workspaceDir = pwd()
-    def ossimMavenProxy = "https://artifacts.radiantbluecloud.com/artifactory/ossim-deps"
+    def ossimMavenProxy = "https://artifactory.ossim.io/artifactory/ossim-deps"
     def appName = "omar-geoscript"
     def omarCommonProjName = "omar-common"
     
