@@ -8,7 +8,7 @@
 
 node("master"){
     env.WORKSPACE=pwd()
-    env.OSSIM_MAVEN_PROXY="https://artifacts.radiantbluecloud.com/artifactory/ossim-deps"
+    env.OSSIM_MAVEN_PROXY="https://artifactory.ossim.io/artifactory/ossim-deps"
 
     stage("Checkout"){
         dir("o2-paas"){
