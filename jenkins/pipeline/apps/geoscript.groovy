@@ -7,7 +7,7 @@
 //    ARTIFACTORY_USER: The user to use when pushing artifacts
 //    ARTIFACTORY_PASSWORD: The password to use when pushing artifacts
 //    OPENSHIFT_USERNAME: The user to use logging into the docker registry
-//    OPENSHIFT_PASSWORD: The password to use logging into the docker registry
+//    OPENSHIFT_PASSWORD: The password to use logging into the docker registry 
 //==================================================================================================
 
 // TODO: get to run on any node
