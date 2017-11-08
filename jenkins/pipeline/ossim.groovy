@@ -19,39 +19,36 @@ node ("master"){
             git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/ossim.git'
          }
          dir("ossim-video"){
-            git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/ossim-video.git'
+            git branch: "${ACCESSORY_GIT_BRANCH}", url: 'https://github.com/ossimlabs/ossim-video.git'
          }
          dir("ossim-planet"){
-            git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/ossim-planet.git'
+            git branch: "${ACCESSORY_GIT_BRANCH}", url: 'https://github.com/ossimlabs/ossim-planet.git'
          }
          dir("ossim-gui"){
-            git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/ossim-gui.git'
+            git branch: "${ACCESSORY_GIT_BRANCH}", url: 'https://github.com/ossimlabs/ossim-gui.git'
          }
          dir("ossim-oms"){
-            git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/ossim-oms.git'
+            git branch: "${ACCESSORY_GIT_BRANCH}", url: 'https://github.com/ossimlabs/ossim-oms.git'
          }
          dir("ossim-plugins"){
-            git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/ossim-plugins.git'
+            git branch: "${OSSIM_PLUGINS_GIT_BRANCH}", url: 'https://github.com/ossimlabs/ossim-plugins.git'
          }
          dir("ossim-wms"){
-            git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/ossim-wms.git'
+            git branch: "${ACCESSORY_GIT_BRANCH}", url: 'https://github.com/ossimlabs/ossim-wms.git'
          }
          dir("ossim-ci"){
-            git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/ossim-ci.git'
+            git branch: "${ACCESSORY_GIT_BRANCH}", url: 'https://github.com/ossimlabs/ossim-ci.git'
          }
          dir("ossim-private"){
-            git branch: "${OSSIM_GIT_BRANCH}", url: 'git@ossim-private.github.com:radiantbluetechnologies/ossim-private.git'
+            git branch: "${ACCESSORY_GIT_BRANCH}", url: 'git@ossim-private.github.com:radiantbluetechnologies/ossim-private.git'
          }
-//         dir("ossim-msp"){
-//            git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/radiantbluetechnologies/ossim-msp.git', credentialsId: 'cicdGithub'
-//         }
        notifyObj = load "${env.WORKSPACE}/ossim-ci/jenkins/pipeline/notify.groovy"
      }
      echo "${env.WORKSPACE}"
      stage("Download Artifacts"){
          dir("${env.WORKSPACE}"){
              step ([$class: "CopyArtifact",
-                projectName: "ossim-kakadu-${OSSIM_GIT_BRANCH}",
+                projectName: "ossim-kakadu-${ACCESSORY_GIT_BRANCH}",
                 filter: "artifacts/kakadu.tgz",
                 flatten: true])
          }
