@@ -64,8 +64,7 @@ node ("master"){
          """
      }
 
-     if (${ARCHIVE_INSTALLS})
-     {
+     if ( "${ARCHIVE_INSTALLS}" == "true" ) {
         stage("Archive"){
           dir("${env.WORKSPACE}"){
               sh "tar cvfz install.tgz install"
