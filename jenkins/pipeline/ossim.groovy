@@ -64,16 +64,19 @@ node ("master"){
          """
      }
 
-     stage("Archive"){
-       dir("${env.WORKSPACE}"){
-           sh "tar cvfz install.tgz install"
+     if (${ARCHIVE_INSTALLS})
+     {
+        stage("Archive"){
+          dir("${env.WORKSPACE}"){
+              sh "tar cvfz install.tgz install"
+          }
+          dir("${env.WORKSPACE}/artifacts"){
+              sh "mv ${env.WORKSPACE}/install.tgz ."
+              sh "cp ${env.WORKSPACE}/ossim-oms/lib/joms-*.jar ."
+          }
+          archiveArtifacts 'artifacts/*'
        }
-       dir("${env.WORKSPACE}/artifacts"){
-           sh "mv ${env.WORKSPACE}/install.tgz ."
-           sh "cp ${env.WORKSPACE}/ossim-oms/lib/joms-*.jar ."
-       }
-       archiveArtifacts 'artifacts/*'
-    }
+     }
   }
   catch(e)
   {
