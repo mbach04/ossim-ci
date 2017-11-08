@@ -58,7 +58,7 @@ node("BATCH_TEST"){
     currentBuild.result = "FAILED"
     notifyObj?.notifyFailed()
   }
-  stage("Clean Workspace"){
-     step([$class: 'WsCleanup'])
-  }
+//  stage("Clean Workspace"){
+//     step([$class: 'WsCleanup'])
+//  }
 }
