@@ -20,6 +20,12 @@ node {
         dir("ossim-plugins"){
           git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/ossim-plugins.git'
         }
+        dir("ossim-csm-plugin"){
+          git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/ossim-csm-plugin.git'
+        }
+        dir("ossim-isa-plugin"){
+           git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/radiantbluetechnologies/ossim-isa-plugin.git', credentialsId: "cicdGithub"
+        }
         dir("ossim-wms"){
           git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/ossim-wms.git'
         }
