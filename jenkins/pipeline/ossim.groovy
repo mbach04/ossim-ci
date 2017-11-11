@@ -67,7 +67,7 @@ node ("master"){
      if ( "${ARCHIVE_INSTALLS}" == "true" ) {
         stage("Archive"){
           dir("${env.WORKSPACE}"){
-              sh "tar cvfz install.tgz install"
+              sh "tar cvfz ossim-install.tgz install"
           }
           dir("${env.WORKSPACE}/artifacts"){
               sh "mv ${env.WORKSPACE}/install.tgz ."
