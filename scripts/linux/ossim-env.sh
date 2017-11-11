@@ -216,6 +216,10 @@ if [ -d $OSSIM_DEV_HOME/ossim-plugins ] ; then
       export BUILD_CSM_PLUGIN=OFF
    fi
 
+   if [ -z $BUILD_ISA_PLUGIN ] ; then
+      export BUILD_ISA_PLUGIN=OFF
+   fi
+
    if [ -z $BUILD_OSSIM_HDF5_SUPPORT ] ; then
       export BUILD_OSSIM_HDF5_SUPPORT=ON
    fi
