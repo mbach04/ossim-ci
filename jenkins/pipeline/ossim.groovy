@@ -70,7 +70,7 @@ node ("master"){
               sh "tar cvfz ossim-install.tgz install"
           }
           dir("${env.WORKSPACE}/artifacts"){
-              sh "mv ${env.WORKSPACE}/install.tgz ."
+              sh "mv ${env.WORKSPACE}/ossim-install.tgz ."
               sh "cp ${env.WORKSPACE}/ossim-oms/lib/joms-*.jar ."
           }
           archiveArtifacts 'artifacts/*'
