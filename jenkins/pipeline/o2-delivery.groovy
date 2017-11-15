@@ -241,7 +241,6 @@ node(){
             // Tar up the repository directories:
             sh "tar cvfz ossimlabs-${OSSIM_GIT_BRANCH}.tgz ossimlabs-${OSSIM_GIT_BRANCH}"
             sh "tar cvfz radiantbluetechnologies-${OSSIM_GIT_BRANCH}.tgz radiantbluetechnologies-${OSSIM_GIT_BRANCH}"
-            sh "tar cvfz docs.tgz ossimlabs-${OSSIM_GIT_BRANCH}/omar/docs"
          }
       }
 
@@ -273,20 +272,6 @@ node(){
                              selectedRegion: 'us-east-1',
                              showDirectlyInBrowser: true,
                              sourceFile: "radiantbluetechnologies-${OSSIM_GIT_BRANCH}.tgz",
-                             storageClass: 'STANDARD',
-                             uploadFromSlave: false,
-                             useServerSideEncryption: false],
-
-                            [bucket: "o2-delivery/${OSSIM_GIT_BRANCH}/o2-install-guide",
-                             excludedFile: '',
-                             flatten: false,
-                             gzipFiles: false,
-                             keepForever: false,
-                             managedArtifacts: false,
-                             noUploadOnFailure: false,
-                             selectedRegion: 'us-east-1',
-                             showDirectlyInBrowser: true,
-                             sourceFile: 'docs.tgz',
                              storageClass: 'STANDARD',
                              uploadFromSlave: false,
                              useServerSideEncryption: false],
