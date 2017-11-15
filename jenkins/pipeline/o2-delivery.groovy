@@ -38,9 +38,6 @@ node(){
             dir("omar"){
                git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/omar.git'
             }
-            dir("oldmar"){
-               git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/radiantbluetechnologies/omar.git'
-            }
             dir("ossim-ci"){
                git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/ossim-ci.git'
             }
@@ -196,6 +193,9 @@ node(){
             }
          }
          dir("radiantbluetechnologies-${OSSIM_GIT_BRANCH}"){
+            dir("oldmar"){
+               git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/radiantbluetechnologies/omar.git', credentialsId: "cicdGithub"
+            }
             dir("ossim-isa-plugin"){
                git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/radiantbluetechnologies/ossim-isa-plugin.git', credentialsId: "cicdGithub"
             }
