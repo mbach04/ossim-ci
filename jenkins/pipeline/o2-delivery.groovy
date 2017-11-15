@@ -276,7 +276,7 @@ node(){
                              uploadFromSlave: false,
                              useServerSideEncryption: false],
 
-                            [bucket: "o2-delivery/${OSSIM,_GIT_BRANCH}/o2-rpms",
+                            [bucket: "o2-delivery/${OSSIM_GIT_BRANCH}/o2-rpms",
                              excludedFile: '',
                              flatten: false,
                              gzipFiles: false,
