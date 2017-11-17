@@ -27,7 +27,7 @@ node("BATCH_TEST"){
               target: "${env.WORKSPACE}"])
         sh """
           pushd ${env.WORKSPACE}
-          tar xvfz install.tgz
+          tar xvfz ossim-install.tgz
           popd
         """
      }
