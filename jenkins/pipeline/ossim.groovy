@@ -35,18 +35,18 @@ node ("master"){
        notifyObj = load "${env.WORKSPACE}/ossim-ci/jenkins/pipeline/notify.groovy"
      }
      echo "${env.WORKSPACE}"
-     stage("Download Artifacts"){
-         dir("${env.WORKSPACE}"){
-             step ([$class: "CopyArtifact",
-                projectName: "ossim-kakadu-${ACCESSORY_GIT_BRANCH}",
-                filter: "artifacts/kakadu.tgz",
-                flatten: true])
-         }
-     }
+//     stage("Download Artifacts"){
+//         dir("${env.WORKSPACE}"){
+//             step ([$class: "CopyArtifact",
+//                projectName: "ossim-kakadu-${ACCESSORY_GIT_BRANCH}",
+//                filter: "artifacts/kakadu.tgz",
+//                flatten: true])
+//         }
+//     }
      stage("Build"){
-         sh """
-          tar xvfz kakadu.tgz
-         """
+ //        sh """
+  //        tar xvfz kakadu.tgz
+   //      """
          sh """
            rm -rf ${env.WORKSPACE}/build/CMakeCache.txt
            ${env.WORKSPACE}/ossim-ci/scripts/linux/ossim-build.sh
