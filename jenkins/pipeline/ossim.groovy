@@ -29,9 +29,9 @@ node ("master"){
          dir("ossim-ci"){
             git branch: "${ACCESSORY_GIT_BRANCH}", url: 'https://github.com/ossimlabs/ossim-ci.git'
          }
-         dir("ossim-private"){
-            git branch: "${ACCESSORY_GIT_BRANCH}", url: 'git@ossim-private.github.com:radiantbluetechnologies/ossim-private.git'
-         }
+         //dir("ossim-private"){
+         //   git branch: "${ACCESSORY_GIT_BRANCH}", url: 'git@ossim-private.github.com:radiantbluetechnologies/ossim-private.git'
+         //}
        notifyObj = load "${env.WORKSPACE}/ossim-ci/jenkins/pipeline/notify.groovy"
      }
      echo "${env.WORKSPACE}"
@@ -46,7 +46,7 @@ node ("master"){
      stage("Build"){
          sh """
           tar xvfz kakadu.tgz
-          """
+         """
          sh """
            rm -rf ${env.WORKSPACE}/build/CMakeCache.txt
            ${env.WORKSPACE}/ossim-ci/scripts/linux/ossim-build.sh
