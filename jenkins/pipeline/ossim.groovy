@@ -32,7 +32,7 @@ node ("master"){
          //dir("ossim-private"){
          //   git branch: "${ACCESSORY_GIT_BRANCH}", url: 'git@ossim-private.github.com:radiantbluetechnologies/ossim-private.git'
          //}
-       notifyObj = load "${env.WORKSPACE}/ossim-ci/jenkins/pipeline/notify.groovy"
+      // notifyObj = load "${env.WORKSPACE}/ossim-ci/jenkins/pipeline/notify.groovy"
      }
      echo "${env.WORKSPACE}"
 //     stage("Download Artifacts"){
@@ -69,7 +69,7 @@ node ("master"){
   {
     println e
     currentBuild.result = "FAILED"
-    notifyObj?.notifyFailed()
+   // notifyObj?.notifyFailed()
   }
 
   stage("Clean Workspace"){
