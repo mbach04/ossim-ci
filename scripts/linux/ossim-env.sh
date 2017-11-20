@@ -166,7 +166,7 @@ if [ -d $OSSIM_DEV_HOME/ossim-plugins ] ; then
    fi
 
    if [ -z $BUILD_KAKADU_PLUGIN ] ; then
-      export BUILD_KAKADU_PLUGIN=ON
+      export BUILD_KAKADU_PLUGIN=OFF
    fi
 
    if [ -z $BUILD_KML_PLUGIN ] ; then
